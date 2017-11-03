@@ -11,7 +11,7 @@ Członkowie zespołu:
 * Łukasz Woźniak
 
 github: https://github.com/LukaszWozniakPWR/pwr-programowanie-zespolowe-2017  
-trello: https://trello.com/pwr27
+trello: https://trello.com/b/z18TYvG1/programowanie-zespołowe-2017
 
 Projekt: gra karciana
 
