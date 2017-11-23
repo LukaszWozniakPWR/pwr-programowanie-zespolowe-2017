@@ -4,7 +4,7 @@
   "description": "Programowanie Zespołowe 2017",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "webpack-dev-server webpack.config.js"
+    "server": "webpack-dev-server"
   },
   "devDependencies": {
     "html-webpack-plugin": "^2.30.1",

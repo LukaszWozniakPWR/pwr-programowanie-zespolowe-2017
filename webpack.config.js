@@ -3,7 +3,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.join(__dirname, 'src/app.ts'),
+    entry: {
+        app: [path.join(__dirname, 'src/app.ts')]
+    },
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -25,7 +27,7 @@ module.exports = {
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
-        port: 8000
+        port: 8090
     },
     module: {
         rules: [
