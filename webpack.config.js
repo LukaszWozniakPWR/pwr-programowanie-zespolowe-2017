@@ -13,7 +13,8 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js'],
         alias: {
-            pixi: path.join(__dirname, 'node_modules/pixi.js/dist/pixi.js')
+            pixi: path.join(__dirname, 'node_modules/pixi.js/dist/pixi.js'),
+            assets: path.join(__dirname, 'assets/')
         }
     },
     node: {
@@ -32,6 +33,7 @@ module.exports = {
     module: {
         rules: [
             { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
+            { test: /assets[\/\\]/, loader: 'file-loader?name=assets/[hash].[ext]' },
             { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' }
         ]
     },
