@@ -6,7 +6,7 @@ export default class MessageBox extends PIXI.Container {
     private margin: number = 10;
     private titleStyle: PIXI.TextStyle = new PIXI.TextStyle({
         fontFamily: "Arial",
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: "bold",
         fill: "#fff",
         wordWrap: true,
@@ -14,8 +14,7 @@ export default class MessageBox extends PIXI.Container {
     });
     private messageStyle: PIXI.TextStyle = new PIXI.TextStyle({
         fontFamily: "Arial",
-        fontSize: 12,
-        fontWeight: "bold",
+        fontSize: 16,
         fill: "#eee",
         wordWrap: true,
         wordWrapWidth: this.width - this.margin * 2,
@@ -50,6 +49,8 @@ export default class MessageBox extends PIXI.Container {
     }
 
     public setData(title: string, message: string) {
+        this.title = title;
+        this.message = message;
         this.titleText.text = title;
         this.messageText.text = message;
         this.messageText.y = this.titleText.y + this.titleText.height + this.margin;
