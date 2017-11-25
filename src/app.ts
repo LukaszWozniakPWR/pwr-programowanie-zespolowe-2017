@@ -2,17 +2,21 @@ import * as debounce from "debounce";
 import * as PIXI from "pixi.js";
 import Animation from "./animation";
 import Assets from "./assets";
+import MessageBox from "./ui/messagebox";
 
 class App {
     public static TARGET_WIDTH: number = 1600;
     public static TARGET_HEIGHT: number = 1000;
 
     private app: PIXI.Application;
+    private messages: MessageBox[] = [];
+    private stage: PIXI.Container;
 
     constructor() {
         this.app = new PIXI.Application(App.TARGET_WIDTH, App.TARGET_HEIGHT, {
                 view: document.getElementById("main") as HTMLCanvasElement,
             });
+        this.stage = this.app.stage;
         document.body.appendChild(this.app.view);
         this.app.renderer.autoResize = true;
         window.onresize = debounce(() => this.resize(), 200);
@@ -20,10 +24,19 @@ class App {
         this.start();
     }
 
+    public createMessageBox(title: string, msg: string): MessageBox {
+        let msgbox: MessageBox = new MessageBox(title, msg);
+        msgbox.pivot.x = msgbox.width / 2;
+        msgbox.pivot.y = msgbox.height / 2;
+        msgbox.x = App.TARGET_WIDTH / 2;
+        msgbox.y = App.TARGET_HEIGHT / 3;
+        return msgbox;
+    }
+
     private resize() {
         let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        const scale = Math.min(w / App.TARGET_WIDTH, h / App.TARGET_HEIGHT);
+        let scale = Math.min(w / App.TARGET_WIDTH, h / App.TARGET_HEIGHT);
         w = App.TARGET_WIDTH * scale;
         h = App.TARGET_HEIGHT * scale;
         this.app.renderer.resize(w, h);
@@ -32,13 +45,24 @@ class App {
     }
 
     private start() {
-        const bg = new PIXI.Sprite(Assets.BACKGROUND);
-        const filter = new PIXI.filters.ColorMatrixFilter();
+        let bg = new PIXI.Sprite(Assets.BACKGROUND);
+        let filter = new PIXI.filters.ColorMatrixFilter();
         bg.filters = [filter];
 
         Animation.valueAnimation((value) => filter.brightness(value),
-            0, 0.5, 1000);
+            0, 0.5, 1000).then(() => {
+            let msgbox = this.createMessageBox("Info", "View ready");
+            msgbox.alpha = 0;
+            this.messages.push(msgbox);
+            this.stage.addChild(msgbox);
+            return Animation.valueAnimation((value) => {
+                msgbox.alpha = value;
+                msgbox.scale.x = 1.5 - 0.5 * value;
+                msgbox.scale.y = 1.5 - 0.5 * value;
+            }, 0, 1, 200);
+        });
         this.app.stage.addChild(bg);
+
     }
 }
 
