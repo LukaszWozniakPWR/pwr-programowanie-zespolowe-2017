@@ -24,6 +24,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "cardgame-browser",
             template: path.join(__dirname, 'src/index.html')
+        }),
+        new webpack.DefinePlugin({
+            "DEBUG": true,
+            "Config.HOSTNAME": JSON.stringify("127.0.0.1"),
+            "Config.PORT": 8448
         })
     ],
     devServer: {

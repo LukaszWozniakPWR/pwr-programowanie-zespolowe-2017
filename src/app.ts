@@ -2,6 +2,7 @@ import * as debounce from "debounce";
 import * as PIXI from "pixi.js";
 import Animation from "./animation";
 import Assets from "./assets";
+import Client from "./client/client";
 import MessageBox from "./ui/messagebox";
 
 class App {
@@ -11,6 +12,7 @@ class App {
     private app: PIXI.Application;
     private messages: MessageBox[] = [];
     private stage: PIXI.Container;
+    private client: Client;
 
     constructor() {
         this.app = new PIXI.Application(App.TARGET_WIDTH, App.TARGET_HEIGHT, {
@@ -20,6 +22,9 @@ class App {
         document.body.appendChild(this.app.view);
         this.app.renderer.autoResize = true;
         window.onresize = debounce(() => this.resize(), 200);
+
+        this.client = new Client(Config.HOSTNAME, Config.PORT);
+
         this.resize();
         this.start();
     }
@@ -48,10 +53,17 @@ class App {
         let bg = new PIXI.Sprite(Assets.BACKGROUND);
         let filter = new PIXI.filters.ColorMatrixFilter();
         bg.filters = [filter];
+        let msgbox = this.createMessageBox("Info", "View ready");
+
+        this.client.onopen = () => {
+            msgbox.setMessage("połączono z serwerem");
+        };
+        this.client.onclose = () => msgbox.setMessage("rozłączono z serwerem");
+        this.client.onerror = () => msgbox.setMessage("błąd");
+        this.client.onmessage = (event) => msgbox.setMessage("otrzymano:\n" + event.data);
 
         Animation.valueAnimation((value) => filter.brightness(value),
             0, 0.5, 1000).then(() => {
-            let msgbox = this.createMessageBox("Info", "View ready");
             msgbox.alpha = 0;
             this.messages.push(msgbox);
             this.stage.addChild(msgbox);
@@ -61,10 +73,14 @@ class App {
                 msgbox.scale.y = 1.5 - 0.5 * value;
             }, 0, 1, 200);
         });
+
         this.app.stage.addChild(bg);
 
     }
 }
 
-const app: App = new App();
-console.dir(app);
+if (DEBUG) {
+    const app: App = new App();
+    console.dir(app);
+    (window as any).app = app;
+}
