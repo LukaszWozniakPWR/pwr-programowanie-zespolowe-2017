@@ -17,6 +17,7 @@ buildscript {
         reactivex_version = '2.0.0'
         rxandroid_version = '1.2.1'
         rxjava_version = '1.2.1'
+        gson_version = '2.8.2'
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
