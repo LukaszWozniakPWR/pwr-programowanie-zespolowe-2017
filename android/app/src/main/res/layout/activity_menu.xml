@@ -18,16 +18,32 @@
 
     </android.support.design.widget.AppBarLayout>
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxHeight="200dp"
-            android:maxWidth="200dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/logo" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="200dp"
+        android:maxWidth="200dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo" />
 
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/start_button"
+            android:layout_alignLeft="@id/start_button"
+            android:layout_alignRight="@id/start_button"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/greenGoblinDark"/>
 
         <Button
             android:id="@+id/start_button"
@@ -35,8 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="30dp"
             android:text="@string/start_button"
             android:theme="@style/MenuButtonStyle" />
 
+    </RelativeLayout>
 </LinearLayout>
