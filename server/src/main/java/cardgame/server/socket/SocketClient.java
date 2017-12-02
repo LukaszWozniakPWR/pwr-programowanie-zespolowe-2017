@@ -3,13 +3,15 @@ package cardgame.server.socket;
 import cardgame.server.Client;
 import cardgame.server.GameServer;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 public class SocketClient extends Client implements Runnable {
     private Socket connection;
     private Thread thread;
     private GameServer gameServer;
+    private BufferedReader reader;
+    private OutputStreamWriter writer;
 
     public SocketClient(Socket socket, GameServer gameServer) {
         this.connection = socket;
@@ -17,8 +19,8 @@ public class SocketClient extends Client implements Runnable {
     }
 
     @Override
-    public void send(String message) {
-        // todo
+    public void send(String message) throws IOException {
+        writer.write(message);
     }
 
     @Override
@@ -29,14 +31,33 @@ public class SocketClient extends Client implements Runnable {
             thread = Thread.currentThread();
         }
 
+        try {
+            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            writer = new OutputStreamWriter(connection.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
         gameServer.onOpen(this);
 
         try {
-            connection.close();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                gameServer.onMessage(this, line);
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            gameServer.onError(this, e);
         } finally {
             gameServer.onClose(this);
+            try {
+                reader.close();
+                writer.close();
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
