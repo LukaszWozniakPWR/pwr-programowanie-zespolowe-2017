@@ -4,7 +4,6 @@ import android.app.Service
 import android.content.Intent
 import android.widget.Toast
 import com.google.gson.Gson
-import com.google.gson.stream.JsonReader
 import com.pwr.zespolowe2016.cardgame.sockets.model.Response
 import com.pwr.zespolowe2016.cardgame.sockets.model.ResponseType.NICKNAME_RESPONSE
 import rx.Completable
@@ -60,7 +59,7 @@ class SocketService : Service() {
 
     private fun handleResponse(response: Response) {
         when (response.type) {
-            NICKNAME_RESPONSE ->
+            NICKNAME_RESPONSE -> Toast.makeText(this, "nickname response", Toast.LENGTH_LONG).show()
         }
     }
 
