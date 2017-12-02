@@ -19,8 +19,13 @@ public class SocketClient extends Client implements Runnable {
     }
 
     @Override
-    public void send(String message) throws IOException {
-        writer.write(message);
+    public void send(String message) {
+        try {
+            writer.write(message);
+            writer.flush();
+        } catch (IOException e) {
+            gameServer.onError(this, e);
+        }
     }
 
     @Override
@@ -55,9 +60,7 @@ public class SocketClient extends Client implements Runnable {
                 reader.close();
                 writer.close();
                 connection.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException ignored) {}
         }
     }
 }
