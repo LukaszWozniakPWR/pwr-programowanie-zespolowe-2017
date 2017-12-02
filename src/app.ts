@@ -20,7 +20,6 @@ class App {
             });
         this.stage = this.app.stage;
         document.body.appendChild(this.app.view);
-        this.app.renderer.autoResize = true;
         window.onresize = debounce(() => this.resize(), 200);
 
         this.client = new Client(Config.HOSTNAME, Config.PORT);
@@ -42,11 +41,15 @@ class App {
         let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         let scale = Math.min(w / App.TARGET_WIDTH, h / App.TARGET_HEIGHT);
+        this.app.renderer.resolution = Math.max(scale, scale ** 2);
+
         w = App.TARGET_WIDTH * scale;
         h = App.TARGET_HEIGHT * scale;
         this.app.renderer.resize(w, h);
         this.app.stage.scale.x = scale;
         this.app.stage.scale.y = scale;
+        this.app.renderer.view.width = w;
+        this.app.renderer.view.height = h;
     }
 
     private start() {
