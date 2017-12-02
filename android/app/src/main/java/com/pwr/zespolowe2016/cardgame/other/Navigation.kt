@@ -13,9 +13,4 @@ class Navigation(private val context: Activity) {
     private fun startActivityForResult(intent: Intent, requestCode: Int) {
         context.startActivityForResult(intent, requestCode)
     }
-
-    companion object {
-        val LOGIN_REQUEST_CODE = 1234
-        val EDIT_PROFILE_REQUEST_CODE = 1235
-    }
 }
