@@ -56,6 +56,9 @@ class PlayerListActivity : SocketApiActivity() {
     }
 
     override val apiCallback = object : EmptyApiCallback() {
+
+        private var isFinishing = false
+
         override fun onPlayerList(playerList: List<Player>) {
             playerListAdapter.setData(playerList)
             viewAnimator.displayChild(if (playerList.isEmpty()) EMPTY_LIST_INDEX else CONTENT_INDEX)
@@ -66,6 +69,7 @@ class PlayerListActivity : SocketApiActivity() {
             AlertDialog.Builder(this@PlayerListActivity)
                     .setTitle(R.string.player_requested_game_title)
                     .setMessage(playerRequestedGameMessageText.format(nickname))
+                    .setCancelable(false)
                     .setNegativeButton(R.string.dialog_no) { dialog, _ ->
                         socketApi?.refuseGameRequestFrom(nickname)
                         dialog.dismiss()
@@ -91,7 +95,15 @@ class PlayerListActivity : SocketApiActivity() {
         }
 
         override fun onConnectionLost() {
-            finish()
+            if (isFinishing) return else isFinishing = true
+            AlertDialog.Builder(this@PlayerListActivity)
+                    .setTitle(R.string.connection_lost_title)
+                    .setMessage(R.string.connection_lost_message)
+                    .setCancelable(false)
+                    .setNeutralButton(R.string.dialog_ok) { dialog, _ -> dialog.dismiss() }
+                    .setOnDismissListener { finish() }
+                    .create()
+                    .show()
         }
     }
 
