@@ -1,0 +1,5 @@
+
+enum RequestType {
+    PASS,
+    PLAY
+}

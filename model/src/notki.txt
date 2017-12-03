@@ -1,0 +1,1 @@
+-- Żądanie zagrania karty od gracza musi zawierać rząd, do którego leci karta.
