@@ -10,6 +10,7 @@ import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.Navigation
 import com.pwr.zespolowe2016.cardgame.other.extensions.displayChild
+import com.pwr.zespolowe2016.cardgame.other.extensions.setRefreshingSafely
 import com.pwr.zespolowe2016.cardgame.sockets.EmptyApiCallback
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.playerlist.Player
@@ -58,6 +59,7 @@ class PlayerListActivity : SocketApiActivity() {
         override fun onPlayerList(playerList: List<Player>) {
             playerListAdapter.setData(playerList)
             viewAnimator.displayChild(if (playerList.isEmpty()) EMPTY_LIST_INDEX else CONTENT_INDEX)
+            pullToRefresh.setRefreshingSafely(false)
         }
 
         override fun onGameRequested(nickname: String) {
