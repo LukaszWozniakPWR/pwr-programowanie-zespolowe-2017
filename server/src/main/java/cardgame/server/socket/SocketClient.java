@@ -22,6 +22,7 @@ public class SocketClient extends Client implements Runnable {
     public void send(String message) {
         try {
             writer.write(message);
+            writer.write('\n');
             writer.flush();
         } catch (IOException e) {
             gameServer.onError(this, e);

@@ -59,6 +59,8 @@ public class GameServer {
 
     public void onMessage(Client client, String message) {
         Command command;
+        log.debug(String.format("Client %d sent: %s", client.getId(), message));
+
         try {
             command = gson.fromJson(message, Command.class);
         } catch (JsonSyntaxException e) {
