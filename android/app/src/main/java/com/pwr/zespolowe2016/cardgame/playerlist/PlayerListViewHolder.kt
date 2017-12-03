@@ -10,7 +10,10 @@ import com.pwr.zespolowe2016.cardgame.sockets.model.responses.playerlist.Player
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.playerlist.PlayerStatus.FREE
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.playerlist.PlayerStatus.PLAYING
 
-class PlayerListViewHolder(view: View) : BaseViewHolder<Player>(view) {
+class PlayerListViewHolder(
+        private val view: View,
+        private val onClickListener: (Player) -> Unit
+) : BaseViewHolder<Player>(view) {
 
     private val playerNickname : TextView by bindView(R.id.playerNickname)
     private val playerStatus : TextView by bindView(R.id.playerStatus)
@@ -18,6 +21,7 @@ class PlayerListViewHolder(view: View) : BaseViewHolder<Player>(view) {
     private val playingStatusText: String by bindString(R.string.player_status_playing)
 
     override fun displayItem(itemType: Player) {
+        view.setOnClickListener { onClickListener.invoke(itemType) }
         playerNickname.text = itemType.name
         playerStatus.text = when (itemType.status) {
             FREE -> freeStatusText

@@ -3,6 +3,7 @@ package com.pwr.zespolowe2016.cardgame.playerlist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
@@ -20,11 +21,27 @@ class PlayerListActivity : SocketApiActivity() {
     val viewAnimator: ViewAnimator by bindView(R.id.viewAnimator)
     val recyclerView: RecyclerView by bindView(R.id.recyclerView)
 
+    val invitePlayerMessageText: String by bindString(R.string.invite_player_message)
+    val playerRefusedMessageText: String by bindString(R.string.player_refused_message)
+
     val playerListAdapter = PlayerListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        playerListAdapter.onItemClickListener = { player -> invitePlayer(player) }
         recyclerView.adapter = playerListAdapter
+    }
+
+    private fun invitePlayer(player: Player) {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.invite_player_title)
+                .setMessage(invitePlayerMessageText.format(player.name))
+                .setNegativeButton(R.string.dialog_no) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(R.string.dialog_yes) { dialog, _ ->
+                    socketApi?.requestGameWithPlayer(player.name)
+                    dialog.dismiss()
+                }.create()
+                .show()
     }
 
     override fun onServiceConnected() {
@@ -36,6 +53,23 @@ class PlayerListActivity : SocketApiActivity() {
         override fun onPlayerList(playerList: List<Player>) {
             playerListAdapter.setData(playerList)
             viewAnimator.displayChild(if (playerList.isEmpty()) EMPTY_LIST_INDEX else CONTENT_INDEX)
+        }
+
+        override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) {
+            if (playerAccepted) {
+
+            } else {
+                AlertDialog.Builder(this@PlayerListActivity)
+                        .setTitle(R.string.player_refused_title)
+                        .setMessage(playerRefusedMessageText.format(nickname))
+                        .setNeutralButton(R.string.dialog_ok) { dialog, _ -> dialog.dismiss() }
+                        .create()
+                        .show()
+            }
+        }
+
+        override fun onConnectionLost() {
+            finish()
         }
     }
 

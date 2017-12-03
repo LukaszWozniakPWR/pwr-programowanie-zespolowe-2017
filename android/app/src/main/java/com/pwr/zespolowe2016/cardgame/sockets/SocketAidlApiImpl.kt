@@ -5,8 +5,12 @@ import com.google.gson.Gson
 import com.google.gson.stream.JsonWriter
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.Command
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.GET_PLAYER_LIST_COMMAND
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.REJECT_GAME_REQUEST_COMMAND
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.REQUEST_GAME_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.SET_NICKNAME_COMMAND
-import com.pwr.zespolowe2016.cardgame.sockets.model.commands.SetNicknameArguments
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.arguments.RejectGameRequestArguments
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.arguments.RequestGameArguments
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.arguments.SetNicknameArguments
 import rx.Completable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -29,11 +33,31 @@ class SocketAidlApiImpl(
     }
 
     override fun setNickname(nickname: String) {
-        asyncSendCommand(Command(SET_NICKNAME_COMMAND, SetNicknameArguments(nickname)))
+        asyncSendCommand(Command(SET_NICKNAME_COMMAND,
+                SetNicknameArguments(
+                        nickname
+                )
+        ))
     }
 
     override fun getPlayerList() {
         asyncSendCommand(Command(GET_PLAYER_LIST_COMMAND, null))
+    }
+
+    override fun requestGameWithPlayer(nickname: String) {
+        asyncSendCommand(Command(REQUEST_GAME_COMMAND,
+                RequestGameArguments(
+                        nickname
+                )
+        ))
+    }
+
+    override fun refuseGameRequestFrom(nickname: String) {
+        asyncSendCommand(Command(REJECT_GAME_REQUEST_COMMAND,
+                RejectGameRequestArguments(
+                        nickname
+                )
+        ))
     }
 
     private fun asyncSendCommand(command: Command) {

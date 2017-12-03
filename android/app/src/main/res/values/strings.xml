@@ -8,9 +8,18 @@
     <!--Errors-->
     <string name="connection_lost">Utracono połączenie</string>
 
+    <!--Dialogs-->
+    <string name="dialog_no">Nie</string>
+    <string name="dialog_yes">Tak.</string>
+    <string name="dialog_ok">OK</string>
+
     <!--Player List-->
     <string name="player_list_appbar_title">Lista graczy</string>
     <string name="player_status_free">Wolny</string>
     <string name="player_status_playing">W grze</string>
     <string name="player_list_empty_message">Lista graczy jest pusta.</string>
+    <string name="invite_player_title">Zaproś gracza</string>
+    <string name="invite_player_message">Czy chcesz zaprosić gracza: %1$s</string>
+    <string name="player_refused_title">Odrzucono zaproszenie</string>
+    <string name="player_refused_message">Gracz: %1$s odrzucił twoje zaproszenie :(</string>
 </resources>

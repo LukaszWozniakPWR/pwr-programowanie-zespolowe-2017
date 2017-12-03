@@ -1,5 +1,12 @@
 package com.pwr.zespolowe2016.cardgame.sockets.model.responses.requestgame
 
-/**
- * Created by akarrin on 03.12.17.
- */
+import com.google.gson.annotations.SerializedName
+
+data class RequestGameResponse(
+        @SerializedName("success") val playerAccepted: Boolean,
+        @SerializedName("nickname") val nickname: String
+) {
+    companion object {
+        fun empty() = RequestGameResponse(false, "")
+    }
+}

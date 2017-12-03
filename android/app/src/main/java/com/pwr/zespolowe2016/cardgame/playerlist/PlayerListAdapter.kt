@@ -9,5 +9,6 @@ class PlayerListAdapter : ClickableBaseAdapter<PlayerListViewHolder, Player>() {
 
     override fun layoutId(viewType: Int) = R.layout.player_list_item
 
-    override fun createHolder(view: View, viewType: Int) = PlayerListViewHolder(view)
+    override fun createHolder(view: View, viewType: Int)
+            = PlayerListViewHolder(view, onItemClickListener)
 }
