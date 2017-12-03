@@ -27,7 +27,6 @@ class MenuActivity : SocketApiActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu)
         startButton.setOnClickListener { startButtonClicked() }
     }
 
