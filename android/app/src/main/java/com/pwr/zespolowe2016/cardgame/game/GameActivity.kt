@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.Navigation
-import com.pwr.zespolowe2016.cardgame.playerlist.PlayerListActivity
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
 
 class GameActivity : SocketApiActivity() {

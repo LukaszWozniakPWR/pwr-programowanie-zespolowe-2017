@@ -5,6 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <include layout="@layout/toolbar"/>
+
+    </android.support.design.widget.AppBarLayout>
+
     <TextView
         android:gravity="center"
         android:id="@+id/player_view"
