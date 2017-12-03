@@ -27,7 +27,7 @@ class GameActivity : SocketApiActivity() {
     companion object {
         private val PLAYER_NICK_KEY = "player_nick"
         fun getIntent(context: Context, playerNick: String) =
-                Intent(context, PlayerListActivity::class.java)
+                Intent(context, GameActivity::class.java)
                         .putExtra(PLAYER_NICK_KEY, playerNick)
     }
 }
