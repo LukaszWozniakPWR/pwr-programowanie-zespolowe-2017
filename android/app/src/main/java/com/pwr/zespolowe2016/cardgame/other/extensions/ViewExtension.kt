@@ -1,6 +1,7 @@
 package com.pwr.zespolowe2016.cardgame.other.extensions
 
 import android.content.Context
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -28,4 +29,9 @@ fun EditText.showKeyboard() {
 
 fun ViewAnimator.displayChild(childIndex: Int) {
     if (displayedChild != childIndex) displayedChild = childIndex
+}
+
+fun SwipeRefreshLayout.setRefreshingSafely(refreshing: Boolean) {
+    if (isRefreshing == refreshing) return
+    isRefreshing = refreshing
 }

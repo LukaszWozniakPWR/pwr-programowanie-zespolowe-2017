@@ -1,4 +1,4 @@
-package com.pwr.zespolowe2016.cardgame.sockets.model.responses.set_nickname
+package com.pwr.zespolowe2016.cardgame.sockets.model.responses.setnickname
 
 import com.google.gson.annotations.SerializedName
 

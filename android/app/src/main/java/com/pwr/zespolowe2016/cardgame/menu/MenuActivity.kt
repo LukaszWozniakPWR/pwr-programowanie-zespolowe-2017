@@ -1,6 +1,7 @@
 package com.pwr.zespolowe2016.cardgame.menu
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -58,5 +59,6 @@ class MenuActivity : SocketApiActivity() {
     companion object {
         private const val CONTENT_INDEX = 0
         private const val PROGRESS_INDEX = 1
+        fun getIntent(context: Context) = Intent(context, MenuActivity::class.java)
     }
 }

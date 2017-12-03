@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.Navigation
-import com.pwr.zespolowe2016.cardgame.playerlist.PlayerListActivity
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
 
 class GameActivity : SocketApiActivity() {
@@ -27,7 +26,7 @@ class GameActivity : SocketApiActivity() {
     companion object {
         private val PLAYER_NICK_KEY = "player_nick"
         fun getIntent(context: Context, playerNick: String) =
-                Intent(context, PlayerListActivity::class.java)
+                Intent(context, GameActivity::class.java)
                         .putExtra(PLAYER_NICK_KEY, playerNick)
     }
 }

@@ -6,5 +6,7 @@ interface SocketAidlCallback {
 
     void onSetNicknameResponse(boolean success);
     void onPlayerList(in List<Player> playerList);
+    void onRequestGameResponse(boolean playerAccepted, String nickname);
+    void onGameRequested(String nickname);
     void onConnectionLost();
 }
