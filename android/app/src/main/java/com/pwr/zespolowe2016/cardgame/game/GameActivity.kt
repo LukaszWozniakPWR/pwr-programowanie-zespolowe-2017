@@ -21,7 +21,7 @@ class GameActivity : SocketApiActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         playerNick = intent.getStringExtra(PLAYER_NICK_KEY)
-        playerView.text = "grasz z " + playerNick
+        playerView.text = "grasz z \n" + playerNick
     }
 
     companion object {
