@@ -29,6 +29,8 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
 
+        <activity android:name=".game.GameActivity"/>
+
         <service android:name=".sockets.SocketService"/>
     </application>
 
