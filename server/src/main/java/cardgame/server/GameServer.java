@@ -1,9 +1,6 @@
 package cardgame.server;
 
-import cardgame.server.communication.BaseResponse;
-import cardgame.server.communication.Command;
-import cardgame.server.communication.CommandDeserializer;
-import cardgame.server.communication.Response;
+import cardgame.server.communication.*;
 import cardgame.server.communication.command.GetPlayers;
 import cardgame.server.communication.command.RejectRequestGame;
 import cardgame.server.communication.command.RequestGame;
@@ -35,6 +32,7 @@ public class GameServer {
         games = new HashSet<>();
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Command.class, new CommandDeserializer());
+        gsonBuilder.registerTypeAdapter(Response.class, new ResponseSerializer());
         gsonBuilder.excludeFieldsWithModifiers(Modifier.PRIVATE);
         gson = gsonBuilder.create();
     }
