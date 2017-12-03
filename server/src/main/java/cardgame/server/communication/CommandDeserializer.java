@@ -1,6 +1,10 @@
 package cardgame.server.communication;
 
+import cardgame.server.communication.command.GetPlayers;
+import cardgame.server.communication.command.RejectRequestGame;
+import cardgame.server.communication.command.RequestGame;
 import cardgame.server.communication.command.SetNickname;
+import cardgame.server.communication.response.RequestGameResponse;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -17,7 +21,15 @@ public class CommandDeserializer implements JsonDeserializer<Command> {
             case SetNickname.NAME:
                 command.args = context.deserialize(object.get("args"), SetNickname.class);
                 break;
-
+            case GetPlayers.NAME:
+                command.args = null;
+                break;
+            case RequestGame.NAME:
+                command.args = context.deserialize(object.get("args"), RequestGame.class);
+                break;
+            case RejectRequestGame.NAME:
+                command.args = context.deserialize(object.get("args"), RejectRequestGame.class);
+                break;
             default:
                 break;
 

@@ -1,8 +1,10 @@
 package cardgame.server;
 
+import cardgame.server.model.Player;
+
 public abstract class Client {
     private int id = -1;
-    private String nickname;
+    private Player player;
 
     public abstract void send(String message);
 
@@ -14,11 +16,12 @@ public abstract class Client {
         return id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setPlayer(Player player) {
+        this.player = player;
+        player.setClient(this);
     }
 }
