@@ -161,11 +161,17 @@ public class GameServer {
                     sendResponse(opponent, new RequestGameResponse(true, player.name));
                     newGame(player, opponent);
                 } else {
+                    boolean sendRequest = false;
                     synchronized (opponent.getGameRequsets()) {
-                        opponent.getGameRequsets().add(player);
+                        if (!opponent.getGameRequsets().contains(player)) {
+                            opponent.getGameRequsets().add(player);
+                            sendRequest = true;
+                        }
                     }
 
-                    sendResponse(opponent, new GameRequest(player.name));
+                    if (sendRequest) {
+                        sendResponse(opponent, new GameRequest(player.name));
+                    }
                 }
 
                 return;
