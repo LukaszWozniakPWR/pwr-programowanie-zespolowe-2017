@@ -110,21 +110,26 @@ public class GameServer {
     private void handleSetNickname(Client client, SetNickname args) {
         boolean success = false;
 
-        if (client.getPlayer() == null) {
-            if (getPlayerByName(args.nickname) == null) {
-                success = true;
-                client.setPlayer(new Player(args.nickname));
-                log.debug(String.format("Client %d set nickname %s", client.getId(), args.nickname));
-            }
-        }
+        if (getPlayerByName(args.nickname) == null) {
+            success = true;
+            Player player = client.getPlayer();
 
+            if (player == null) {
+                player = new Player(args.nickname);
+                client.setPlayer(player);
+            } else {
+                player.name = args.nickname;
+            }
+
+            log.debug(String.format("Client %d set nickname %s", client.getId(), args.nickname));
+        }
         sendResponse(client, new SetNicknameResponse(success));
     }
 
     private void handleGetPlayers(Client client) {
         PlayerList players = new PlayerList();
         synchronized (clients) {
-            clients.stream().filter(c -> c.getPlayer() != null).forEach(c -> players.add(c.getPlayer()));
+            clients.stream().filter(c -> c.getPlayer() != null).forEach(c -> players.players.add(c.getPlayer()));
         }
 
         sendResponse(client, players);

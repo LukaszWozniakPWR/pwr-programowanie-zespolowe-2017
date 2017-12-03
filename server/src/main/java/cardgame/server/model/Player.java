@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
-    public final String name;
+    public String name;
     public PlayerState state = PlayerState.FREE;
     private Client client;
     private final Set<Player> gameRequsets;
