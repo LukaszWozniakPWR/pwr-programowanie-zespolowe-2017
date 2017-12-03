@@ -91,6 +91,7 @@ class SocketService : Service(), ServiceCallbacksContainer {
 
     private fun handleError(error: Throwable) {
         error.printStackTrace()
+        responseHandler.notifyConnectionLost()
         Completable.timer(CONNECTION_RETRY_DELAY, MILLISECONDS)
                 .subscribe { connectAndListenOnListenThread() }
     }

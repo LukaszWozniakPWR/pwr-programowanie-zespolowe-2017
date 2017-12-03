@@ -52,7 +52,6 @@ class MenuActivity : SocketApiActivity() {
 
         override fun onConnectionLost() {
             viewAnimator.displayChild(CONTENT_INDEX)
-            Toast.makeText(context, R.string.connection_lost, Toast.LENGTH_LONG).show()
         }
     }
 
