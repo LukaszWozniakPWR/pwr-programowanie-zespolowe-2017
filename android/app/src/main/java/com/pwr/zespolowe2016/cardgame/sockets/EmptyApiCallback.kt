@@ -8,4 +8,5 @@ open class EmptyApiCallback : SocketAidlCallback.Stub() {
     override fun onConnectionLost() { /* NO-OP */ }
     override fun onPlayerList(playerList: List<Player>) { /* NO-OP */ }
     override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) { /* NO-OP */ }
+    override fun onGameRequested(nickname: String) { /* NO-OP */ }
 }

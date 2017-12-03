@@ -23,6 +23,7 @@ class PlayerListActivity : SocketApiActivity() {
 
     val invitePlayerMessageText: String by bindString(R.string.invite_player_message)
     val playerRefusedMessageText: String by bindString(R.string.player_refused_message)
+    val playerRequestedGameMessageText: String by bindString(R.string.player_requested_game_message)
 
     val playerListAdapter = PlayerListAdapter()
 
@@ -55,9 +56,24 @@ class PlayerListActivity : SocketApiActivity() {
             viewAnimator.displayChild(if (playerList.isEmpty()) EMPTY_LIST_INDEX else CONTENT_INDEX)
         }
 
+        override fun onGameRequested(nickname: String) {
+            AlertDialog.Builder(this@PlayerListActivity)
+                    .setTitle(R.string.player_requested_game_title)
+                    .setMessage(playerRequestedGameMessageText.format(nickname))
+                    .setNegativeButton(R.string.dialog_no) { dialog, _ ->
+                        socketApi?.refuseGameRequestFrom(nickname)
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton(R.string.dialog_yes) { dialog, _ ->
+                        socketApi?.requestGameWithPlayer(nickname)
+                        dialog.dismiss()
+                    }.create()
+                    .show()
+        }
+
         override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) {
             if (playerAccepted) {
-
+                navigation.startGameActivity(nickname)
             } else {
                 AlertDialog.Builder(this@PlayerListActivity)
                         .setTitle(R.string.player_refused_title)
