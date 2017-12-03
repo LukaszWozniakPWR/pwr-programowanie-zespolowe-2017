@@ -18,6 +18,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class GameServer {
     private static Logger log = LogManager.getLogger();
@@ -26,6 +27,7 @@ public class GameServer {
     private int lastClientId = 0;
     private Gson gson;
     private final Set<Game> games;
+    private static final Pattern NICKNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_-]{4,24}$");
 
     public GameServer() {
         clients = new HashSet<>();
@@ -109,10 +111,11 @@ public class GameServer {
 
     private void handleSetNickname(Client client, SetNickname args) {
         boolean success = false;
+        Player p = getPlayerByName(args.nickname);
+        Player player = client.getPlayer();
 
-        if (getPlayerByName(args.nickname) == null) {
+        if (NICKNAME_REGEX.matcher(args.nickname).matches() && (p == null || p == player)) {
             success = true;
-            Player player = client.getPlayer();
 
             if (player == null) {
                 player = new Player(args.nickname);
@@ -129,7 +132,9 @@ public class GameServer {
     private void handleGetPlayers(Client client) {
         PlayerList players = new PlayerList();
         synchronized (clients) {
-            clients.stream().filter(c -> c.getPlayer() != null).forEach(c -> players.players.add(c.getPlayer()));
+            clients.stream()
+                    .filter(c -> c.getPlayer() != null && c.getPlayer() != client.getPlayer())
+                    .forEach(c -> players.players.add(c.getPlayer()));
         }
 
         sendResponse(client, players);
