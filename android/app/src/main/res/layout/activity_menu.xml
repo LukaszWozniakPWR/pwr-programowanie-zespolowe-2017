@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/defaultBackground"
     android:gravity="center_horizontal"
@@ -29,31 +30,30 @@
         android:scaleType="fitCenter"
         android:src="@drawable/logo" />
 
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/start_button"
-            android:layout_alignLeft="@id/start_button"
-            android:layout_alignRight="@id/start_button"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/greenGoblinDark"/>
-
-        <Button
-            android:id="@+id/start_button"
+    <ViewAnimator
+        android:id="@+id/viewAnimator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="@string/start_button"
-            android:theme="@style/MenuButtonStyle" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/nicknameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nickname_hint"/>
+
+            <Button
+                android:id="@+id/startButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_button"
+                android:theme="@style/MenuButtonStyle" />
+        </LinearLayout>
+        <include layout="@layout/progressbar"/>
+    </ViewAnimator>
 </LinearLayout>
