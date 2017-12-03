@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/greenGoblin</color>
+    <color name="colorPrimaryDark">@color/greenGoblinDark</color>
+    <color name="colorAccent">@color/orangeCarrot</color>
+
+    <color name="defaultBackground">@color/white</color>
+
+    <color name="greenGoblin">#248641</color>
+    <color name="greenGoblinDark">#147631</color>
+    <color name="greenGoblinLight">#7eca67</color>
+    <color name="greenGoblinLightSemiTransparent">#AA7eca67</color>
+    <color name="orangeCarrot">#ff6e27</color>
+    <color name="grayLight">#cbcbcb</color>
+    <color name="white">#ffffff</color>
+    <color name="whiteHalfTransparent">#7fffffff</color>
+    <color name="grayStone">#757575</color>
+    <color name="grayStoneDark">#555555</color>
+    <color name="redDarkWarning">#f33534</color>
 </resources>

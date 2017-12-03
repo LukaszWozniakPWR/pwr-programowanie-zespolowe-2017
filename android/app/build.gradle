@@ -20,6 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/aidl', 'src/main/java']
+        }
+    }
 }
 
 dependencies {
@@ -36,6 +41,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile "io.reactivex:rxandroid:$rxandroid_version"
     compile "io.reactivex:rxjava:$rxjava_version"
+    compile "com.google.code.gson:gson:$gson_version"
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
