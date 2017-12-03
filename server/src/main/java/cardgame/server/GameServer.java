@@ -5,6 +5,7 @@ import cardgame.server.communication.command.GetPlayers;
 import cardgame.server.communication.command.RejectRequestGame;
 import cardgame.server.communication.command.RequestGame;
 import cardgame.server.communication.command.SetNickname;
+import cardgame.server.communication.response.GameRequest;
 import cardgame.server.communication.response.PlayerList;
 import cardgame.server.communication.response.RequestGameResponse;
 import cardgame.server.communication.response.SetNicknameResponse;
@@ -163,6 +164,8 @@ public class GameServer {
                     synchronized (opponent.getGameRequsets()) {
                         opponent.getGameRequsets().add(player);
                     }
+
+                    sendResponse(opponent, new GameRequest(player.name));
                 }
 
                 return;
