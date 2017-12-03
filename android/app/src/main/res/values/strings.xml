@@ -19,9 +19,9 @@
     <string name="player_status_playing">W grze</string>
     <string name="player_list_empty_message">Lista graczy jest pusta.</string>
     <string name="invite_player_title">Zaproś gracza</string>
-    <string name="invite_player_message">Czy chcesz zaprosić gracza: %1$s</string>
+    <string name="invite_player_message">Czy chcesz zaprosić gracza %1$s?</string>
     <string name="player_refused_title">Odrzucono zaproszenie</string>
-    <string name="player_refused_message">Gracz: %1$s odrzucił twoje zaproszenie :(</string>
+    <string name="player_refused_message">Gracz %1$s odrzucił twoje zaproszenie :(</string>
     <string name="player_requested_game_title">Zaproszenie do gry</string>
-    <string name="player_requested_game_message">Gracz: %1$s zaporsił Cię do wspólnej rozgrywki, grasz?</string>
+    <string name="player_requested_game_message">Gracz %1$s zaprosił Cię do wspólnej rozgrywki, grasz?</string>
 </resources>
