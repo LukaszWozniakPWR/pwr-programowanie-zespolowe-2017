@@ -1,7 +1,10 @@
 package com.pwr.zespolowe2016.cardgame.sockets;
 
-interface SocketAidlApi {
+import com.pwr.zespolowe2016.cardgame.sockets.SocketAidlCallback;
 
-    void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
-            double aDouble, String aString);
+interface SocketAidlApi {
+    void setNickname(String nickname);
+
+    void registerCallback(SocketAidlCallback callback);
+    void unregisterCallback(SocketAidlCallback callback);
 }
