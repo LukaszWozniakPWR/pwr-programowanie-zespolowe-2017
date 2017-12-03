@@ -23,6 +23,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".playerlist.PlayerListActivity"
+            android:label="@string/player_list_appbar_title"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+
         <service android:name=".sockets.SocketService"/>
     </application>
 

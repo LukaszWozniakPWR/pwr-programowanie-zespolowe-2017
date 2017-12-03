@@ -4,38 +4,41 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import com.google.gson.Gson
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.Response
 import rx.Completable
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import java.net.InetSocketAddress
 import java.net.Socket
+import java.util.concurrent.TimeUnit.MILLISECONDS
 
 class SocketService : Service(), ServiceCallbacksContainer {
 
     private val serverPort = 4884
     private val serverHostname = "zespolowe.ddns.net"
-    private val clientSocket = Socket()
+    private var clientSocket = Socket()
+    private val listenScheduler = Schedulers.newThread()
     private val subscriptions = mutableListOf<Subscription>()
     private var responseHandler = ResponseHandler()
-    private val binder: SocketAidlApi.Stub = SocketAidlApiImpl(clientSocket, this)
+    private val binder = SocketAidlApiImpl(clientSocket, this)
 
     override fun onBind(intent: Intent?) = binder
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        connectAndListenOnListenThread()
+        return START_STICKY
+    }
+
+    private fun connectAndListenOnListenThread() {
         subscriptions.add(
                 Completable.fromCallable { connectAndListen() }
-                        .subscribeOn(Schedulers.newThread())
+                        .subscribeOn(listenScheduler)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnCompleted { stopSelf() }
                         .subscribe (
                                 { /* NO-OP */ },
                                 { error -> handleError(error) }
                         )
         )
-        return START_STICKY
     }
 
     override fun registerCallback(callback: SocketAidlCallback) {
@@ -46,9 +49,20 @@ class SocketService : Service(), ServiceCallbacksContainer {
         responseHandler = responseHandler.withCallbackRemoved(callback)
     }
 
+    override fun notifyConnectionLost() {
+        unsubscribeAll()
+        responseHandler.notifyConnectionLost()
+        connectAndListenOnListenThread()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        unsubscribeAll()
+    }
+
+    private fun unsubscribeAll() {
         subscriptions.forEach { subscription -> subscription.unsubscribe() }
+        subscriptions.clear()
     }
 
     private fun connectAndListen() {
@@ -57,7 +71,8 @@ class SocketService : Service(), ServiceCallbacksContainer {
     }
 
     private fun connectToSocket() {
-        clientSocket.connect(InetSocketAddress(serverHostname, serverPort))
+        clientSocket = Socket(serverHostname, serverPort)
+        binder.socket = clientSocket
     }
 
     private fun listenForResponses() {
@@ -76,11 +91,12 @@ class SocketService : Service(), ServiceCallbacksContainer {
 
     private fun handleError(error: Throwable) {
         error.printStackTrace()
-        Toast.makeText(this, "Error in SocketService", Toast.LENGTH_LONG).show()
-        stopSelf()
+        Completable.timer(CONNECTION_RETRY_DELAY, MILLISECONDS)
+                .subscribe { connectAndListenOnListenThread() }
     }
 
     companion object {
+        private const val CONNECTION_RETRY_DELAY = 500L
         fun getIntent(context: Context): Intent {
             return Intent(context, SocketService::class.java)
         }
