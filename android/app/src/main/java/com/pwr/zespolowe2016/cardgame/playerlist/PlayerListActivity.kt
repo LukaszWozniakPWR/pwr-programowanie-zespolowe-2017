@@ -3,6 +3,7 @@ package com.pwr.zespolowe2016.cardgame.playerlist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.widget.ViewAnimator
@@ -20,6 +21,7 @@ class PlayerListActivity : SocketApiActivity() {
 
     val viewAnimator: ViewAnimator by bindView(R.id.viewAnimator)
     val recyclerView: RecyclerView by bindView(R.id.recyclerView)
+    val pullToRefresh: SwipeRefreshLayout by bindView(R.id.pullToRefresh)
 
     val invitePlayerMessageText: String by bindString(R.string.invite_player_message)
     val playerRefusedMessageText: String by bindString(R.string.player_refused_message)
@@ -31,6 +33,8 @@ class PlayerListActivity : SocketApiActivity() {
         super.onCreate(savedInstanceState)
         playerListAdapter.onItemClickListener = { player -> invitePlayer(player) }
         recyclerView.adapter = playerListAdapter
+        pullToRefresh.setColorSchemeResources(R.color.greenGoblin)
+        pullToRefresh.setOnRefreshListener { socketApi?.getPlayerList() }
     }
 
     private fun invitePlayer(player: Player) {
