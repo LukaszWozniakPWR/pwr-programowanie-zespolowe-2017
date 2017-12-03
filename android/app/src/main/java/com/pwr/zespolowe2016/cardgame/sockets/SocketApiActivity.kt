@@ -9,7 +9,7 @@ import com.pwr.zespolowe2016.cardgame.other.BaseActivity
 
 abstract class SocketApiActivity : BaseActivity() {
 
-     open protected val apiCallback: SocketAidlCallback.Stub = EmptyAidlCallback()
+     open protected val apiCallback: SocketAidlCallback.Stub = EmptyApiCallback()
 
     private val serviceConnection = SocketApiServiceConnection()
     var socketApi: SocketAidlApi? = null
@@ -47,11 +47,14 @@ abstract class SocketApiActivity : BaseActivity() {
         socketApi?.unregisterCallback(apiCallback)
     }
 
+    open protected fun onServiceConnected() { /* NO-OP */ }
+
     inner class SocketApiServiceConnection : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             with(SocketAidlApi.Stub.asInterface(service)) {
                 socketApi = this
                 registerCallback(apiCallback)
+                onServiceConnected()
             }
         }
 

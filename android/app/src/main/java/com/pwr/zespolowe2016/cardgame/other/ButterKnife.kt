@@ -1,6 +1,3 @@
-package com.pwr.zespolowe2016.cardgame.other
-
-
 //Copyright 2014 Jake Wharton
 //
 //Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +11,8 @@ package com.pwr.zespolowe2016.cardgame.other
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
+
+package com.pwr.zespolowe2016.cardgame.other
 
 import android.app.Activity
 import android.app.Dialog
@@ -119,7 +118,7 @@ fun View.bindInt(id: Int)
 
 private val View.viewFinder: View.(Int) -> View?
     get() = { findViewById(it) }
-private val Activity.viewFinder: Activity.(Int) -> View?
+val Activity.viewFinder: Activity.(Int) -> View?
     get() = { findViewById(it) }
 private val Dialog.viewFinder: Dialog.(Int) -> View?
     get() = { findViewById(it) }

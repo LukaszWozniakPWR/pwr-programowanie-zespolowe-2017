@@ -1,5 +1,6 @@
 package com.pwr.zespolowe2016.cardgame.menu
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -7,14 +8,15 @@ import android.widget.Toast
 import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.Navigation
-import com.pwr.zespolowe2016.cardgame.other.bindView
+import com.pwr.zespolowe2016.cardgame.other.extensions.displayChild
+import com.pwr.zespolowe2016.cardgame.other.extensions.hideKeyboard
 import com.pwr.zespolowe2016.cardgame.other.extensions.string
-import com.pwr.zespolowe2016.cardgame.sockets.SocketAidlCallback
+import com.pwr.zespolowe2016.cardgame.sockets.EmptyApiCallback
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
 
 class MenuActivity : SocketApiActivity() {
 
-    override val apiCallback = MenuActivityApiCallback()
+    override val apiCallback = MenuActivityApiCallback(this)
 
     override val layoutId: Int = R.layout.activity_menu
     override val navigation = Navigation(this)
@@ -32,16 +34,25 @@ class MenuActivity : SocketApiActivity() {
     private fun startButtonClicked() {
         socketApi?.let { socketApi ->
             socketApi.setNickname(nicknameEditText.string)
-            viewAnimator.displayedChild = PROGRESS_INDEX
+            nicknameEditText.hideKeyboard()
+            viewAnimator.displayChild(PROGRESS_INDEX)
         }
     }
 
-    inner class MenuActivityApiCallback : SocketAidlCallback.Stub() {
+    inner class MenuActivityApiCallback(private val context: Context) : EmptyApiCallback() {
 
         override fun onSetNicknameResponse(success: Boolean) {
-            viewAnimator.displayedChild = CONTENT_INDEX
-            Toast.makeText(this@MenuActivity, "success $success", Toast.LENGTH_LONG)
-                    .show()
+            if (success) {
+                navigation.startPlayerListActivity()
+            } else {
+                Toast.makeText(context, R.string.nickname_incorrect, Toast.LENGTH_LONG).show()
+            }
+            viewAnimator.displayChild(CONTENT_INDEX)
+        }
+
+        override fun onConnectionLost() {
+            viewAnimator.displayChild(CONTENT_INDEX)
+            Toast.makeText(context, R.string.connection_lost, Toast.LENGTH_LONG).show()
         }
     }
 
