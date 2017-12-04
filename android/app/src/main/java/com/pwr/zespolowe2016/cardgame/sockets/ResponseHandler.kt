@@ -11,10 +11,29 @@ import com.pwr.zespolowe2016.cardgame.sockets.model.responses.requestgame.Reques
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.requestgameresponse.RequestGameResponse
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.setnickname.SetNicknameResponse
 
-class ResponseHandler(private val callbacks: List<SocketAidlCallback> = emptyList()) {
+class ResponseHandler(
+        private val callbacks: List<SocketAidlCallback> = emptyList(),
+        private val queuedResponses: MutableList<Response> = mutableListOf(),
+        private var queuedConnectionLost: Boolean = false
+) {
+
+    init {
+        if (callbacks.isNotEmpty()) {
+            if (queuedConnectionLost) {
+                queuedResponses.clear()
+                notifyConnectionLost()
+                queuedConnectionLost = false
+            } else {
+                queuedResponses.reversed().forEach { response -> handleResponse(response) }
+                queuedResponses.clear()
+            }
+        }
+    }
 
     fun withCallbackAdded(callback: SocketAidlCallback): ResponseHandler {
-        return if (callbacks.contains(callback)) this else ResponseHandler(callbacks.plus(callback))
+        return if (callbacks.contains(callback)) {
+            this
+        } else ResponseHandler(callbacks.plus(callback), queuedResponses.toMutableList())
     }
 
     fun withCallbackRemoved(callback: SocketAidlCallback): ResponseHandler {
@@ -22,10 +41,18 @@ class ResponseHandler(private val callbacks: List<SocketAidlCallback> = emptyLis
     }
 
     fun notifyConnectionLost() {
+        if (callbacks.isEmpty()) {
+            queuedConnectionLost = true
+            return
+        }
         callbacks.forEach { callback -> callback.onConnectionLost() }
     }
 
     fun handleResponse(response: Response) {
+        if (callbacks.isEmpty()) {
+            queuedResponses.add(response)
+            return
+        }
         when (response.type) {
             NICKNAME_RESPONSE -> handleSetNicknameResponse(response.setNicknameResponse.orEmpty())
             PLAYER_LIST_RESPONSE -> handlePlayerListResponse(response.playerList.orEmpty())
