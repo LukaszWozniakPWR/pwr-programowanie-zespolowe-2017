@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.other.DialogCreator
 import com.pwr.zespolowe2016.cardgame.other.Navigation
 import com.pwr.zespolowe2016.cardgame.other.extensions.displayChild
 import com.pwr.zespolowe2016.cardgame.other.extensions.setRefreshingSafely
@@ -24,9 +24,7 @@ class PlayerListActivity : SocketApiActivity() {
     val recyclerView: RecyclerView by bindView(R.id.recyclerView)
     val pullToRefresh: SwipeRefreshLayout by bindView(R.id.pullToRefresh)
 
-    val invitePlayerMessageText: String by bindString(R.string.invite_player_message)
-    val playerRefusedMessageText: String by bindString(R.string.player_refused_message)
-    val playerRequestedGameMessageText: String by bindString(R.string.player_requested_game_message)
+    private val dialogCreator = DialogCreator(this)
 
     val playerListAdapter = PlayerListAdapter()
 
@@ -39,15 +37,10 @@ class PlayerListActivity : SocketApiActivity() {
     }
 
     private fun invitePlayer(player: Player) {
-        AlertDialog.Builder(this)
-                .setTitle(R.string.invite_player_title)
-                .setMessage(invitePlayerMessageText.format(player.name))
-                .setNegativeButton(R.string.dialog_no) { dialog, _ -> dialog.dismiss() }
-                .setPositiveButton(R.string.dialog_yes) { dialog, _ ->
-                    socketApi?.requestGameWithPlayer(player.name)
-                    dialog.dismiss()
-                }.create()
-                .show()
+        dialogCreator.showInvitePlayerDialog(
+                player.name,
+                positiveButtonCallback = { _,_ -> socketApi?.requestGameWithPlayer(player.name) }
+        )
     }
 
     override fun onServiceConnected() {
@@ -57,7 +50,7 @@ class PlayerListActivity : SocketApiActivity() {
 
     override val apiCallback = object : EmptyApiCallback() {
 
-        private var isFinishing = false
+        private var isShowingConnectionLost = false
 
         override fun onPlayerList(playerList: List<Player>) {
             playerListAdapter.setData(playerList)
@@ -66,44 +59,24 @@ class PlayerListActivity : SocketApiActivity() {
         }
 
         override fun onGameRequested(nickname: String) {
-            AlertDialog.Builder(this@PlayerListActivity)
-                    .setTitle(R.string.player_requested_game_title)
-                    .setMessage(playerRequestedGameMessageText.format(nickname))
-                    .setCancelable(false)
-                    .setNegativeButton(R.string.dialog_no) { dialog, _ ->
-                        socketApi?.refuseGameRequestFrom(nickname)
-                        dialog.dismiss()
-                    }
-                    .setPositiveButton(R.string.dialog_yes) { dialog, _ ->
-                        socketApi?.requestGameWithPlayer(nickname)
-                        dialog.dismiss()
-                    }.create()
-                    .show()
+            dialogCreator.showGameRequestedDialog(
+                    nickname,
+                    positiveButtonCallback = { _, _ -> socketApi?.requestGameWithPlayer(nickname) },
+                    negativeButtonCallback = { _, _ -> socketApi?.refuseGameRequestFrom(nickname) }
+            )
         }
 
         override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) {
             if (playerAccepted) {
                 navigation.startGameActivity(nickname)
             } else {
-                AlertDialog.Builder(this@PlayerListActivity)
-                        .setTitle(R.string.player_refused_title)
-                        .setMessage(playerRefusedMessageText.format(nickname))
-                        .setNeutralButton(R.string.dialog_ok) { dialog, _ -> dialog.dismiss() }
-                        .create()
-                        .show()
+                dialogCreator.showGameRefusedDialog(nickname)
             }
         }
 
         override fun onConnectionLost() {
-            if (isFinishing) return else isFinishing = true
-            AlertDialog.Builder(this@PlayerListActivity)
-                    .setTitle(R.string.connection_lost_title)
-                    .setMessage(R.string.connection_lost_message)
-                    .setCancelable(false)
-                    .setNeutralButton(R.string.dialog_ok) { dialog, _ -> dialog.dismiss() }
-                    .setOnDismissListener { finish() }
-                    .create()
-                    .show()
+            if (isShowingConnectionLost) return else isShowingConnectionLost = true
+            dialogCreator.showConnectionLostDialog { finish() }
         }
     }
 
