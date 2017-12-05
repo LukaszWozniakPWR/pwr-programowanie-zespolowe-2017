@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.other.DialogCreator
 import com.pwr.zespolowe2016.cardgame.other.Navigation
 import com.pwr.zespolowe2016.cardgame.other.extensions.displayChild
 import com.pwr.zespolowe2016.cardgame.other.extensions.hideKeyboard
@@ -21,6 +22,8 @@ class MenuActivity : SocketApiActivity() {
 
     override val layoutId: Int = R.layout.activity_menu
     override val navigation = Navigation(this)
+
+    private val dialogCreator = DialogCreator(this)
 
     private val viewAnimator: ViewAnimator by bindView(R.id.viewAnimator)
     private val startButton: Button by bindView(R.id.startButton)
@@ -48,6 +51,22 @@ class MenuActivity : SocketApiActivity() {
                 Toast.makeText(context, R.string.nickname_incorrect, Toast.LENGTH_LONG).show()
             }
             viewAnimator.displayChild(CONTENT_INDEX)
+        }
+
+        override fun onGameRequested(nickname: String) {
+            dialogCreator.showGameRequestedDialog(
+                    nickname,
+                    positiveButtonCallback = { _, _ -> socketApi?.requestGameWithPlayer(nickname) },
+                    negativeButtonCallback = { _, _ -> socketApi?.refuseGameRequestFrom(nickname) }
+            )
+        }
+
+        override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) {
+            if (playerAccepted) {
+                navigation.startGameActivity(nickname)
+            } else {
+                dialogCreator.showGameRefusedDialog(nickname)
+            }
         }
 
         override fun onConnectionLost() {
