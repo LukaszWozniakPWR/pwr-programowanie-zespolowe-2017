@@ -1,10 +1,10 @@
 package cardgame.server;
 
-import cardgame.server.model.Player;
+import cardgame.server.model.User;
 
 public abstract class Client {
     private int id = -1;
-    private Player player;
+    private User user;
 
     public abstract void send(String message);
 
@@ -16,12 +16,12 @@ public abstract class Client {
         return id;
     }
 
-    public Player getPlayer() {
-        return player;
+    public User getUser() {
+        return user;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-        player.setClient(this);
+    public void setUser(User user) {
+        this.user = user;
+        user.setClient(this);
     }
 }

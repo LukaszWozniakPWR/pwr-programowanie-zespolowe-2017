@@ -1,16 +1,14 @@
 package cardgame.server;
 
 import cardgame.server.communication.*;
-import cardgame.server.communication.command.GetPlayers;
-import cardgame.server.communication.command.RejectRequestGame;
-import cardgame.server.communication.command.RequestGame;
-import cardgame.server.communication.command.SetNickname;
+import cardgame.server.communication.command.*;
 import cardgame.server.communication.response.GameRequest;
 import cardgame.server.communication.response.PlayerList;
 import cardgame.server.communication.response.RequestGameResponse;
 import cardgame.server.communication.response.SetNicknameResponse;
-import cardgame.server.model.Game;
-import cardgame.server.model.Player;
+import cardgame.server.model.game.Game;
+import cardgame.server.model.User;
+import cardgame.server.model.game.Player;
 import com.google.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -89,6 +87,9 @@ public class GameServer {
                 handleRejectRequestGame(client, (RejectRequestGame) command.args);
                 break;
 
+            case Pong.NAME:
+                break;
+
             default:
                 break;
         }
@@ -99,12 +100,12 @@ public class GameServer {
         ex.printStackTrace();
     }
 
-    private Player getPlayerByName(String name) {
-        Optional<Player> player;
+    private User getPlayerByName(String name) {
+        Optional<User> player;
         synchronized (clients) {
             player = clients.stream()
-                    .filter(c -> c.getPlayer() != null && name.equals(c.getPlayer().name))
-                    .map(Client::getPlayer).findFirst();
+                    .filter(c -> c.getUser() != null && name.equals(c.getUser().name))
+                    .map(Client::getUser).findFirst();
         }
 
         return player.orElse(null);
@@ -112,17 +113,17 @@ public class GameServer {
 
     private void handleSetNickname(Client client, SetNickname args) {
         boolean success = false;
-        Player p = getPlayerByName(args.nickname);
-        Player player = client.getPlayer();
+        User p = getPlayerByName(args.nickname);
+        User user = client.getUser();
 
-        if (NICKNAME_REGEX.matcher(args.nickname).matches() && (p == null || p == player)) {
+        if (NICKNAME_REGEX.matcher(args.nickname).matches() && (p == null || p == user)) {
             success = true;
 
-            if (player == null) {
-                player = new Player(args.nickname);
-                client.setPlayer(player);
+            if (user == null) {
+                user = new User(args.nickname);
+                client.setUser(user);
             } else {
-                player.name = args.nickname;
+                user.name = args.nickname;
             }
 
             log.debug(String.format("Client %d set nickname %s", client.getId(), args.nickname));
@@ -134,23 +135,23 @@ public class GameServer {
         PlayerList players = new PlayerList();
         synchronized (clients) {
             clients.stream()
-                    .filter(c -> c.getPlayer() != null && c.getPlayer() != client.getPlayer())
-                    .forEach(c -> players.players.add(c.getPlayer()));
+                    .filter(c -> c.getUser() != null && c.getUser() != client.getUser())
+                    .forEach(c -> players.players.add(c.getUser()));
         }
 
         sendResponse(client, players);
     }
 
     private void handleRequestGame(Client client, RequestGame args) {
-        Player player = client.getPlayer();
+        User user = client.getUser();
 
-        if (player != null && player.state == Player.PlayerState.FREE) {
-            Player opponent = getPlayerByName(args.nickname);
+        if (user != null && user.state == User.PlayerState.FREE) {
+            User opponent = getPlayerByName(args.nickname);
 
-            if (opponent != null && opponent != player && opponent.state == Player.PlayerState.FREE) {
+            if (opponent != null && opponent != user && opponent.state == User.PlayerState.FREE) {
                 boolean matched = false;
-                synchronized (player.getGameRequsets()) {
-                    if (player.getGameRequsets().remove(opponent)) {
+                synchronized (user.getGameRequsets()) {
+                    if (user.getGameRequsets().remove(opponent)) {
                         // opponent requested game with player
                         matched = true;
                     }
@@ -158,19 +159,19 @@ public class GameServer {
 
                 if (matched) {
                     sendResponse(client, new RequestGameResponse(true, opponent.name));
-                    sendResponse(opponent, new RequestGameResponse(true, player.name));
-                    newGame(player, opponent);
+                    sendResponse(opponent, new RequestGameResponse(true, user.name));
+                    newGame(user, opponent);
                 } else {
                     boolean sendRequest = false;
                     synchronized (opponent.getGameRequsets()) {
-                        if (!opponent.getGameRequsets().contains(player)) {
-                            opponent.getGameRequsets().add(player);
+                        if (!opponent.getGameRequsets().contains(user)) {
+                            opponent.getGameRequsets().add(user);
                             sendRequest = true;
                         }
                     }
 
                     if (sendRequest) {
-                        sendResponse(opponent, new GameRequest(player.name));
+                        sendResponse(opponent, new GameRequest(user.name));
                     }
                 }
 
@@ -182,33 +183,38 @@ public class GameServer {
     }
 
     private void handleRejectRequestGame(Client client, RejectRequestGame args) {
-        Player player = client.getPlayer();
-        Player opponent = getPlayerByName(args.nickname);
+        User user = client.getUser();
+        User opponent = getPlayerByName(args.nickname);
 
-        if (player != null && opponent != null && player != opponent) {
+        if (user != null && opponent != null && user != opponent) {
             boolean rejected;
-            synchronized (player.getGameRequsets()) {
-                rejected = player.getGameRequsets().remove(opponent);
+            synchronized (user.getGameRequsets()) {
+                rejected = user.getGameRequsets().remove(opponent);
             }
 
             if (rejected) {
-                sendResponse(opponent, new RequestGameResponse(false, player.name));
+                sendResponse(opponent, new RequestGameResponse(false, user.name));
             }
         }
     }
 
-    private void sendResponse(Player player, BaseResponse response) {
-        sendResponse(player.getClient(), response);
+    private void sendResponse(User user, BaseResponse response) {
+        sendResponse(user.getClient(), response);
     }
 
     private void sendResponse(Client client, BaseResponse response) {
         client.send(gson.toJson(new Response(response)));
     }
 
-    private void newGame(Player player1, Player player2) {
-        player1.state = Player.PlayerState.PLAYING;
-        player2.state = Player.PlayerState.PLAYING;
-
-        games.add(new Game(player1, player2));
+    private void newGame(User user1, User user2) {
+        user1.state = User.PlayerState.PLAYING;
+        user2.state = User.PlayerState.PLAYING;
+//        Game game = null;
+//        user1.setGame(game);
+//        user2.setGame(game);
+//        user1.setPlayer(game.getPlayer1());
+//        user2.setPlayer(game.getPlayer2());
+//
+//        games.add(game);
     }
 }

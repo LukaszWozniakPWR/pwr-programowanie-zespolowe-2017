@@ -1,9 +1,6 @@
 package cardgame.server.communication;
 
-import cardgame.server.communication.command.GetPlayers;
-import cardgame.server.communication.command.RejectRequestGame;
-import cardgame.server.communication.command.RequestGame;
-import cardgame.server.communication.command.SetNickname;
+import cardgame.server.communication.command.*;
 import cardgame.server.communication.response.RequestGameResponse;
 import com.google.gson.*;
 
@@ -30,9 +27,11 @@ public class CommandDeserializer implements JsonDeserializer<Command> {
             case RejectRequestGame.NAME:
                 command.args = context.deserialize(object.get("args"), RejectRequestGame.class);
                 break;
+            case Pong.NAME:
+                command.args = null;
+                break;
             default:
                 break;
-
         }
 
         return command;
