@@ -1,3 +1,5 @@
+package cardgame.model;
+
 public enum MusterClass {
     DWARF_SKIRMISHER,
     ELVEN_SKIRMISHER,

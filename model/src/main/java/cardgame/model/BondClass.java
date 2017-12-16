@@ -1,3 +1,5 @@
+package cardgame.model;
+
 public enum BondClass {
     PFI,
     CRINFRID_REAVERS,

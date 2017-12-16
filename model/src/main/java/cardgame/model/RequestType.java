@@ -1,3 +1,4 @@
+package cardgame.model;
 
 enum RequestType {
     PASS,

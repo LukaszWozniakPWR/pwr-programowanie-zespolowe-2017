@@ -1,3 +1,4 @@
+package cardgame.model;
 
 enum Effect {
     COMMANDERS_HORN,

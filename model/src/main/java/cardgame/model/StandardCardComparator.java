@@ -1,3 +1,5 @@
+package cardgame.model;
+
 import java.util.Comparator;
 
 public class StandardCardComparator implements Comparator<Card> {
