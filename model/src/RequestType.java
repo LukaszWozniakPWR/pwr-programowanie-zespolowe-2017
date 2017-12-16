@@ -1,5 +1,7 @@
 
 enum RequestType {
     PASS,
-    PLAY
+    PLAY,
+    REVIVE,
+    GET_NEW
 }

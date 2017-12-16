@@ -1,33 +1,52 @@
+import java.util.ArrayList;
+
 public class Card {
-    public CardType cardType;
+    public ArrayList<Attribute> attributes;
     public int basicStrength;
+    public MusterClass musterClass;
+    private BondClass bondClass;
+
+    public boolean is(Attribute a) {
+        return attributes.contains(a);
+    }
 
     public int getStrength(Row row) {
         int strength = basicStrength;
 
-        if (cardType.is(Attribute.HERO))
+        if (attributes.contains(Attribute.HERO))
             return strength;
 
         int weatherAffectedStrength = basicStrength;
         if (row.isAffectedBy(Effect.BAD_WEATHER))
-            weatherAffectedStrength = strength = 1;
+            if (basicStrength >= 1)
+                weatherAffectedStrength = strength = 1;
+            else
+                weatherAffectedStrength = strength = 0;
 
-        if (cardType.is(Attribute.BOND))
+        if (attributes.contains(Attribute.BOND))
             for (Card c : row.elements)
-                if (c != this && c.cardType == this.cardType)
+                if (c != this && c.bondClass != null && c.bondClass == this.bondClass)
                     strength += weatherAffectedStrength;
-
-        for (Card c : row.elements)
-            if (c.cardType.is(Attribute.SUPPLY))
-                ++strength;
 
         if (row.hasHorn())
             strength *= 2;
 
+        for (Card c : row.elements)
+            if (c != this && c.is(Attribute.SUPPLY))
+                ++strength;
+
         return strength;
     }
 
-    public void specialAction(Player player, int row) {
-        cardType.specialAction(player, row);
+    public void specialActions(Player player, int row) {
+        for (Attribute a : attributes)
+            a.specialAction(player, row);
+    }
+
+    Card(ArrayList<Attribute> attributes, int basicStrength, MusterClass musterClass, BondClass bondClass) {
+        this.attributes = attributes;
+        this.basicStrength = basicStrength;
+        this.musterClass = musterClass;
+        this.bondClass = bondClass;
     }
 }

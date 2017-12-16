@@ -1,18 +1,18 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.OptionalInt;
 
 
 class Row {
     public ArrayList<Card> elements = new ArrayList<>();
     private ArrayList<Effect> effects = new ArrayList<>();
+    private StandardCardComparator scc = new StandardCardComparator();
 
     public int getScore() {
         return elements.stream().mapToInt(x -> x.getStrength(this)).sum();
     }
 
     public int getScourgePeak() {
-        OptionalInt max = elements.stream().mapToInt(x -> x.cardType.is(Attribute.HERO) ? -1 : x.basicStrength).max();
+        OptionalInt max = elements.stream().mapToInt(x -> x.is(Attribute.HERO) ? -1 : x.getStrength(this)).max();
         if (max.isPresent())
             return max.getAsInt();
         else
@@ -33,7 +33,7 @@ class Row {
     }
 
     public boolean hasHorn() {
-        return isAffectedBy(Effect.COMMANDERS_HORN) || elements.stream().anyMatch(c -> c.cardType.is(Attribute.COMMANDERS_HORN));
+        return isAffectedBy(Effect.COMMANDERS_HORN) || elements.stream().anyMatch(c -> c.is(Attribute.COMMANDERS_HORN));
     }
 
     public void clear() {
@@ -46,15 +46,19 @@ class Row {
         return this;
     }
 
-    public void sort(Comparator<Card> c) {
-        elements.sort(c);
+    public void sort() {
+        elements.sort(scc);
     }
 
-    public void scourge(ArrayList<Card> graveyard, int value) {
+    public Row scourge(ArrayList<Card> graveyard, int value) {
+        ArrayList<Card> toRemove = new ArrayList<>();
         for (Card c : elements)
-            if (c.basicStrength == value && !c.cardType.is(Attribute.HERO)) {
-                graveyard.add(c);
-                elements.remove(c);
+            if (c.getStrength(this) == value && !c.is(Attribute.HERO)) {
+                toRemove.add(c);
             }
+        graveyard.addAll(toRemove);
+        for (Card c: toRemove)
+            elements.remove(c);
+        return this;
     }
 }
