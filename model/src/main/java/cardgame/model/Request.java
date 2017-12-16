@@ -34,7 +34,7 @@ public class Request {
         this.row = 0;
     }
 
-    Request(Player p, RequestType t, Card c, int row) {
+    public Request(Player p, RequestType t, Card c, int row) {
         this.player = p;
         this.type = t;
         this.card = c;

@@ -45,7 +45,7 @@ public class Card {
             a.specialAction(player, row);
     }
 
-    Card(ArrayList<Attribute> attributes, int basicStrength, MusterClass musterClass, BondClass bondClass) {
+    public Card(ArrayList<Attribute> attributes, int basicStrength, MusterClass musterClass, BondClass bondClass) {
         this.attributes = attributes;
         this.basicStrength = basicStrength;
         this.musterClass = musterClass;
