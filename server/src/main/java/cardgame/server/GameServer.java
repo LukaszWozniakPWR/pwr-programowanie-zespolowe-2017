@@ -1,14 +1,12 @@
 package cardgame.server;
 
+import cardgame.model.Player;
+import cardgame.model.Request;
+import cardgame.model.RequestType;
 import cardgame.server.communication.*;
 import cardgame.server.communication.command.*;
-import cardgame.server.communication.response.GameRequest;
-import cardgame.server.communication.response.PlayerList;
-import cardgame.server.communication.response.RequestGameResponse;
-import cardgame.server.communication.response.SetNicknameResponse;
-import cardgame.server.model.game.Game;
-import cardgame.server.model.User;
-import cardgame.server.model.game.Player;
+import cardgame.server.communication.response.*;
+import cardgame.server.model.*;
 import com.google.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -90,8 +88,46 @@ public class GameServer {
             case Pong.NAME:
                 break;
 
+            case PutCard.NAME:
+                handleAction(client, command.args, Action.PUT_CARD);
+                break;
+
+            case Pass.NAME:
+                handleAction(client, command.args, Action.PASS);
+                break;
+
             default:
                 break;
+        }
+    }
+
+    private void handleAction(Client client, BaseCommand command, Action action) {
+        GameState state = new GameState();
+
+        // try-catch driven validation
+        try {
+            User user = client.getUser();
+            Player p = user.getPlayer();
+
+            switch (action) {
+                case PUT_CARD:
+                    PutCard args = (PutCard) command;
+                    new Request(p, RequestType.PLAY, p.deckInHands.get(args.cardNumber), args.row).validate().takeEffect();
+                    break;
+                case PASS:
+                    new Request(p, RequestType.PASS).validate().takeEffect();
+                    break;
+            }
+
+            state.forUser(user);
+            GameStateResponse opponentState = new GameStateResponse();
+            opponentState.forUser(user.getGame().getOpponent(user));
+
+            sendResponse(client, new ActionResponse(Action.PUT_CARD, true, state));
+            sendResponse(client, opponentState);
+
+        } catch (NullPointerException | IndexOutOfBoundsException ex) {
+            sendResponse(client, new ActionResponse(Action.PUT_CARD, false, state));
         }
     }
 
@@ -209,12 +245,19 @@ public class GameServer {
     private void newGame(User user1, User user2) {
         user1.state = User.PlayerState.PLAYING;
         user2.state = User.PlayerState.PLAYING;
-//        Game game = null;
-//        user1.setGame(game);
-//        user2.setGame(game);
-//        user1.setPlayer(game.getPlayer1());
-//        user2.setPlayer(game.getPlayer2());
-//
-//        games.add(game);
+        user1.setPlayer(new Player());
+        user2.setPlayer(new Player());
+
+        Game game = new Game(user1, user2);
+        games.add(game);
+
+        GameStartedResponse response1 = new GameStartedResponse();
+        response1.forUser(user1);
+
+        GameStartedResponse response2 = new GameStartedResponse();
+        response2.forUser(user2);
+
+        sendResponse(user1, response1);
+        sendResponse(user2, response2);
     }
 }
