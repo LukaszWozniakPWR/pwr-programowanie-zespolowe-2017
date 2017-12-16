@@ -3,7 +3,7 @@ package cardgame.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-enum CardType {
+public enum CardType {
     BASIC(new Attribute[]{}, "BASIC") {
         @Override
         public void specialAction(Player player, int row) {

@@ -1,6 +1,6 @@
 package cardgame.model;
 
-enum RequestType {
+public enum RequestType {
     PASS,
     PLAY,
     REVIVE,

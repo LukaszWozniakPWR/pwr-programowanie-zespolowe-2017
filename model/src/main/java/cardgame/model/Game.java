@@ -2,7 +2,7 @@ package cardgame.model;
 
 import java.util.Random;
 
-class Game {
+public class Game {
     private Player player1, player2, currentPlayer;
 
     private void chooseStartingPlayer() {

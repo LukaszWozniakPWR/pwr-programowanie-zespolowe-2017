@@ -1,6 +1,6 @@
 package cardgame.model;
 
-enum Effect {
+public enum Effect {
     COMMANDERS_HORN,
     BAD_WEATHER
 }

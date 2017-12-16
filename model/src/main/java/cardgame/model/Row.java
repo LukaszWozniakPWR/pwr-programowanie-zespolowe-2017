@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.OptionalInt;
 
 
-class Row {
+public class Row {
     public ArrayList<Card> elements = new ArrayList<>();
     private ArrayList<Effect> effects = new ArrayList<>();
     private StandardCardComparator scc = new StandardCardComparator();

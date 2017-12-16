@@ -1,6 +1,6 @@
 package cardgame.model;
 
-enum Attribute
+public enum Attribute
 {
     HERO() {
         @Override

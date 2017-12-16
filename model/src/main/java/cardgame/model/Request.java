@@ -1,6 +1,6 @@
 package cardgame.model;//class CardNotFoundException extends Exception {}
 
-class Request {
+public class Request {
     private Player player;
     private RequestType type;
     private Card card;

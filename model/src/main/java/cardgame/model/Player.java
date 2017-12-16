@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 
-class Player {
+public class Player {
     public int gameScore;
     public Boolean passed = false;
     public Player opponent;
