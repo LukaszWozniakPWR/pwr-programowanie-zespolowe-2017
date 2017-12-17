@@ -57,6 +57,10 @@ public class Game {
 
     }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public void play() {
         getDecksFromPlayers();
         validateDecks();
