@@ -11,10 +11,10 @@ module.exports = {
         filename: 'bundle.js'
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.js', '.vue'],
         alias: {
-            pixi: path.join(__dirname, 'node_modules/pixi.js/dist/pixi.js'),
-            assets: path.join(__dirname, 'assets/')
+            assets: path.join(__dirname, 'assets/'),
+            'vue$': 'vue/dist/vue.esm.js'
         }
     },
     node: {
@@ -37,9 +37,38 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
-            { test: /assets[\/\\]/, loader: 'file-loader?name=assets/[hash].[ext]' },
-            { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' }
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        'sass': 'vue-style-loader!css-loader!sass-loader'
+                    },
+                    esModule: true
+                }
+            },
+            {
+                test: /\.ts$/, enforce: "pre", loader: 'tslint-loader',
+                options: {
+                    appendTsSuffixTo: [/\.vue$/]
+                }
+            },
+            {
+                test: /assets[\/\\]/,
+                loader: 'file-loader?name=assets/[hash].[ext]'
+            },
+            {
+                test: /mdbootstrap[\/\\]/,
+                loader: 'file-loader?name=mdb/[hash].[ext]'
+            },
+            {
+                test: /\.ts$/,
+                loader: 'ts-loader',
+                exclude: '/node_modules/',
+                options: {
+                    appendTsSuffixTo: [/\.vue$/]
+                }
+            }
         ]
     },
     devtool: 'source-map'

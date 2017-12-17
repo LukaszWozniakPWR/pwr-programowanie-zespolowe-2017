@@ -5,10 +5,13 @@
     "sourceMap": true,
     "types": [
       "node"
-    ]
+    ],
+    "experimentalDecorators": true
   },
   "files": [
     "./src/app.ts",
-    "./src/config.d.ts"
+    "./src/config.d.ts",
+    "./src/vue-shims.d.ts",
+    "./src/model.d.ts"
   ]
 }
