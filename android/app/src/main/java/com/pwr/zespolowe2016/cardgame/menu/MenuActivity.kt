@@ -10,6 +10,7 @@ import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.game.Card
 import com.pwr.zespolowe2016.cardgame.game.CardType
+import com.pwr.zespolowe2016.cardgame.game.CardsBottomSheetFragment
 import com.pwr.zespolowe2016.cardgame.game.CardsDialog
 import com.pwr.zespolowe2016.cardgame.other.DialogCreator
 import com.pwr.zespolowe2016.cardgame.other.Navigation
@@ -30,20 +31,29 @@ class MenuActivity : SocketApiActivity() {
 
     private val viewAnimator: ViewAnimator by bindView(R.id.viewAnimator)
     private val startButton: Button by bindView(R.id.startButton)
-    //TODO remove fake button
+    //TODO remove fake button and bottomsheet
     private val fakeButton: Button by bindView(R.id.fakeButotn)
+    private val cardsBottomSheetFragment = CardsBottomSheetFragment()
+    private val fakeButton2: Button by bindView(R.id.fakeButotn2)
+    // TODO
+
     private val nicknameEditText: EditText by bindView(R.id.nicknameEditText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startButton.setOnClickListener { startButtonClicked() }
+
+        val cards = mutableListOf<Card>()
+        cards.add(Card(10, "Karta 1", -1, CardType.ONE, "super opis karty 1"))
+        cards.add(Card(200, "Karta 2", -1, CardType.TWO, "super opis karty 2"))
+        cards.add(Card(300, "Karta 3", -1, CardType.ONE, "super opis karty 3"))
+        cards.add(Card(400, "Karta 4", -1, CardType.TWO, "super opis karty 4"))
         fakeButton.setOnClickListener {
-            val cards = mutableListOf<Card>()
-            cards.add(Card(10, "Karta 1", -1, CardType.ONE, "super opis karty 1"))
-            cards.add(Card(200, "Karta 2", -1, CardType.TWO, "super opis karty 2"))
-            cards.add(Card(300, "Karta 3", -1, CardType.ONE, "super opis karty 3"))
-            cards.add(Card(400, "Karta 4", -1, CardType.TWO, "super opis karty 4"))
             CardsDialog(this).apply { loadCards(cards) }.show()
+        }
+        fakeButton2.setOnClickListener {
+            cardsBottomSheetFragment.show(supportFragmentManager, cardsBottomSheetFragment.tag)
+            cardsBottomSheetFragment.loadCards(this, cards)
         }
     }
 

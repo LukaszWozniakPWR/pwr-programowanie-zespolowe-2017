@@ -3,12 +3,10 @@ package com.pwr.zespolowe2016.cardgame.game
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.game.views.PlayerView
 import com.pwr.zespolowe2016.cardgame.other.Navigation
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
-import kotlinx.android.synthetic.main.player_in_game_view.view.playerName
 
 class GameActivity : SocketApiActivity() {
 
