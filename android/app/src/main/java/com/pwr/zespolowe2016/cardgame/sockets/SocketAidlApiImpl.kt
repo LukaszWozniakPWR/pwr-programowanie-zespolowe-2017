@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.stream.JsonWriter
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.Command
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.GET_PLAYER_LIST_COMMAND
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.PONG_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.REJECT_GAME_REQUEST_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.REQUEST_GAME_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.SET_NICKNAME_COMMAND
@@ -58,6 +59,10 @@ class SocketAidlApiImpl(
                         nickname
                 )
         ))
+    }
+
+    fun answerPingWithPong() {
+        asyncSendCommand(Command(PONG_COMMAND, arguments = null))
     }
 
     private fun asyncSendCommand(command: Command) {
