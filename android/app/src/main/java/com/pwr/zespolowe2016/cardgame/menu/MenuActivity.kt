@@ -37,6 +37,7 @@ class MenuActivity : SocketApiActivity() {
     private val fakeButton2: Button by bindView(R.id.fakeButotn2)
     // TODO
 
+    private val fakeButton3: Button by bindView(R.id.fakeButotn3)
     private val nicknameEditText: EditText by bindView(R.id.nicknameEditText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +56,7 @@ class MenuActivity : SocketApiActivity() {
             cardsBottomSheetFragment.show(supportFragmentManager, cardsBottomSheetFragment.tag)
             cardsBottomSheetFragment.loadCards(this, cards)
         }
+        fakeButton3.setOnClickListener { navigation.startGameActivity("fakeEnemyNickname") }
     }
 
     private fun startButtonClicked() {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <com.pwr.zespolowe2016.cardgame.game.views.BattleLineView
+        android:id="@+id/leftBattleLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/BattleFieldLineStyle"/>
+
+    <com.pwr.zespolowe2016.cardgame.game.views.BattleLineView
+        android:id="@+id/middleBattleLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/BattleFieldLineStyle"/>
+
+    <com.pwr.zespolowe2016.cardgame.game.views.BattleLineView
+        android:id="@+id/rightBattleLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/BattleFieldLineStyle"/>
+
+</LinearLayout>

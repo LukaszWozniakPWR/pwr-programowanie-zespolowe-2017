@@ -39,10 +39,10 @@ class PlayerView @JvmOverloads constructor(
             field = value
         }
 
-    val playerNameView: TextView by bindView(R.id.playerName)
-    val cardsCountView: TextView by bindView(R.id.cardsCount)
-    val pointsCountView: TextView by bindView(R.id.pointsCount)
-    val lifesCountView: TextView by bindView(R.id.lifesCount)
+    private val playerNameView: TextView by bindView(R.id.playerName)
+    private val cardsCountView: TextView by bindView(R.id.cardsCount)
+    private val pointsCountView: TextView by bindView(R.id.pointsCount)
+    private val lifesCountView: TextView by bindView(R.id.lifesCount)
 
     private val cardsCountStringFormat: String by bindString(R.string.player_cards_count_format)
     private val pointsCountStringFormat: String by bindString(R.string.player_points_count_format)
@@ -60,6 +60,7 @@ class PlayerView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
+        val maxMeasureSpec = maxOf(widthMeasureSpec, heightMeasureSpec)
+        super.onMeasure(maxMeasureSpec, maxMeasureSpec)
     }
 }

@@ -86,7 +86,11 @@
         <item name="android:textColor">@color/grayStone</item>
         <item name="android:padding">@dimen/padding_2</item>
         <item name="android:layout_marginLeft">@dimen/padding_8</item>
+    </style>
 
+    <style name="BattleFieldLineStyle">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/padding_2</item>
     </style>
 
 </resources>
