@@ -5,22 +5,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.game.views.PlayerView
 import com.pwr.zespolowe2016.cardgame.other.Navigation
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
+import kotlinx.android.synthetic.main.player_in_game_view.view.playerName
 
 class GameActivity : SocketApiActivity() {
 
     override val layoutId: Int = R.layout.activity_game
     override val navigation = Navigation(this)
 
-    private val playerView: TextView by bindView(R.id.player_view)
-
-    private lateinit var playerNick: String
+    private val yourPlayerView: PlayerView by bindView(R.id.yourPlayerView)
+    private val otherPlayerView: PlayerView by bindView(R.id.otherPlayerView)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        playerNick = intent.getStringExtra(PLAYER_NICK_KEY)
-        playerView.text = "grasz z \n" + playerNick
+        yourPlayerView.playerName = "Twoja nazwa"
+        otherPlayerView.playerName = intent.getStringExtra(PLAYER_NICK_KEY)
     }
 
     companion object {

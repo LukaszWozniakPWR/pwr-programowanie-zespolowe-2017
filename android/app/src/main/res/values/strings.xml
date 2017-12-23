@@ -27,4 +27,9 @@
     <string name="player_refused_message">Gracz %1$s odrzucił twoje zaproszenie :(</string>
     <string name="player_requested_game_title">Zaproszenie do gry</string>
     <string name="player_requested_game_message">Gracz %1$s zaprosił Cię do wspólnej rozgrywki, grasz?</string>
+
+    <!--Player In Game View-->
+    <string name="player_cards_count_format">Ilość kart: %1$s</string>
+    <string name="player_points_count_format">Ilość punktów: %1$s</string>
+    <string name="player_lifes_count_format">Życia: %1$s</string>
 </resources>

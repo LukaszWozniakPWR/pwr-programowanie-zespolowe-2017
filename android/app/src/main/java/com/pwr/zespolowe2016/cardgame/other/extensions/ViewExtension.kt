@@ -6,6 +6,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ViewAnimator
+import com.pwr.zespolowe2016.cardgame.other.DialogCreator
+import com.pwr.zespolowe2016.cardgame.other.Lazy
+import com.pwr.zespolowe2016.cardgame.other.requiredString
 
 var View.visible: Boolean
     get() = visibility == View.VISIBLE
@@ -34,4 +37,11 @@ fun ViewAnimator.displayChild(childIndex: Int) {
 fun SwipeRefreshLayout.setRefreshingSafely(refreshing: Boolean) {
     if (isRefreshing == refreshing) return
     isRefreshing = refreshing
+}
+
+val View.stringFinder: View.(Int) -> String?
+    get() = { context.resources?.getString(it) }
+
+private fun View.bindString(id: Int): Lazy<View, String> {
+    return requiredString(id, stringFinder)
 }

@@ -14,12 +14,24 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:gravity="center"
-        android:id="@+id/player_view"
-        android:textSize="32sp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:text="Jan Kowalski"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.pwr.zespolowe2016.cardgame.game.views.PlayerView
+            android:id="@+id/yourPlayerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/padding_4"/>
+
+        <com.pwr.zespolowe2016.cardgame.game.views.PlayerView
+            android:id="@+id/otherPlayerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/padding_4"/>
+    </LinearLayout>
 
 </LinearLayout>

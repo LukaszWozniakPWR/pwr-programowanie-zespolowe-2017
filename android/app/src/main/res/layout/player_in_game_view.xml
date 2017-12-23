@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/padding_16"
+    android:background="@drawable/green_goblin_rounded_rectangle_border"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/playerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/padding_8"
+        android:paddingBottom="@dimen/padding_16"
+        android:textSize="@dimen/text_size_18"
+        android:textColor="@color/grayStoneDark"
+        android:textStyle="bold"
+        tools:text="Nazwa gracza"/>
+
+    <TextView
+        android:id="@+id/cardsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/PlayerViewValueStyle"
+        android:text="@string/player_cards_count_format"/>
+
+    <TextView
+        android:id="@+id/pointsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/PlayerViewValueStyle"
+        android:text="@string/player_points_count_format"/>
+
+    <TextView
+        android:id="@+id/lifesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/PlayerViewValueStyle"
+        android:text="@string/player_lifes_count_format"/>
+
+</LinearLayout>
