@@ -8,6 +8,9 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.game.Card
+import com.pwr.zespolowe2016.cardgame.game.CardType
+import com.pwr.zespolowe2016.cardgame.game.CardsDialog
 import com.pwr.zespolowe2016.cardgame.other.DialogCreator
 import com.pwr.zespolowe2016.cardgame.other.Navigation
 import com.pwr.zespolowe2016.cardgame.other.extensions.displayChild
@@ -35,11 +38,19 @@ class MenuActivity : SocketApiActivity() {
     }
 
     private fun startButtonClicked() {
-        socketApi?.let { socketApi ->
-            socketApi.setNickname(nicknameEditText.string)
-            nicknameEditText.hideKeyboard()
-            viewAnimator.displayChild(PROGRESS_INDEX)
-        }
+//        socketApi?.let { socketApi ->
+//            socketApi.setNickname(nicknameEditText.string)
+//            nicknameEditText.hideKeyboard()
+//            viewAnimator.displayChild(PROGRESS_INDEX)
+//        }
+        val cards = mutableListOf<Card>()
+        cards.add(Card(10, "Karta 1", -1, CardType.ONE, "super opis karty 1"))
+        cards.add(Card(200, "Karta 2", -1, CardType.TWO, "super opis karty 2"))
+        cards.add(Card(300, "Karta 3", -1, CardType.ONE, "super opis karty 3"))
+        cards.add(Card(400, "Karta 4", -1, CardType.TWO, "super opis karty 4"))
+       val a =  CardsDialog(this, cards)
+        a.loadCards(cards)
+        a.show()
     }
 
     inner class MenuActivityApiCallback(private val context: Context) : EmptyApiCallback() {
