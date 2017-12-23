@@ -24,6 +24,7 @@ class CardView : LinearLayout {
 
     private fun initialize() {
         inflate(context, R.layout.card_view, this)
+        orientation = VERTICAL
     }
 
     fun displayCard(card: Card) {

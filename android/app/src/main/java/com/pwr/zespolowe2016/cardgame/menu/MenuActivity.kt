@@ -48,9 +48,7 @@ class MenuActivity : SocketApiActivity() {
         cards.add(Card(200, "Karta 2", -1, CardType.TWO, "super opis karty 2"))
         cards.add(Card(300, "Karta 3", -1, CardType.ONE, "super opis karty 3"))
         cards.add(Card(400, "Karta 4", -1, CardType.TWO, "super opis karty 4"))
-       val a =  CardsDialog(this, cards)
-        a.loadCards(cards)
-        a.show()
+        CardsDialog(this).apply { loadCards(cards) }.show()
     }
 
     inner class MenuActivityApiCallback(private val context: Context) : EmptyApiCallback() {

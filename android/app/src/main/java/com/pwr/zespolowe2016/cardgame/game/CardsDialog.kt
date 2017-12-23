@@ -8,9 +8,7 @@ import android.widget.Button
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.bindView
 
-class CardsDialog(context: Context,
-                  private val cards: List<Card>
-) : AlertDialog(context) {
+class CardsDialog(context: Context) : AlertDialog(context) {
 
     private val cardsList: RecyclerView by bindView(R.id.cards_dialog_list)
     private val closeButton: Button by bindView(R.id.cards_dialog_close_button)
@@ -22,7 +20,6 @@ class CardsDialog(context: Context,
         setContentView(R.layout.cards_dialog)
         closeButton.setOnClickListener { dismiss() }
         cardsList.adapter = cardsAdapter
-       // loadCards()
     }
 
     fun loadCards(cards: List<Card>) {
