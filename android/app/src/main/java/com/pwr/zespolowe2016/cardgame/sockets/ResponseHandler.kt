@@ -1,7 +1,9 @@
 package com.pwr.zespolowe2016.cardgame.sockets
 
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.Response
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.NICKNAME_RESPONSE
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.PING_FROM_SERVER
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.PLAYER_LIST_RESPONSE
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.REQUEST_GAME
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.REQUEST_GAME_RESPONSE
@@ -12,6 +14,7 @@ import com.pwr.zespolowe2016.cardgame.sockets.model.responses.requestgamerespons
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.setnickname.SetNicknameResponse
 
 class ResponseHandler(
+        private val socketApi: SocketAidlApiImpl,
         private val callbacks: List<SocketAidlCallback> = emptyList(),
         private val queuedResponses: MutableList<Response> = mutableListOf(),
         private var queuedConnectionLost: Boolean = false
@@ -33,11 +36,11 @@ class ResponseHandler(
     fun withCallbackAdded(callback: SocketAidlCallback): ResponseHandler {
         return if (callbacks.contains(callback)) {
             this
-        } else ResponseHandler(callbacks.plus(callback), queuedResponses.toMutableList())
+        } else ResponseHandler(socketApi, callbacks.plus(callback), queuedResponses.toMutableList())
     }
 
     fun withCallbackRemoved(callback: SocketAidlCallback): ResponseHandler {
-        return ResponseHandler(callbacks.minus(callback))
+        return ResponseHandler(socketApi, callbacks.minus(callback))
     }
 
     fun notifyConnectionLost() {
@@ -54,11 +57,16 @@ class ResponseHandler(
             return
         }
         when (response.type) {
+            PING_FROM_SERVER -> handlePing()
             NICKNAME_RESPONSE -> handleSetNicknameResponse(response.setNicknameResponse.orEmpty())
             PLAYER_LIST_RESPONSE -> handlePlayerListResponse(response.playerList.orEmpty())
             REQUEST_GAME_RESPONSE -> handleRequestGameResponse(response.requestGameResponse.orEmpty())
             REQUEST_GAME -> handleGameRequested(response.requestGame.orEmpty())
         }
+    }
+
+    private fun handlePing() {
+        socketApi.answerPingWithPong()
     }
 
     private fun handleSetNicknameResponse(data: SetNicknameResponse) {
@@ -70,9 +78,7 @@ class ResponseHandler(
     }
 
     private fun handleRequestGameResponse(data: RequestGameResponse) {
-        callbacks.forEach { callback ->
-            callback.onRequestGameResponse(data.playerAccepted, data.nickname)
-        }
+        callbacks.forEach { callback -> callback.onRequestGameResponse(data.playerAccepted, data.nickname) }
     }
 
     private fun handleGameRequested(data: RequestGame) {

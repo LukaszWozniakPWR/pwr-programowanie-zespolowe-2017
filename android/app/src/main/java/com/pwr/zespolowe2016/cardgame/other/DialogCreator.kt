@@ -7,9 +7,16 @@ import com.pwr.zespolowe2016.cardgame.R
 
 class DialogCreator(private val context: Context) {
 
-    val invitePlayerMessageText = context.getString(R.string.invite_player_message)
-    val playerRefusedMessageText = context.getString(R.string.player_refused_message)
-    val playerRequestedGameMessageText = context.getString(R.string.player_requested_game_message)
+    private val invitePlayerMessageText: String by bindString(R.string.invite_player_message)
+    private val playerRefusedMessageText: String by bindString(R.string.player_refused_message)
+    private val playerRequestedGameMessageText: String by bindString(R.string.player_requested_game_message)
+
+    private val stringFinder: DialogCreator.(Int) -> String?
+        get() = { context.resources?.getString(it) }
+
+    private fun DialogCreator.bindString(id: Int): Lazy<DialogCreator, String> {
+        return requiredString(id, stringFinder)
+    }
 
     fun showInvitePlayerDialog(
             nickname: String,

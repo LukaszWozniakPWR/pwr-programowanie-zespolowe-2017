@@ -20,8 +20,8 @@ class SocketService : Service(), ServiceCallbacksContainer {
     private var clientSocket = Socket()
     private val listenScheduler = Schedulers.newThread()
     private val subscriptions = mutableListOf<Subscription>()
-    private var responseHandler = ResponseHandler()
     private val binder = SocketAidlApiImpl(clientSocket, this)
+    private var responseHandler = ResponseHandler(binder)
 
     override fun onBind(intent: Intent?) = binder
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
