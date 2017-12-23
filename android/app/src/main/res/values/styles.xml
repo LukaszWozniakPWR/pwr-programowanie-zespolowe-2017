@@ -81,4 +81,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="PlayerViewValueStyle">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">@color/grayStone</item>
+        <item name="android:padding">@dimen/padding_2</item>
+        <item name="android:layout_marginLeft">@dimen/padding_8</item>
+
+    </style>
+
 </resources>
