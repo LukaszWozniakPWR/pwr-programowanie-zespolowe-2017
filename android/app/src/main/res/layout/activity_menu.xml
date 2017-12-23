@@ -60,6 +60,13 @@
                 android:layout_height="wrap_content"
                 android:text="FAKE BUTTON"
                 android:theme="@style/MenuButtonStyle" />
+
+            <Button
+                android:id="@+id/fakeButotn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FAKE BUTTON2"
+                android:theme="@style/MenuButtonStyle" />
         </LinearLayout>
         <include layout="@layout/progressbar"/>
     </ViewAnimator>
