@@ -30,25 +30,29 @@ class MenuActivity : SocketApiActivity() {
 
     private val viewAnimator: ViewAnimator by bindView(R.id.viewAnimator)
     private val startButton: Button by bindView(R.id.startButton)
+    //TODO remove fake button
+    private val fakeButton: Button by bindView(R.id.fakeButotn)
     private val nicknameEditText: EditText by bindView(R.id.nicknameEditText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startButton.setOnClickListener { startButtonClicked() }
+        fakeButton.setOnClickListener {
+            val cards = mutableListOf<Card>()
+            cards.add(Card(10, "Karta 1", -1, CardType.ONE, "super opis karty 1"))
+            cards.add(Card(200, "Karta 2", -1, CardType.TWO, "super opis karty 2"))
+            cards.add(Card(300, "Karta 3", -1, CardType.ONE, "super opis karty 3"))
+            cards.add(Card(400, "Karta 4", -1, CardType.TWO, "super opis karty 4"))
+            CardsDialog(this).apply { loadCards(cards) }.show()
+        }
     }
 
     private fun startButtonClicked() {
-//        socketApi?.let { socketApi ->
-//            socketApi.setNickname(nicknameEditText.string)
-//            nicknameEditText.hideKeyboard()
-//            viewAnimator.displayChild(PROGRESS_INDEX)
-//        }
-        val cards = mutableListOf<Card>()
-        cards.add(Card(10, "Karta 1", -1, CardType.ONE, "super opis karty 1"))
-        cards.add(Card(200, "Karta 2", -1, CardType.TWO, "super opis karty 2"))
-        cards.add(Card(300, "Karta 3", -1, CardType.ONE, "super opis karty 3"))
-        cards.add(Card(400, "Karta 4", -1, CardType.TWO, "super opis karty 4"))
-        CardsDialog(this).apply { loadCards(cards) }.show()
+        socketApi?.let { socketApi ->
+            socketApi.setNickname(nicknameEditText.string)
+            nicknameEditText.hideKeyboard()
+            viewAnimator.displayChild(PROGRESS_INDEX)
+        }
     }
 
     inner class MenuActivityApiCallback(private val context: Context) : EmptyApiCallback() {
