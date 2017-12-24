@@ -6,7 +6,7 @@ import java.util.OptionalInt;
 
 public class Row {
     public ArrayList<Card> elements = new ArrayList<>();
-    private ArrayList<Effect> effects = new ArrayList<>();
+    public ArrayList<Effect> effects = new ArrayList<>();
     private StandardCardComparator scc = new StandardCardComparator();
 
     public int getScore() {

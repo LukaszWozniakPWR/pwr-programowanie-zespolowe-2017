@@ -9,6 +9,7 @@ public class OpponentState {
     public Row frontRow;
     public Row middleRow;
     public Row rearRow;
+    public int handLength;
 
     public OpponentState(Player player) {
         this.passed = player.passed;
@@ -16,5 +17,6 @@ public class OpponentState {
         this.frontRow = player.frontRow;
         this.middleRow = player.middleRow;
         this.rearRow = player.rearRow;
+        this.handLength = player.deckInHands.size();
     }
 }

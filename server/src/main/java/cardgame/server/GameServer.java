@@ -1,5 +1,6 @@
 package cardgame.server;
 
+import cardgame.model.Card;
 import cardgame.model.Player;
 import cardgame.model.Request;
 import cardgame.model.RequestType;
@@ -32,6 +33,7 @@ public class GameServer {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Command.class, new CommandDeserializer());
         gsonBuilder.registerTypeAdapter(Response.class, new ResponseSerializer());
+        gsonBuilder.registerTypeAdapter(Card.class, new CardSerializer());
         gsonBuilder.excludeFieldsWithModifiers(Modifier.PRIVATE);
         gson = gsonBuilder.create();
     }
