@@ -1,4 +1,4 @@
-package com.pwr.zespolowe2016.cardgame.game
+package com.pwr.zespolowe2016.cardgame.game.cards
 
 enum class CardType {
     // TODO real types

@@ -1,4 +1,4 @@
-package com.pwr.zespolowe2016.cardgame.game.views
+package com.pwr.zespolowe2016.cardgame.game.views.battle_view
 
 enum class LanesOrder(val value: Int) {
     CATAPULS_FIRST(0),

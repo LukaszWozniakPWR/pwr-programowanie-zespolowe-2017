@@ -1,6 +1,6 @@
-package com.pwr.zespolowe2016.cardgame.game.views
+package com.pwr.zespolowe2016.cardgame.game.views.battle_view
 
-import com.pwr.zespolowe2016.cardgame.game.Card
+import com.pwr.zespolowe2016.cardgame.game.cards.Card
 
 class CatapultsFirstBattleFieldViewState(
         playerBattleFieldView: PlayerBattleFieldView
@@ -15,10 +15,10 @@ class CatapultsFirstBattleFieldViewState(
     }
 
     override fun setCatapultsData(catapults: List<Card>) {
-        playerBattleFieldView.leftBattleLineView.setData(catapults)
+        playerBattleFieldView.leftBattleLineView.cardList = catapults
     }
 
     override fun setSwordsData(swords: List<Card>) {
-        playerBattleFieldView.rightBattleLineView.setData(swords)
+        playerBattleFieldView.rightBattleLineView.cardList = swords
     }
 }

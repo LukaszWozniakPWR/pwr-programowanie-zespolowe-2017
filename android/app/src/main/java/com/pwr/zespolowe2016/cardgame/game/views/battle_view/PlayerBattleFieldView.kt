@@ -1,15 +1,12 @@
-package com.pwr.zespolowe2016.cardgame.game.views
+package com.pwr.zespolowe2016.cardgame.game.views.battle_view
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.R.layout
-import com.pwr.zespolowe2016.cardgame.game.Card
-import com.pwr.zespolowe2016.cardgame.game.views.LanesOrder.CATAPULS_FIRST
-import com.pwr.zespolowe2016.cardgame.game.views.PlayerBattleFieldViewState.Companion
+import com.pwr.zespolowe2016.cardgame.R.styleable
+import com.pwr.zespolowe2016.cardgame.game.cards.Card
+import com.pwr.zespolowe2016.cardgame.game.views.battle_view.LanesOrder.CATAPULS_FIRST
 import com.pwr.zespolowe2016.cardgame.other.bindView
 import com.pwr.zespolowe2016.cardgame.other.extensions.extractAttributes
 
@@ -52,7 +49,7 @@ class PlayerBattleFieldView @JvmOverloads constructor(
     }
 
     fun setArchersData(archers: List<Card>) {
-        middleBattleLineView.setData(archers)
+        middleBattleLineView.cardList = archers
     }
 
     fun setSwordsData(swords: List<Card>) {
@@ -63,7 +60,7 @@ class PlayerBattleFieldView @JvmOverloads constructor(
         inflate(context, R.layout.player_battle_field_view, this)
         attrs?.extractAttributes(context, R.styleable.PlayerBattleFieldView) { typedArray ->
             lanesOrder = LanesOrder.fromInt(
-                    typedArray.getInt(R.styleable.PlayerBattleFieldView_lanesOrder, lanesOrder.value)
+                    typedArray.getInt(styleable.PlayerBattleFieldView_lanesOrder, lanesOrder.value)
             )
         }
     }

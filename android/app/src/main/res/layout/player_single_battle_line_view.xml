@@ -19,12 +19,14 @@
         android:id="@+id/totalPoints"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_22"
+        android:textSize="@dimen/text_size_12"
         android:textStyle="bold"
         android:textColor="@color/grayStoneDark"
         android:layout_marginTop="@dimen/padding_4"
         android:padding="@dimen/padding_16"
         android:gravity="center"
         android:background="@drawable/brown_red_rounded_border"
+        android:maxLength="3"
+        android:maxLines="1"
         tools:text="50"/>
 </LinearLayout>

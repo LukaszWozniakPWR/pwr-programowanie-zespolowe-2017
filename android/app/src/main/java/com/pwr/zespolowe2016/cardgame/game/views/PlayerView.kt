@@ -58,9 +58,4 @@ class PlayerView @JvmOverloads constructor(
         pointsCount = 0
         lifesCount = 0
     }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val maxMeasureSpec = maxOf(widthMeasureSpec, heightMeasureSpec)
-        super.onMeasure(maxMeasureSpec, maxMeasureSpec)
-    }
 }

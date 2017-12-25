@@ -1,4 +1,4 @@
-package com.pwr.zespolowe2016.cardgame.game
+package com.pwr.zespolowe2016.cardgame.game.cards
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -16,14 +16,26 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
 
     private lateinit var behavior: BottomSheetBehavior<*>
     private lateinit var cardsAdapter: HorizontalCardsAdapter
+    private lateinit var recyclerView: RecyclerView
+
+    private var positionToScroll = 0
+
+    var onCardClickListener: (Card) -> Unit = { /* NO-OP */ }
+        set(value) {
+            cardsAdapter.onItemClickListener = value
+            field = value
+        }
 
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
         val contentView = View.inflate(context, R.layout.bottom_sheet_fragment, null)
-        val cardsList = contentView.findViewById(R.id.bottom_sheet_list) as RecyclerView
-        cardsList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        cardsList.adapter = cardsAdapter
+        recyclerView = contentView.findViewById(R.id.bottom_sheet_list) as RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = cardsAdapter
+        if (positionToScroll < cardsAdapter.itemCount) {
+            recyclerView.scrollToPosition(positionToScroll)
+        }
         configureDialog(dialog, contentView)
         configureBehavior(contentView)
     }
@@ -55,7 +67,14 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
         cardsAdapter.setData(cards)
     }
 
+    fun scrollToPosition(position: Int) {
+        positionToScroll = position
+    }
+
     override fun onShow(dialog: DialogInterface?) {
+        if (positionToScroll < cardsAdapter.itemCount) {
+            recyclerView.scrollToPosition(positionToScroll)
+        }
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 }
