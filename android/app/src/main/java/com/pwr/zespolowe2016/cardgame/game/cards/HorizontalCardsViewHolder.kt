@@ -1,4 +1,4 @@
-package com.pwr.zespolowe2016.cardgame.game
+package com.pwr.zespolowe2016.cardgame.game.cards
 
 import android.content.Context
 import android.view.View
@@ -10,12 +10,14 @@ import com.pwr.zespolowe2016.cardgame.other.recyclerview.BaseViewHolder
 
 class HorizontalCardsViewHolder(
         private val context: Context,
-        view: View
+        view: View,
+        private val onClickListener: (Card) -> Unit
 ) : BaseViewHolder<Card>(view) {
 
     private val cardView: CardView by bindView(R.id.card_view)
 
     override fun displayItem(itemType: Card) {
+        cardView.setOnClickListener { onClickListener.invoke(itemType) }
         setCardWidth()
         cardView.displayCard(itemType)
     }

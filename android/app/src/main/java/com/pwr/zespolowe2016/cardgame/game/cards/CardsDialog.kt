@@ -1,4 +1,4 @@
-package com.pwr.zespolowe2016.cardgame.game
+package com.pwr.zespolowe2016.cardgame.game.cards
 
 import android.app.AlertDialog
 import android.content.Context
@@ -14,12 +14,26 @@ class CardsDialog(context: Context) : AlertDialog(context) {
     private val closeButton: Button by bindView(R.id.cards_dialog_close_button)
 
     private val cardsAdapter = CardsAdapter()
+    private var positionToScroll = 0
+
+    var onCardClickListener: (Card) -> Unit = cardsAdapter.onItemClickListener
+        set(value) {
+            cardsAdapter.onItemClickListener = value
+            field = value
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cards_dialog)
         closeButton.setOnClickListener { dismiss() }
         cardsList.adapter = cardsAdapter
+        if (positionToScroll < cardsAdapter.itemCount) {
+            cardsList.scrollToPosition(positionToScroll)
+        }
+    }
+
+    fun scrollToPosition(position: Int) {
+        positionToScroll = position
     }
 
     fun loadCards(cards: List<Card>) {

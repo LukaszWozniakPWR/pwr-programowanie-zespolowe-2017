@@ -17,4 +17,6 @@
     <color name="grayStone">#757575</color>
     <color name="grayStoneDark">#555555</color>
     <color name="redDarkWarning">#f33534</color>
+    <color name="brownRed">#c11312</color>
+    <color name="brownSeparator">#8b8113</color>
 </resources>

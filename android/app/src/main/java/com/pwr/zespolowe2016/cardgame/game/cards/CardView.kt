@@ -1,4 +1,4 @@
-package com.pwr.zespolowe2016.cardgame.game
+package com.pwr.zespolowe2016.cardgame.game.cards
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.game.cards.Card
 import com.pwr.zespolowe2016.cardgame.other.bindView
 
 class CardView : LinearLayout {
@@ -16,6 +17,8 @@ class CardView : LinearLayout {
     private val typeView: TextView by bindView(R.id.card_view_type)
     private val descriptionView: TextView by bindView(R.id.card_view_description)
 
+    private val layoutId: Int =  R.layout.card_view
+
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
@@ -23,7 +26,7 @@ class CardView : LinearLayout {
     }
 
     private fun initialize() {
-        inflate(context, R.layout.card_view, this)
+        inflate(context, layoutId, this)
         orientation = VERTICAL
     }
 

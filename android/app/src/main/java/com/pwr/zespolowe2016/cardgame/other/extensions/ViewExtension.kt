@@ -1,7 +1,9 @@
 package com.pwr.zespolowe2016.cardgame.other.extensions
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.support.v4.widget.SwipeRefreshLayout
+import android.util.AttributeSet
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -44,4 +46,13 @@ val View.stringFinder: View.(Int) -> String?
 
 private fun View.bindString(id: Int): Lazy<View, String> {
     return requiredString(id, stringFinder)
+}
+
+fun AttributeSet.extractAttributes(context: Context, attributes: IntArray, applyAttributes: (TypedArray)-> Unit) {
+    val typedArray = context.obtainStyledAttributes(this, attributes, 0, 0)
+    try {
+        applyAttributes(typedArray)
+    } finally {
+        typedArray.recycle()
+    }
 }
