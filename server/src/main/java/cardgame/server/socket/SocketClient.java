@@ -2,6 +2,8 @@ package cardgame.server.socket;
 
 import cardgame.server.Client;
 import cardgame.server.GameServer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,6 +16,7 @@ public class SocketClient extends Client implements Runnable {
     private GameServer gameServer;
     private BufferedReader reader;
     private OutputStreamWriter writer;
+    private static Logger log = LogManager.getLogger();
 
     public SocketClient(Socket socket, GameServer gameServer) {
         this.connection = socket;
@@ -27,6 +30,7 @@ public class SocketClient extends Client implements Runnable {
 
     @Override
     public void send(String message) {
+        log.debug("Sending: " + message);
         try {
             writer.write(message);
             writer.write('\n');
@@ -69,20 +73,23 @@ public class SocketClient extends Client implements Runnable {
                         state = 0;
                         gameServer.onMessage(this, line);
                     }
+                    log.debug("client closed connection");
                     state = 2;
                 } catch (SocketTimeoutException ignored) {
-                    send("{\"type\":\"Ping\",\"Ping\":{}}");
-                    state++;
+                    if (++state < 2) send("{\"type\":\"Ping\",\"Ping\":{}}");
+                    else log.debug("connection timeout");
                 }
             }
         } catch (IOException e) {
             gameServer.onError(this, e);
         } finally {
+            log.debug("closing connection");
             gameServer.onClose(this);
             try {
                 reader.close();
                 writer.close();
                 connection.close();
+                log.debug("connection closed");
             } catch (IOException ignored) {}
         }
     }
