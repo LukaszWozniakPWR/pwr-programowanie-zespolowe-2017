@@ -6,6 +6,7 @@ import cardgame.model.Row;
 public class OpponentState {
     public Boolean passed;
     public int score;
+    public int points;
     public Row frontRow;
     public Row middleRow;
     public Row rearRow;
@@ -18,5 +19,6 @@ public class OpponentState {
         this.middleRow = player.middleRow;
         this.rearRow = player.rearRow;
         this.handLength = player.deckInHands.size();
+        points = frontRow.getScore() + middleRow.getScore() + rearRow.getScore();
     }
 }
