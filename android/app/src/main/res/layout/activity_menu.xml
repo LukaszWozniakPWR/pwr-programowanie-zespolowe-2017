@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/defaultBackground"
+    android:background="@drawable/menu_screen_background_transition"
     android:gravity="center_horizontal"
     android:padding="@dimen/menu_activity_padding"
     tools:context="com.pwr.zespolowe2016.cardgame.menu.MenuActivity">
@@ -19,9 +19,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/appLogo"
+        android:layout_marginTop="48dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
