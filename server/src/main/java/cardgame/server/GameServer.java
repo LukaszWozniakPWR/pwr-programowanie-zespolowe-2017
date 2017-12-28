@@ -1,13 +1,11 @@
 package cardgame.server;
 
-import cardgame.model.Card;
-import cardgame.model.Player;
-import cardgame.model.Request;
-import cardgame.model.RequestType;
+import cardgame.model.*;
 import cardgame.server.communication.*;
 import cardgame.server.communication.command.*;
 import cardgame.server.communication.response.*;
 import cardgame.server.model.*;
+import cardgame.server.model.Game;
 import com.google.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,6 +32,7 @@ public class GameServer {
         gsonBuilder.registerTypeAdapter(Command.class, new CommandDeserializer());
         gsonBuilder.registerTypeAdapter(Response.class, new ResponseSerializer());
         gsonBuilder.registerTypeAdapter(Card.class, new CardSerializer());
+        gsonBuilder.registerTypeAdapter(Row.class, new RowSerializer());
         gsonBuilder.excludeFieldsWithModifiers(Modifier.PRIVATE);
         gson = gsonBuilder.create();
     }
