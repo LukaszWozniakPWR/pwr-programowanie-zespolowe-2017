@@ -11,10 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Modifier;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class GameServer {
     private static Logger log = LogManager.getLogger();
@@ -24,6 +23,12 @@ public class GameServer {
     private Gson gson;
     private final Set<Game> games;
     private static final Pattern NICKNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_-]{4,24}$");
+    public static final List<Cards> BASIC_DECK = Arrays.asList(
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER
+    );
 
     public GameServer() {
         clients = new HashSet<>();
@@ -251,6 +256,8 @@ public class GameServer {
 
         Game game = new Game(user1, user2);
         games.add(game);
+        applyDeck(BASIC_DECK, user1.getPlayer());
+        applyDeck(BASIC_DECK, user2.getPlayer());
 
         GameStartedResponse response1 = new GameStartedResponse();
         response1.forUser(user1);
@@ -260,5 +267,16 @@ public class GameServer {
 
         sendResponse(user1, response1);
         sendResponse(user2, response2);
+    }
+
+    // this should be in model
+    // eg. when creating Player object
+    private void applyDeck(List<Cards> cards, Player player) {
+        int random = new Random().nextInt();
+        cards.stream()
+                .sorted(Comparator.comparingInt(o -> System.identityHashCode(o) ^ random))
+                .limit(10)
+                .map(Cards::getCard)
+                .collect(Collectors.toCollection(() -> player.deckInHands));
     }
 }
