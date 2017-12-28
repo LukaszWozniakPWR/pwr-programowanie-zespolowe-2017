@@ -4,10 +4,4 @@ import com.google.gson.annotations.SerializedName
 
 data class SetNicknameResponse(
         @SerializedName("success") val success: Boolean
-) {
-    companion object {
-        fun empty() = SetNicknameResponse(
-                false
-        )
-    }
-}
+)

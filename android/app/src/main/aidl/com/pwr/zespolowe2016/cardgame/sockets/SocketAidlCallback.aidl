@@ -1,6 +1,7 @@
 package com.pwr.zespolowe2016.cardgame.sockets;
 
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.playerlist.Player;
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.GameState;
 
 interface SocketAidlCallback {
 
@@ -9,4 +10,9 @@ interface SocketAidlCallback {
     void onRequestGameResponse(boolean playerAccepted, String nickname);
     void onGameRequested(String nickname);
     void onConnectionLost();
+
+    void gameStartedResponse(in GameState initialGameState);
+    void opponentActionResponse(in GameState gameStateAfterOpponentMove);
+    void putCardResponse(boolean success, in GameState gameStateAfterYourMove);
+    void passResponse(boolean success, in GameState gameStateAfterYourPass);
 }
