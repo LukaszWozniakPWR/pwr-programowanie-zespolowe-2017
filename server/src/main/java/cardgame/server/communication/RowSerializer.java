@@ -1,5 +1,6 @@
 package cardgame.server.communication;
 
+import cardgame.model.Cards;
 import cardgame.model.Row;
 import cardgame.server.model.CardData;
 import com.google.gson.JsonElement;
@@ -16,7 +17,7 @@ public class RowSerializer implements JsonSerializer<Row> {
         JsonObject object = new JsonObject();
         object.addProperty("points", src.getScore());
         object.add("effects", context.serialize(src.effects));
-        object.add("elements", context.serialize(src.elements.stream().map((card -> new CardData(card, src))).toArray(CardData[]::new)));
+        object.add("elements", context.serialize(src.elements.stream().map((card -> new CardData(Cards.fromCard(card), src))).toArray(CardData[]::new)));
         return object;
     }
 }

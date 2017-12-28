@@ -13,4 +13,12 @@ public enum Cards {
     public Card getCard() {
         return card;
     }
+
+    public static Cards fromCard(Card card) {
+        for (Cards c : Cards.values()) {
+            if (card == c.getCard()) return c;
+        }
+
+        return null;
+    }
 }
