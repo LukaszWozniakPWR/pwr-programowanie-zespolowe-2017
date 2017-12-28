@@ -2,19 +2,16 @@ package com.pwr.zespolowe2016.cardgame.sockets
 
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.Response
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.NICKNAME_RESPONSE
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.PING_FROM_SERVER
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.PLAYER_LIST_RESPONSE
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.REQUEST_GAME
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.REQUEST_GAME_RESPONSE
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.orEmpty
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.*
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.GameState
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestateresponse.GameStateResponse
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.orThrow
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.playerlist.PlayerListResponse
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.requestgame.RequestGame
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.requestgameresponse.RequestGameResponse
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.setnickname.SetNicknameResponse
 
 class ResponseHandler(
-        private val socketApi: SocketAidlApiImpl,
         private val callbacks: List<SocketAidlCallback> = emptyList(),
         private val queuedResponses: MutableList<Response> = mutableListOf(),
         private var queuedConnectionLost: Boolean = false
@@ -36,11 +33,11 @@ class ResponseHandler(
     fun withCallbackAdded(callback: SocketAidlCallback): ResponseHandler {
         return if (callbacks.contains(callback)) {
             this
-        } else ResponseHandler(socketApi, callbacks.plus(callback), queuedResponses.toMutableList())
+        } else ResponseHandler(callbacks.plus(callback), queuedResponses.toMutableList())
     }
 
     fun withCallbackRemoved(callback: SocketAidlCallback): ResponseHandler {
-        return ResponseHandler(socketApi, callbacks.minus(callback))
+        return ResponseHandler(callbacks.minus(callback))
     }
 
     fun notifyConnectionLost() {
@@ -58,15 +55,19 @@ class ResponseHandler(
         }
         when (response.type) {
             PING_FROM_SERVER -> handlePing()
-            NICKNAME_RESPONSE -> handleSetNicknameResponse(response.setNicknameResponse.orEmpty())
-            PLAYER_LIST_RESPONSE -> handlePlayerListResponse(response.playerList.orEmpty())
-            REQUEST_GAME_RESPONSE -> handleRequestGameResponse(response.requestGameResponse.orEmpty())
-            REQUEST_GAME -> handleGameRequested(response.requestGame.orEmpty())
+            NICKNAME_RESPONSE -> handleSetNicknameResponse(response.setNicknameResponse.orThrow())
+            PLAYER_LIST_RESPONSE -> handlePlayerListResponse(response.playerList.orThrow())
+            REQUEST_GAME_RESPONSE -> handleRequestGameResponse(response.requestGameResponse.orThrow())
+            REQUEST_GAME -> handleGameRequested(response.requestGame.orThrow())
+            GAME_STARTED_RESPONSE -> gameStartedResponse(response.gameStartedResponse.orThrow())
+            OPPONENT_ACTION_RESPONSE -> opponentActionResponse(response.opponentActionResponse.orThrow())
+            PUT_CARD_RESPONSE -> putCardResponse(response.putCardResponse.orThrow())
+            PASS_RESPONSE -> passResponse(response.passResponse.orThrow())
         }
     }
 
     private fun handlePing() {
-        socketApi.answerPingWithPong()
+        /* NO-OP, handled in Service */
     }
 
     private fun handleSetNicknameResponse(data: SetNicknameResponse) {
@@ -83,5 +84,21 @@ class ResponseHandler(
 
     private fun handleGameRequested(data: RequestGame) {
         callbacks.forEach { callback -> callback.onGameRequested(data.nickname) }
+    }
+
+    private fun gameStartedResponse(data: GameState) {
+        callbacks.forEach { callback -> callback.gameStartedResponse(data) }
+    }
+
+    private fun opponentActionResponse(data: GameState) {
+        callbacks.forEach { callback -> callback.opponentActionResponse(data) }
+    }
+
+    private fun putCardResponse(data: GameStateResponse) {
+        callbacks.forEach { callback -> callback.putCardResponse(data.success, data.gameState) }
+    }
+
+    private fun passResponse(data: GameStateResponse) {
+        callbacks.forEach { callback -> callback.passResponse(data.success, data.gameState) }
     }
 }

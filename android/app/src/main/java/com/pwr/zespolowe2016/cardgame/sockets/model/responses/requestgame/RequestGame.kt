@@ -4,8 +4,4 @@ import com.google.gson.annotations.SerializedName
 
 data class RequestGame(
         @SerializedName("nickname") val nickname: String
-) {
-    companion object {
-        fun empty() = RequestGame("")
-    }
-}
+)

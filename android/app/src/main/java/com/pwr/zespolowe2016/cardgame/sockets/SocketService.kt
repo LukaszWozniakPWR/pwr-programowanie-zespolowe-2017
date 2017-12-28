@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import com.google.gson.Gson
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.Response
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.PING_FROM_SERVER
 import rx.Completable
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
@@ -21,12 +22,14 @@ class SocketService : Service(), ServiceCallbacksContainer {
     private val listenScheduler = Schedulers.newThread()
     private val subscriptions = mutableListOf<Subscription>()
     private val binder = SocketAidlApiImpl(clientSocket, this)
-    private var responseHandler = ResponseHandler(binder)
+    private var responseHandler = ResponseHandler()
 
     override fun onBind(intent: Intent?) = binder
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        super.onStartCommand(intent, flags, startId)
+        Log.d("SocketService", "onStartCommand")
         connectAndListenOnListenThread()
-        return START_STICKY
+        return START_NOT_STICKY
     }
 
     private fun connectAndListenOnListenThread() {
@@ -56,7 +59,9 @@ class SocketService : Service(), ServiceCallbacksContainer {
     }
 
     override fun onDestroy() {
+        Log.d("SocketService", "onDestroy")
         super.onDestroy()
+        stopSelf()
         unsubscribeAll()
     }
 
@@ -81,6 +86,7 @@ class SocketService : Service(), ServiceCallbacksContainer {
         while (true) {
             val response = gson.fromJson<Response>(jsonReader, Response::class.java)
             Log.v("Received response", response.toString())
+            if (response.type == PING_FROM_SERVER) binder.answerPingWithPong()
             subscriptions.add(
                     Completable.fromCallable { responseHandler.handleResponse(response) }
                             .subscribeOn(AndroidSchedulers.mainThread())
@@ -91,8 +97,11 @@ class SocketService : Service(), ServiceCallbacksContainer {
 
     private fun handleError(error: Throwable) {
         error.printStackTrace()
+        clientSocket.close()
         responseHandler.notifyConnectionLost()
         Completable.timer(CONNECTION_RETRY_DELAY, MILLISECONDS)
+                .subscribeOn(listenScheduler)
+                .observeOn(listenScheduler)
                 .subscribe { connectAndListenOnListenThread() }
     }
 
