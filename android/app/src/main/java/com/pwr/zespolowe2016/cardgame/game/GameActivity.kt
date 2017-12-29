@@ -115,6 +115,11 @@ class GameActivity : SocketApiActivity() {
                 refreshInfo()
             }
         }
+
+        override fun opponentActionResponse(gameStateAfterOpponentMove: GameState) {
+            gameState = gameStateAfterOpponentMove
+            refreshInfo()
+        }
     }
 
     companion object {
