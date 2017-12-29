@@ -21,7 +21,7 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
 
     private var positionToScroll = 0
 
-    var onCardClickListener: (Card) -> Unit = { /* NO-OP */ }
+    var onCardClickListener: (Int, Card) -> Unit = { i, card -> /* NO-OP */ }
         set(value) {
             cardsAdapter.onItemClickListener = value
             field = value

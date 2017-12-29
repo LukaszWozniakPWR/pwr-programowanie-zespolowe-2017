@@ -28,7 +28,7 @@ class CardsInHandView @JvmOverloads constructor(
     private val supportFragmentManager: FragmentManager
         get() = (context as FragmentActivity).supportFragmentManager
 
-    var onCardClickListener: (Card) -> Unit = cardsAdapter.onItemClickListener
+    var onCardClickListener: (Int, Card) -> Unit = cardsAdapter.onItemClickListener
         set(value) {
             cardsBottomSheetFragment.onCardClickListener = value
             field = value
@@ -44,7 +44,7 @@ class CardsInHandView @JvmOverloads constructor(
         inflate(context, R.layout.cards_in_hand_view, this)
         recyclerView.adapter = cardsAdapter
         recyclerView.layoutManager = layoutManager
-        cardsAdapter.onItemClickListener = { card -> onCardClicked(card) }
+        cardsAdapter.onItemClickListener = { i, card -> onCardClicked(card) }
     }
 
     private fun onCardClicked(card: Card) {

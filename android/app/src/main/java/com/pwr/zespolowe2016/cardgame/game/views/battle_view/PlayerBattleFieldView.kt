@@ -28,17 +28,17 @@ class PlayerBattleFieldView @JvmOverloads constructor(
 
     private var state = PlayerBattleFieldViewState.fromLanesOrder(lanesOrder, this)
 
-    var onCatapultsItemClickListener: (Card) -> Unit = { /* NO-OP */ }
+    var onCatapultsItemClickListener: (Int, Card) -> Unit = { i, card ->/* NO-OP */ }
         set(value) {
             state.setOnCatapultsItemClickListener(value)
             field = value
         }
-    var onArchersItemClickListener: (Card) -> Unit = { /* NO-OP */ }
+    var onArchersItemClickListener: (Int, Card) -> Unit = { i, card ->/* NO-OP */ }
         set(value) {
             middleBattleLineView.onCardClickListener = value
             field = value
         }
-    var onSwordsItemClickListener: (Card) -> Unit = { /* NO-OP */ }
+    var onSwordsItemClickListener: (Int, Card) -> Unit = { i, card -> /* NO-OP */ }
         set(value) {
             state.setOnSwordsItemClickListener(value)
             field = value

@@ -6,11 +6,11 @@ class SwordsFirstBattleFieldViewState(
         playerBattleFieldView: PlayerBattleFieldView
 ) : PlayerBattleFieldViewState(playerBattleFieldView) {
 
-    override fun setOnCatapultsItemClickListener(listener: (Card) -> Unit) {
+    override fun setOnCatapultsItemClickListener(listener: (Int, Card) -> Unit) {
         playerBattleFieldView.rightBattleLineView.onCardClickListener = listener
     }
 
-    override fun setOnSwordsItemClickListener(listener: (Card) -> Unit) {
+    override fun setOnSwordsItemClickListener(listener: (Int, Card) -> Unit) {
         playerBattleFieldView.leftBattleLineView.onCardClickListener = listener
     }
 

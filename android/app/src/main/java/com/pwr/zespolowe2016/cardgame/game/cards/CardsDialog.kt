@@ -17,7 +17,7 @@ class CardsDialog(context: Context) : AlertDialog(context) {
     private val cardsAdapter = CardsAdapter()
     private var positionToScroll = 0
 
-    var onCardClickListener: (Card) -> Unit = cardsAdapter.onItemClickListener
+    var onCardClickListener: (Int, Card) -> Unit = cardsAdapter.onItemClickListener
         set(value) {
             cardsAdapter.onItemClickListener = value
             field = value

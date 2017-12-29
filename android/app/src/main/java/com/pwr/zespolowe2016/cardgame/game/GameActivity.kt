@@ -31,6 +31,9 @@ class GameActivity : SocketApiActivity() {
         super.onCreate(savedInstanceState)
         gameState = intent.getParcelableExtra(INITIAL_GAME_STATE_KEY)
         yourPlayerView.addResignButtonListener { socketApi?.pass() }
+        cardsInHandView.onCardClickListener = {i, card ->
+            socketApi?.putCard(i, card.cardClass.rowInfo.rowNumber)
+        }
         refreshInfo()
 
 //        val cards = mutableListOf<Card>()
@@ -105,7 +108,12 @@ class GameActivity : SocketApiActivity() {
     }
 
     inner class GameActivityApiCallback(private val context: Context) : EmptyApiCallback() {
-
+        override fun putCardResponse(success: Boolean, gameStateAfterYourMove: GameState) {
+            if (success) {
+                gameState = gameStateAfterYourMove
+                refreshInfo()
+            }
+        }
     }
 
     companion object {
