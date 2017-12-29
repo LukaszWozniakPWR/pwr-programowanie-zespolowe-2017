@@ -21,9 +21,11 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
 
     private var positionToScroll = 0
 
+    private var isInitialized = false
+
     var onCardClickListener: (Int, Card) -> Unit = { i, card -> /* NO-OP */ }
         set(value) {
-            cardsAdapter.onItemClickListener = value
+            if (isInitialized) cardsAdapter.onItemClickListener = value
             field = value
         }
 
@@ -37,6 +39,8 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
         if (positionToScroll < cardsAdapter.itemCount) {
             recyclerView.scrollToPosition(positionToScroll)
         }
+        cardsAdapter.onItemClickListener = onCardClickListener
+        isInitialized = true
         configureDialog(dialog, contentView)
         configureBehavior(contentView)
     }
