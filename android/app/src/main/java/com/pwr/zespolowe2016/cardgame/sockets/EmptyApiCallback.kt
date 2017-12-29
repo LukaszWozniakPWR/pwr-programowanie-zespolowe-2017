@@ -15,5 +15,4 @@ open class EmptyApiCallback : SocketAidlCallback.Stub() {
     override fun opponentActionResponse(gameStateAfterOpponentMove: GameState) { /* NO-OP */ }
     override fun putCardResponse(success: Boolean, gameStateAfterYourMove: GameState) { /* NO-OP */ }
     override fun passResponse(success: Boolean, gameStateAfterYourPass: GameState) { /* NO-OP */ }
-
 }

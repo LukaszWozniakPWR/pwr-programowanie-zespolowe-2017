@@ -31,20 +31,10 @@ class GameActivity : SocketApiActivity() {
         super.onCreate(savedInstanceState)
         gameState = intent.getParcelableExtra(INITIAL_GAME_STATE_KEY)
         yourPlayerView.addResignButtonListener { socketApi?.pass() }
-        cardsInHandView.onCardClickListener = {i, card ->
+        cardsInHandView.onCardClickListener = { i, card ->
             socketApi?.putCard(i, card.cardClass.rowInfo.rowNumber)
         }
         refreshInfo()
-
-//        val cards = mutableListOf<Card>()
-//        cards.add(Card(10, "Karta 1", -1, ONE, "super opis karty 1"))
-//        cards.add(Card(20, "Karta 2", -1, TWO, "super opis karty 2"))
-//        cards.add(Card(30, "Karta 3", -1, ONE, "super opis karty 3"))
-//        cards.add(Card(40, "Karta 4", -1, TWO, "super opis karty 4"))
-//        yourBattleFieldView.setCatapultsData(cards.subList(0, 2))
-//        yourBattleFieldView.setArchersData(cards.subList(0, 1))
-//        otherPlayerBattleFieldView.setSwordsData(cards)
-//        cardsInHandView.cardList = cards
     }
 
     private fun refreshInfo() {
@@ -59,6 +49,7 @@ class GameActivity : SocketApiActivity() {
 
     private fun loadTurn(turn: Turn) {
         yourPlayerView.showTurnAndResignButton()
+        //TODO real turn
 //        if (turn == Turn.YOUR) {
 //            yourPlayerView.showTurnAndResignButton()
 //            otherPlayerView.hideTurn()
@@ -109,6 +100,8 @@ class GameActivity : SocketApiActivity() {
     }
 
     inner class GameActivityApiCallback(private val context: Context) : EmptyApiCallback() {
+        //TODO onConnectionLost
+
         override fun putCardResponse(success: Boolean, gameStateAfterYourMove: GameState) {
             if (success) {
                 gameState = gameStateAfterYourMove
@@ -119,6 +112,13 @@ class GameActivity : SocketApiActivity() {
         override fun opponentActionResponse(gameStateAfterOpponentMove: GameState) {
             gameState = gameStateAfterOpponentMove
             refreshInfo()
+        }
+
+        override fun passResponse(success: Boolean, gameStateAfterYourPass: GameState) {
+            if (success) {
+                gameState = gameStateAfterYourPass
+                refreshInfo()
+            }
         }
     }
 

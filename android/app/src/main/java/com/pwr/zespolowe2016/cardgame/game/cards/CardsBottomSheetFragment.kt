@@ -39,7 +39,10 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
         if (positionToScroll < cardsAdapter.itemCount) {
             recyclerView.scrollToPosition(positionToScroll)
         }
-        cardsAdapter.onItemClickListener = onCardClickListener
+        cardsAdapter.onItemClickListener = { i, card ->
+            behavior.state = BottomSheetBehavior.STATE_HIDDEN
+            onCardClickListener.invoke(i, card)
+        }
         isInitialized = true
         configureDialog(dialog, contentView)
         configureBehavior(contentView)

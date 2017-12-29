@@ -36,4 +36,7 @@
     <string name="player_lifes_count_format">Życia: %1$s</string>
 
     <string name="resign">P</string>
+
+    <string name="testArcher">Łucznik</string>
+    <string name="testArcherDescription">Łucznik jest bardzo dobrym strzelcem</string>
 </resources>

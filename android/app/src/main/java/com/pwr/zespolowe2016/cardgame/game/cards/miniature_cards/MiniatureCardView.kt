@@ -3,6 +3,7 @@ package com.pwr.zespolowe2016.cardgame.game.cards.miniature_cards
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.bindView
@@ -14,6 +15,7 @@ class MiniatureCardView @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
+    private val photoView: ImageView by bindView(R.id.card_view_photo)
     private val pointsView: TextView by bindView(R.id.card_view_points)
     private val nameView: TextView by bindView(R.id.card_view_name)
 
@@ -28,8 +30,9 @@ class MiniatureCardView @JvmOverloads constructor(
     }
 
     fun displayCard(card: Card) {
-        //todo img
+        //TODO photoView
         val cardClass = card.cardClass
+        photoView.setImageResource(cardClass.cardImage)
         pointsView.text = cardClass.basePoints.toString()
         nameView.text = context.getString(cardClass.cardName)
     }

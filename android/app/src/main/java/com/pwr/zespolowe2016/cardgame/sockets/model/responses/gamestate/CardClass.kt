@@ -13,5 +13,5 @@ enum class CardClass(
         @DrawableRes val cardImage: Int
 ) {
     /* todo NO CARDS YET, JACOPO SYGA WILL DO */
-    @SerializedName("ARCHER") ARCHER(5, RowInfo.ARCHERS, R.string.nickname_hint, R.string.nickname_incorrect, R.drawable.ic_dissatisfied_512)
+    @SerializedName("ARCHER") ARCHER(5, RowInfo.ARCHERS, R.string.testArcher, R.string.testArcherDescription, R.drawable.ic_dissatisfied_512)
 }
