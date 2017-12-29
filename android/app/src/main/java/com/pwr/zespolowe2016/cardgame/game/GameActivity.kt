@@ -58,13 +58,14 @@ class GameActivity : SocketApiActivity() {
     }
 
     private fun loadTurn(turn: Turn) {
-        if (turn == Turn.YOUR) {
-            yourPlayerView.showTurnAndResignButton()
-            otherPlayerView.hideTurn()
-        } else {
-            otherPlayerView.showTurnAndHideResignButton()
-            yourPlayerView.hideTurn()
-        }
+        yourPlayerView.showTurnAndResignButton()
+//        if (turn == Turn.YOUR) {
+//            yourPlayerView.showTurnAndResignButton()
+//            otherPlayerView.hideTurn()
+//        } else {
+//            otherPlayerView.showTurnAndHideResignButton()
+//            yourPlayerView.hideTurn()
+//        }
     }
 
     private fun loadNames(you: String, opponent: String) {
