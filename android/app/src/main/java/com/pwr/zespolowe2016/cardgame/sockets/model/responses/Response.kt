@@ -15,7 +15,7 @@ data class Response(
         @SerializedName("RequestGameResponse") val requestGameResponse: RequestGameResponse?,
         @SerializedName("RequestGame") val requestGame: RequestGame?,
         @SerializedName("GameStartedResponse") val gameStartedResponse: GameState?,
-        @SerializedName("GameState") val opponentActionResponse: GameState?,
+        @SerializedName("OpponentActionResponse") val opponentActionResponse: GameState?,
         @SerializedName("PutCardResponse") val putCardResponse: GameStateResponse?,
         @SerializedName("PassResponse") val passResponse: GameStateResponse?
 )

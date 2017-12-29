@@ -7,5 +7,7 @@ enum class CommandType {
     @SerializedName("set_nickname") SET_NICKNAME_COMMAND,
     @SerializedName("get_players") GET_PLAYER_LIST_COMMAND,
     @SerializedName("request_game") REQUEST_GAME_COMMAND,
-    @SerializedName("reject_request_game") REJECT_GAME_REQUEST_COMMAND
+    @SerializedName("reject_request_game") REJECT_GAME_REQUEST_COMMAND,
+    @SerializedName("put_card") PUT_CARD_COMMAND,
+    @SerializedName("pass") PASS_COMMAND,
 }
