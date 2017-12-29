@@ -55,6 +55,10 @@ class PlayerView @JvmOverloads constructor(
         resignButton.visibility = View.GONE
     }
 
+    fun addResignButtonListener(listener: () -> Unit) {
+        resignButton.setOnClickListener { listener.invoke() }
+    }
+
     private val playerNameView: TextView by bindView(R.id.playerName)
     private val playerTurnView: View by bindView(R.id.turn_view)
     private val cardsCountView: TextView by bindView(R.id.cardsCount)

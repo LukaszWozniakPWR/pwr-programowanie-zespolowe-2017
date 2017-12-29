@@ -30,6 +30,7 @@ class GameActivity : SocketApiActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         gameState = intent.getParcelableExtra(INITIAL_GAME_STATE_KEY)
+        yourPlayerView.addResignButtonListener { socketApi?.pass() }
         refreshInfo()
 
 //        val cards = mutableListOf<Card>()
