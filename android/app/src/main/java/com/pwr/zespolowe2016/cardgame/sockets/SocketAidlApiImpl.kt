@@ -5,10 +5,13 @@ import com.google.gson.Gson
 import com.google.gson.stream.JsonWriter
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.Command
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.GET_PLAYER_LIST_COMMAND
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.PASS_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.PONG_COMMAND
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.PUT_CARD_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.REJECT_GAME_REQUEST_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.REQUEST_GAME_COMMAND
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.CommandType.SET_NICKNAME_COMMAND
+import com.pwr.zespolowe2016.cardgame.sockets.model.commands.arguments.PutCardArguments
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.arguments.RejectGameRequestArguments
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.arguments.RequestGameArguments
 import com.pwr.zespolowe2016.cardgame.sockets.model.commands.arguments.SetNicknameArguments
@@ -61,6 +64,19 @@ class SocketAidlApiImpl(
         ))
     }
 
+    override fun putCard(indexOfCardInHand: Int, numberOfRow: Int) {
+        asyncSendCommand(Command(PUT_CARD_COMMAND,
+                PutCardArguments(
+                        indexOfCardInHand,
+                        numberOfRow
+                )
+        ))
+    }
+
+    override fun pass() {
+        asyncSendCommand(Command(PASS_COMMAND, arguments = null))
+    }
+
     fun answerPingWithPong() {
         asyncSendCommand(Command(PONG_COMMAND, arguments = null))
     }
@@ -85,7 +101,7 @@ class SocketAidlApiImpl(
         val bufferedWriter = socket.getOutputStream().bufferedWriter()
         val jsonWriter = JsonWriter(bufferedWriter)
         val jsonTree = gson.toJsonTree(command)
-        Log.v("Sending command",jsonTree.toString())
+        Log.v("Sending command", jsonTree.toString())
         gson.toJson(jsonTree, jsonWriter)
         bufferedWriter.newLine()
         jsonWriter.flush()

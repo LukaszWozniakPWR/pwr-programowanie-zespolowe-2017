@@ -9,7 +9,7 @@ enum class ResponseType {
     @SerializedName("RequestGameResponse") REQUEST_GAME_RESPONSE,
     @SerializedName("RequestGame") REQUEST_GAME,
     @SerializedName("GameStartedResponse") GAME_STARTED_RESPONSE,
-    @SerializedName("GameState") OPPONENT_ACTION_RESPONSE,
+    @SerializedName("OpponentActionResponse") OPPONENT_ACTION_RESPONSE,
     @SerializedName("PutCardResponse") PUT_CARD_RESPONSE,
     @SerializedName("PassResponse") PASS_RESPONSE,
 }
