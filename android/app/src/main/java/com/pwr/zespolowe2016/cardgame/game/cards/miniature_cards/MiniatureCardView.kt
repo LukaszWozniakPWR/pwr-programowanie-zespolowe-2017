@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
 import com.pwr.zespolowe2016.cardgame.other.bindView
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class MiniatureCardView @JvmOverloads constructor(
         context: Context,
@@ -29,7 +29,8 @@ class MiniatureCardView @JvmOverloads constructor(
 
     fun displayCard(card: Card) {
         //todo img
-        pointsView.text = card.points.toString()
-        nameView.text = card.name
+        val cardClass = card.cardClass
+        pointsView.text = cardClass.basePoints.toString()
+        nameView.text = context.getString(cardClass.cardName)
     }
 }

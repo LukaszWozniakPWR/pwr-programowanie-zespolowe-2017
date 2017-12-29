@@ -2,9 +2,9 @@ package com.pwr.zespolowe2016.cardgame.game.cards.miniature_cards
 
 import android.view.View
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
 import com.pwr.zespolowe2016.cardgame.other.bindView
 import com.pwr.zespolowe2016.cardgame.other.recyclerview.BaseViewHolder
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class MiniatureCardsViewHolder(
         view: View,

@@ -9,6 +9,7 @@ class DialogCreator(private val context: Context) {
 
     private val invitePlayerMessageText: String by bindString(R.string.invite_player_message)
     private val playerRefusedMessageText: String by bindString(R.string.player_refused_message)
+    private val playerAcceptedMessageText: String by bindString(R.string.player_accepted_message)
     private val playerRequestedGameMessageText: String by bindString(R.string.player_requested_game_message)
 
     private val stringFinder: DialogCreator.(Int) -> String?
@@ -63,6 +64,22 @@ class DialogCreator(private val context: Context) {
                 .setMessage(playerRefusedMessageText.format(nickname))
                 .setNeutralButton(R.string.dialog_ok) { dialog, _ -> dialog.dismiss() }
                 .create()
+                .show()
+    }
+
+    fun showGameAcceptedDialogDialog(nickname: String, okPressedListener: () -> Unit) {
+        AlertDialog.Builder(context)
+                .setTitle(R.string.player_accepted_title)
+                .setMessage(playerAcceptedMessageText.format(nickname))
+                .setPositiveButton(R.string.dialog_ok) { dialog, _ ->
+                    dialog.dismiss()
+                    okPressedListener.invoke()
+                }
+                .create()
+                .apply {
+                    setCancelable(false)
+                    setCanceledOnTouchOutside(false)
+                }
                 .show()
     }
 

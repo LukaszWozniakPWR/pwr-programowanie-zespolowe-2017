@@ -10,7 +10,7 @@
 
     <!--Dialogs-->
     <string name="dialog_no">Nie</string>
-    <string name="dialog_yes">Tak.</string>
+    <string name="dialog_yes">Tak</string>
     <string name="dialog_ok">OK</string>
     <string name="connection_lost_title">Połączenie zerwane</string>
     <string name="connection_lost_message">Coś poszło nie tak, spróbuj za chwilę.</string>
@@ -24,12 +24,16 @@
     <string name="invite_player_title">Zaproś gracza</string>
     <string name="invite_player_message">Czy chcesz zaprosić gracza %1$s?</string>
     <string name="player_refused_title">Odrzucono zaproszenie</string>
-    <string name="player_refused_message">Gracz %1$s odrzucił twoje zaproszenie :(</string>
+    <string name="player_accepted_title">Przyjęto zaproszenie</string>
+    <string name="player_refused_message">Gracz %1$s odrzucił Twoje zaproszenie :(</string>
+    <string name="player_accepted_message">Gracz %1$s przyjął Twoje zaproszenie :)</string>
     <string name="player_requested_game_title">Zaproszenie do gry</string>
     <string name="player_requested_game_message">Gracz %1$s zaprosił Cię do wspólnej rozgrywki, grasz?</string>
 
     <!--Player In Game View-->
-    <string name="player_cards_count_format">Ilość kart: %1$s</string>
-    <string name="player_points_count_format">Ilość punktów: %1$s</string>
+    <string name="player_cards_count_format">Karty: %1$s</string>
+    <string name="player_points_count_format">Punkty: %1$s</string>
     <string name="player_lifes_count_format">Życia: %1$s</string>
+
+    <string name="resign">P</string>
 </resources>

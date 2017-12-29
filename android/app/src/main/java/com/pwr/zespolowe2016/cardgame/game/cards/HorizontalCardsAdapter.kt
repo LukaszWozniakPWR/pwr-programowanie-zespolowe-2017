@@ -3,8 +3,8 @@ package com.pwr.zespolowe2016.cardgame.game.cards
 import android.content.Context
 import android.view.View
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.other.recyclerview.BaseAdapter
 import com.pwr.zespolowe2016.cardgame.other.recyclerview.ClickableBaseAdapter
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class HorizontalCardsAdapter(private val context: Context) : ClickableBaseAdapter<HorizontalCardsViewHolder, Card>() {
 

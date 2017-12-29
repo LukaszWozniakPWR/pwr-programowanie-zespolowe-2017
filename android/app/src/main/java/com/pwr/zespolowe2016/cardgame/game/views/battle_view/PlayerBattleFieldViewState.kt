@@ -1,7 +1,7 @@
 package com.pwr.zespolowe2016.cardgame.game.views.battle_view
 
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
 import com.pwr.zespolowe2016.cardgame.game.views.battle_view.LanesOrder.*
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 abstract class PlayerBattleFieldViewState(protected val playerBattleFieldView: PlayerBattleFieldView) {
 

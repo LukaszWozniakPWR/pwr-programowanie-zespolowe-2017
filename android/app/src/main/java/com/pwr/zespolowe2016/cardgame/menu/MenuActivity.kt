@@ -2,15 +2,9 @@ package com.pwr.zespolowe2016.cardgame.menu
 
 import android.animation.Animator
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
-import com.pwr.zespolowe2016.cardgame.game.cards.CardType.ONE
-import com.pwr.zespolowe2016.cardgame.game.cards.CardType.TWO
-import com.pwr.zespolowe2016.cardgame.game.cards.CardsBottomSheetFragment
-import com.pwr.zespolowe2016.cardgame.game.cards.CardsDialog
 import com.pwr.zespolowe2016.cardgame.menu.animation.MenuAnimation
 import com.pwr.zespolowe2016.cardgame.menu.animation.OnEndAnimatorListener
 import com.pwr.zespolowe2016.cardgame.other.DialogCreator
@@ -41,12 +35,12 @@ class MenuActivity : SocketApiActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startButton.setOnClickListener { startButtonClicked() }
-        fakeButton3.setOnClickListener { navigation.startGameActivity("fakeEnemyNickname") }
+        //fakeButton3.setOnClickListener { navigation.startGameActivity("fakeEnemyNickname") }
         mainContainer.post {
             MenuAnimation.Builder()
                     .build(mainContainer, appLogoImageView, viewAnimator, object : OnEndAnimatorListener() {
                         override fun onAnimationEnd(animation: Animator) {
-                           
+
                         }
                     })
                     .startAnimations()
@@ -82,7 +76,7 @@ class MenuActivity : SocketApiActivity() {
 
         override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) {
             if (playerAccepted) {
-                navigation.startGameActivity(nickname)
+                //navigation.startGameActivity(nickname)
             } else {
                 dialogCreator.showGameRefusedDialog(nickname)
             }
@@ -96,6 +90,5 @@ class MenuActivity : SocketApiActivity() {
     companion object {
         private const val CONTENT_INDEX = 0
         private const val PROGRESS_INDEX = 1
-        fun getIntent(context: Context) = Intent(context, MenuActivity::class.java)
     }
 }
