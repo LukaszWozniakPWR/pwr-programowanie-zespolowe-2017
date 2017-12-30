@@ -16,6 +16,10 @@ export default class Client extends WebSocket {
 
             let response = JSON.parse(ev.data);
 
+            if (!this.responseListeners[response.type]) {
+                this.responseListeners[response.type] = new Set();
+            }
+
             let listeners = this.responseListeners[response.type];
             let toRemove = [];
             for (let l of listeners) {

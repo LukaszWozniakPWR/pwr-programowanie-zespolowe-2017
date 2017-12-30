@@ -26,7 +26,6 @@
                :secondaryBtnText="modal.secondaryBtnText"
                :primaryBtnCallback="modal.primaryBtnCallback"
                :secondaryBtnCallback="modal.secondaryBtnCallback"
-               :hidden="modal.hidden"
                />
     </div>
 </template>
@@ -44,6 +43,9 @@
     import PlayerState from "../model/playerstate";
     import ResponseListener from "../client/responselistener";
     import Modal from "./Modal.vue";
+    import * as $ from "jquery";
+    (<any>window).jQuery = $
+    import "bootstrap";
 
     @Component({
         components: {
@@ -53,8 +55,8 @@
     export default class PlayerList extends Vue {
         @Prop() client: Client;
         @Prop() app: Main;
-        @Model() players: Player[];
-        @Model() modals = [];
+        players: Player[] = [];
+        modals = [];
 
         getStateString(state: string) {
             switch (PlayerState[state]) {
@@ -77,7 +79,6 @@
         mounted() {
             this.getPlayers();
             this.client.addResponseListener("RequestGame", new ResponseListener((response) => {
-                console.debug("asd");
                 this.onGameRequested(response.nickname);
             }));
         }
@@ -89,22 +90,26 @@
                 body: `${nickname} zaprosił cię do wspólnej gry`,
                 primaryBtnText: "Zaakceptuj",
                 primaryBtnCallback: () => {
+                    $(`#${modal.id}`).modal("hide");
                     this.modals.splice(this.modals.indexOf(modal));
                     this.acceptGameRequest(nickname);
                 },
                 secondaryBtnText: "Odrzuć",
                 secondaryBtnCallback: () => {
+                    $(`#${modal.id}`).modal("hide");
                     this.modals.splice(this.modals.indexOf(modal));
                     this.rejectGameRequest(nickname);
-                },
-                hidden: false
+                }
             };
 
             this.modals.push(modal);
+
         }
 
         onPlayerClick(player: Player) {
-            this.client.requestGame(player.name);
+            this.client.requestGame(player.name).then(() => {
+                this.app.state = "game";
+            });
         }
 
         acceptGameRequest(nickname: string) {
@@ -120,26 +125,4 @@
 </script>
 
 <style lang="scss">
-    #login {
-        padding: 20px;
-    }
-
-    #main-logo {
-        width: 300px;
-        height: 300px;
-        background: url("../../assets/logo.png") no-repeat;
-        background-size: contain;
-        margin: 0 auto;
-    }
-
-    #login-box {
-        button {
-            width: 100%;
-        }
-
-        width: 300px;
-        margin: 0 auto;
-        position: relative;
-        top: calc(50% - 300px);
-    }
 </style>

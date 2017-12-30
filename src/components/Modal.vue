@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" :id="id" tabindex="-1" role="dialog" :aria-hidden="hidden">
+    <div class="modal fade" :id="id" tabindex="-1" role="dialog" :aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,6 +22,8 @@
 
 <script lang="ts">
     import {Vue, Component, Prop} from "vue-property-decorator";
+    import * as $ from "jquery";
+    import "bootstrap";
 
     @Component
     export default class Modal extends Vue {
@@ -33,7 +35,10 @@
         @Prop() secondaryBtnText: string;
         @Prop() primaryBtnCallback: any;
         @Prop() secondaryBtnCallback: any;
-        @Prop() hidden: boolean;
+
+        mounted() {
+            $(`#${this.id}`).appendTo("body").modal("show");
+        }
     }
 </script>
 

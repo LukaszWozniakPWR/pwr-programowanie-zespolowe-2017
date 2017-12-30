@@ -23,7 +23,7 @@
     export default class Login extends Vue {
         @Prop() client: Client;
         @Prop() app: Main;
-        @Prop() username: string = "";
+        username: string = "";
 
         @Emit()
         login() {

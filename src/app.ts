@@ -1,6 +1,4 @@
-import Bootstrap from "bootstrap";
 import * as debounce from "debounce";
-import Vue from "vue";
 import Main from "./app.vue";
 import Client from "./client/client";
 
