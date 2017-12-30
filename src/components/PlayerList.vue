@@ -107,15 +107,11 @@
         }
 
         onPlayerClick(player: Player) {
-            this.client.requestGame(player.name).then(() => {
-                this.app.state = "game";
-            });
+            this.client.requestGame(player.name);
         }
 
         acceptGameRequest(nickname: string) {
-            this.client.requestGame(nickname).then(() => {
-               this.app.state = "game";
-            });
+            this.client.requestGame(nickname);
         }
 
         rejectGameRequest(nickname: string) {
