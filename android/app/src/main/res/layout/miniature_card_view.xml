@@ -8,22 +8,22 @@
 
     <ImageView
         android:id="@+id/card_view_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/card_view_points"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:background="@drawable/miniature_oval_background"
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="@color/grayStoneDark"
         android:includeFontPadding="false"
         android:maxLength="2"
-        android:textSize="10dp"
+        android:textSize="10sp"
         tools:text="8" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="@color/grayStoneDark"
-        android:textSize="5dp"
+        android:textSize="8sp"
         android:background="@drawable/miniature_border"
         tools:text="Nazwa karty"/>
 </FrameLayout>

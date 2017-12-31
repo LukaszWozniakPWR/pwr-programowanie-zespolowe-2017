@@ -13,6 +13,7 @@ import com.pwr.zespolowe2016.cardgame.other.extensions.displayChild
 import com.pwr.zespolowe2016.cardgame.other.extensions.setRefreshingSafely
 import com.pwr.zespolowe2016.cardgame.sockets.EmptyApiCallback
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.GameState
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.playerlist.Player
 
 class PlayerListActivity : SocketApiActivity() {
@@ -25,8 +26,7 @@ class PlayerListActivity : SocketApiActivity() {
     val pullToRefresh: SwipeRefreshLayout by bindView(R.id.pullToRefresh)
 
     private val dialogCreator = DialogCreator(this)
-
-    val playerListAdapter = PlayerListAdapter()
+    private val playerListAdapter = PlayerListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +68,12 @@ class PlayerListActivity : SocketApiActivity() {
 
         override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) {
             if (playerAccepted) {
-                navigation.startGameActivity(nickname)
+                dialogCreator.showGameAcceptedDialogDialog(
+                        nickname,
+                        {
+                            viewAnimator.displayedChild = PROGRESS_INDEX
+
+                        })
             } else {
                 dialogCreator.showGameRefusedDialog(nickname)
             }
@@ -77,6 +82,10 @@ class PlayerListActivity : SocketApiActivity() {
         override fun onConnectionLost() {
             if (isShowingConnectionLost) return else isShowingConnectionLost = true
             dialogCreator.showConnectionLostDialog { finish() }
+        }
+
+        override fun gameStartedResponse(initialGameState: GameState) {
+            navigation.startGameActivity(initialGameState)
         }
     }
 

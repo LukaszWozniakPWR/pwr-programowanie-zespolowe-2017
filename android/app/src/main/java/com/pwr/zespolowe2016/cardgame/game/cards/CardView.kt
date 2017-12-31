@@ -1,13 +1,14 @@
 package com.pwr.zespolowe2016.cardgame.game.cards
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
 import com.pwr.zespolowe2016.cardgame.other.bindView
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class CardView : LinearLayout {
 
@@ -32,9 +33,11 @@ class CardView : LinearLayout {
 
     fun displayCard(card: Card) {
         //TODO photoView
-        pointsView.text = card.points.toString()
-        nameView.text = card.name
-        typeView.text = card.type.realName()
-        descriptionView.text = card.description
+        val cardClass = card.cardClass
+        photoView.setImageResource(cardClass.cardImage)
+        pointsView.text = cardClass.basePoints.toString()
+        nameView.text = context.getString(cardClass.cardName)
+        typeView.text = "NO TYPE"
+        descriptionView.text = context.getString(cardClass.cardDescription)
     }
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.widget.Button
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.bindView
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class CardsDialog(context: Context) : AlertDialog(context) {
 
@@ -16,7 +17,7 @@ class CardsDialog(context: Context) : AlertDialog(context) {
     private val cardsAdapter = CardsAdapter()
     private var positionToScroll = 0
 
-    var onCardClickListener: (Card) -> Unit = cardsAdapter.onItemClickListener
+    var onCardClickListener: (Int, Card) -> Unit = cardsAdapter.onItemClickListener
         set(value) {
             cardsAdapter.onItemClickListener = value
             field = value

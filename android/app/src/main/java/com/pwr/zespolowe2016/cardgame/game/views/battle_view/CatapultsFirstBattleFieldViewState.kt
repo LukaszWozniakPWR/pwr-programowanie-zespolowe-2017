@@ -1,16 +1,16 @@
 package com.pwr.zespolowe2016.cardgame.game.views.battle_view
 
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class CatapultsFirstBattleFieldViewState(
         playerBattleFieldView: PlayerBattleFieldView
 ) : PlayerBattleFieldViewState(playerBattleFieldView) {
 
-    override fun setOnCatapultsItemClickListener(listener: (Card) -> Unit) {
+    override fun setOnCatapultsItemClickListener(listener: (Int, Card) -> Unit) {
         playerBattleFieldView.leftBattleLineView.onCardClickListener = listener
     }
 
-    override fun setOnSwordsItemClickListener(listener: (Card) -> Unit) {
+    override fun setOnSwordsItemClickListener(listener: (Int, Card) -> Unit) {
         playerBattleFieldView.rightBattleLineView.onCardClickListener = listener
     }
 

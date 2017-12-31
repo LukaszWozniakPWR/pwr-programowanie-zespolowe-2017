@@ -6,10 +6,10 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
 import com.pwr.zespolowe2016.cardgame.game.cards.CardsDialog
 import com.pwr.zespolowe2016.cardgame.game.cards.miniature_cards.MiniatureCardsAdapter
 import com.pwr.zespolowe2016.cardgame.other.bindView
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class BattleLineView @JvmOverloads constructor(
         context: Context,
@@ -29,7 +29,7 @@ class BattleLineView @JvmOverloads constructor(
     private val cardsAdapter: MiniatureCardsAdapter = MiniatureCardsAdapter()
     private val cardsDialog: CardsDialog = CardsDialog(context)
 
-    var onCardClickListener: (Card) -> Unit = cardsAdapter.onItemClickListener
+    var onCardClickListener: (Int, Card) -> Unit = cardsAdapter.onItemClickListener
         set(value) {
             cardsDialog.onCardClickListener = value
             field = value
@@ -38,14 +38,14 @@ class BattleLineView @JvmOverloads constructor(
     var cardList: List<Card> = emptyList()
         set(value) {
             cardsAdapter.setData(value)
-            totalPoints = value.sumBy { card -> card.points }
+            totalPoints = value.sumBy { card -> card.cardClass.basePoints }
             field = value
         }
 
     init {
         inflate(context, R.layout.player_single_battle_line_view, this)
         recyclerView.adapter = cardsAdapter
-        cardsAdapter.onItemClickListener = { card -> onCardClicked(card) }
+        cardsAdapter.onItemClickListener = { position, card -> onCardClicked(card) }
     }
 
     private fun onCardClicked(card: Card) {

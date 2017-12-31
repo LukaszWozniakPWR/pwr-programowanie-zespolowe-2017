@@ -5,10 +5,10 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.R.styleable
-import com.pwr.zespolowe2016.cardgame.game.cards.Card
 import com.pwr.zespolowe2016.cardgame.game.views.battle_view.LanesOrder.CATAPULS_FIRST
 import com.pwr.zespolowe2016.cardgame.other.bindView
 import com.pwr.zespolowe2016.cardgame.other.extensions.extractAttributes
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class PlayerBattleFieldView @JvmOverloads constructor(
         context: Context,
@@ -28,17 +28,17 @@ class PlayerBattleFieldView @JvmOverloads constructor(
 
     private var state = PlayerBattleFieldViewState.fromLanesOrder(lanesOrder, this)
 
-    var onCatapultsItemClickListener: (Card) -> Unit = { /* NO-OP */ }
+    var onCatapultsItemClickListener: (Int, Card) -> Unit = { i, card ->/* NO-OP */ }
         set(value) {
             state.setOnCatapultsItemClickListener(value)
             field = value
         }
-    var onArchersItemClickListener: (Card) -> Unit = { /* NO-OP */ }
+    var onArchersItemClickListener: (Int, Card) -> Unit = { i, card ->/* NO-OP */ }
         set(value) {
             middleBattleLineView.onCardClickListener = value
             field = value
         }
-    var onSwordsItemClickListener: (Card) -> Unit = { /* NO-OP */ }
+    var onSwordsItemClickListener: (Int, Card) -> Unit = { i, card -> /* NO-OP */ }
         set(value) {
             state.setOnSwordsItemClickListener(value)
             field = value
