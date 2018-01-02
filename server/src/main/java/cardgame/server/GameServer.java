@@ -129,11 +129,11 @@ public class GameServer {
             GameStateResponse opponentState = new OpponentActionResponse();
             opponentState.forUser(user.getGame().getOpponent(user));
 
-            sendResponse(client, new ActionResponse(Action.PUT_CARD, true, state));
+            sendResponse(client, new ActionResponse(action, true, state));
             sendResponse(user.getGame().getOpponent(user), opponentState);
 
         } catch (NullPointerException | IndexOutOfBoundsException ex) {
-            sendResponse(client, new ActionResponse(Action.PUT_CARD, false, state));
+            sendResponse(client, new ActionResponse(action, false, state));
         }
     }
 
