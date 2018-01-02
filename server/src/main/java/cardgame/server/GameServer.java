@@ -114,14 +114,37 @@ public class GameServer {
         try {
             User user = client.getUser();
             Player p = user.getPlayer();
+            Game game = user.getGame();
 
             switch (action) {
                 case PUT_CARD:
                     PutCard args = (PutCard) command;
                     new Request(p, RequestType.PLAY, p.deckInHands.get(args.cardNumber), args.row).validate().takeEffect();
+                    // temporary solution
+                    if (!game.getOpponent(user).getPlayer().passed) {
+                        game.switchPlayers();
+                    }
                     break;
                 case PASS:
                     new Request(p, RequestType.PASS).validate().takeEffect();
+                    // temporary solution
+                    if (!user.getGame().getOpponent(user).getPlayer().passed) {
+                        game.switchPlayers();
+                    } else {
+                        int playerScore = user.getPlayer().getRoundScore();
+                        int opponentScore = user.getGame().getOpponent(user).getPlayer().getRoundScore();
+
+                        if (playerScore >= opponentScore) {
+                            user.getPlayer().gameScore++;
+                        }
+
+                        if (playerScore <= opponentScore) {
+                            user.getGame().getOpponent(user).getPlayer().gameScore++;
+                        }
+
+                        user.getPlayer().clear();
+                        user.getGame().getOpponent(user).getPlayer().clear();
+                    }
                     break;
             }
 
@@ -256,6 +279,7 @@ public class GameServer {
 
         Game game = new Game(user1, user2);
         games.add(game);
+        game.chooseStartingPlayer();
         applyDeck(BASIC_DECK, user1.getPlayer());
         applyDeck(BASIC_DECK, user2.getPlayer());
 
