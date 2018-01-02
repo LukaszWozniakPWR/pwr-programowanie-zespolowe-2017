@@ -1,5 +1,5 @@
 <template>
-    <div class="game-card" @click="click()">
+    <div class="game-card" @click="click()" @contextmenu="contextmenu($event)">
         <div class="card-data" v-if="type !== 'PLACEHOLDER'">
             <div class="card-strength" v-bind:class="{
                 buff: strength > basicStrength,
@@ -15,13 +15,19 @@
     import * as $ from "jquery";
     import "bootstrap";
     import Cards from "../../cards";
+    import CardInfo from "../CardInfo.vue";
 
-    @Component
+    @Component({
+        components: {
+            CardInfo,
+        }
+    })
     export default class Card extends Vue {
         @Prop() id: string;
         @Prop() type: string;
         @Prop() strength: number;
         @Prop() click;
+        cardInfo: boolean = false;
 
         get name() {
             return (Cards[this.type]) ? Cards[this.type].name : this.type;
@@ -36,6 +42,26 @@
         }
 
         mounted() {
+        }
+
+        contextmenu(e) {
+            e.preventDefault();
+            if (this.type !== "PLACEHOLDER") {
+                this.showCardInfo();
+            }
+        }
+
+        showCardInfo() {
+            console.log(this.name, this.description, this.strength, this.basicStrength);
+            new CardInfo({
+                el: "#card-info",
+                data: {
+                    cardName: this.name,
+                    description: this.description,
+                    basicStrength: this.basicStrength,
+                    id: "card-info",
+                }
+            });
         }
     }
 </script>

@@ -129,4 +129,41 @@ export default class Client extends WebSocket {
             },
         });
     }
+
+    public putCard(index, row) {
+        return new Promise(((resolve, reject) => {
+            this.addResponseListener("PutCardResponse", new ResponseListener((response) => {
+                if (response.success) {
+                    resolve(response);
+                } else {
+                    reject();
+                }
+            }, true));
+
+            this.sendCommand({
+                command: "put_card",
+                args: {
+                    cardNumber: index,
+                    row,
+                },
+            });
+        }));
+    }
+
+    public pass() {
+        return new Promise(((resolve, reject) => {
+            this.addResponseListener("PassResponse", new ResponseListener((response) => {
+                if (response.success) {
+                    resolve(response);
+                } else {
+                    reject();
+                }
+            }, true));
+
+            this.sendCommand({
+                command: "pass",
+                args: {},
+            });
+        }));
+    }
 }
