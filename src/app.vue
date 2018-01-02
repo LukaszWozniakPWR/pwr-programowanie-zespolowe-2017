@@ -2,7 +2,7 @@
     <div class="v">
         <Login v-if="!loggedAs" :client="client" :app="this"/>
         <PlayerList v-if="loggedAs && state === 'list'" :client="client" :app="this"/>
-        <Game v-if="loggedAs && state === 'game'" :client="client" :app="this" :gamestate="this.gamestate"/>
+        <Game v-if="loggedAs && state === 'game'" :client="client" :app="this" :startgamestate="this.gamestate"/>
     </div>
 </template>
 

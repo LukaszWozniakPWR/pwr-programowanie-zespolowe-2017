@@ -105,13 +105,23 @@
     export default class Game extends Vue {
         @Prop() client: Client;
         @Prop() app: Main;
-        @Model() gamestate;
+        @Model() startgamestate;
         selected: number = -1;
         lock = false;
+        gs = null;
 
         mounted() {
             console.log(this.gamestate);
             this.showTurnInfo();
+            this.client.addResponseListener("OpponentActionResponse", new ResponseListener((response) => {
+                this.updateStateWithInfo(response);
+            }));
+        }
+
+        get gamestate() {
+            if (this.gs === null) {
+                return this.startgamestate;
+            } else return this.gs;
         }
 
         handClick(index: number) {
@@ -127,7 +137,7 @@
             ) {
                 this.lock = true;
                 this.client.putCard(this.selected, row).then((response) => {
-                    this.updateStateWithInfo(response['gamestate']);
+                    this.updateStateWithInfo(response['game']);
                     this.lock = false;
                     this.selected = -1;
                 }).catch(() => {
@@ -139,11 +149,11 @@
         }
 
         updateState(gamestate) {
-            this.gamestate = gamestate;
+            this.gs = gamestate;
         }
 
         updateStateWithInfo(gamestate) {
-            this.gamestate = gamestate;
+            this.updateState(gamestate);
             this.showTurnInfo();
         }
 
@@ -174,7 +184,7 @@
                 this.lock = true;
                 this.selected = -1;
                 this.client.pass().then((response) => {
-                    this.updateStateWithInfo(response['gamestate']);
+                    this.updateStateWithInfo(response['game']);
                     this.lock = false;
                 }).catch(() => {
                     this.app.showError("Błąd");

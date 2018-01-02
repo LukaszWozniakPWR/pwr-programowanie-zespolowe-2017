@@ -133,6 +133,7 @@ export default class Client extends WebSocket {
     public putCard(index, row) {
         return new Promise(((resolve, reject) => {
             this.addResponseListener("PutCardResponse", new ResponseListener((response) => {
+                console.log(response);
                 if (response.success) {
                     resolve(response);
                 } else {
