@@ -1,11 +1,11 @@
-package cardgame.model;
+package main.java.cardgame.model;
 
 import java.util.ArrayList;
 
 public class Card {
     public ArrayList<Attribute> attributes;
     public int basicStrength;
-    public MusterClass musterClass;
+    public cardgame.model.MusterClass musterClass;
     private BondClass bondClass;
 
     public boolean is(Attribute a) {
@@ -45,7 +45,7 @@ public class Card {
             a.specialAction(player, row);
     }
 
-    public Card(ArrayList<Attribute> attributes, int basicStrength, MusterClass musterClass, BondClass bondClass) {
+    public Card(ArrayList<Attribute> attributes, int basicStrength, cardgame.model.MusterClass musterClass, BondClass bondClass) {
         this.attributes = attributes;
         this.basicStrength = basicStrength;
         this.musterClass = musterClass;

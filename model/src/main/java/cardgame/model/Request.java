@@ -1,4 +1,4 @@
-package cardgame.model;//class CardNotFoundException extends Exception {}
+package main.java.cardgame.model;//class CardNotFoundException extends Exception {}
 
 public class Request {
     private Player player;

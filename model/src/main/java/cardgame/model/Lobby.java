@@ -1,4 +1,4 @@
-package cardgame.model;
+package main.java.cardgame.model;
 
 import java.util.ArrayList;
 
@@ -41,8 +41,8 @@ public class Lobby {
         player1.deckInHands.get(0).attributes.add(Attribute.BOND);
         new Request(player1, RequestType.PLAY, player1.deckInHands.get(0),2).validate().takeEffect();
 
-        player1.deckInHands.add(new Card(new ArrayList<>(), 2, MusterClass.ELVEN_SKIRMISHER, null));
-        player1.deckInHands.add(new Card(new ArrayList<>(), 2, MusterClass.ELVEN_SKIRMISHER, null));
+        player1.deckInHands.add(new Card(new ArrayList<>(), 2, cardgame.model.MusterClass.ELVEN_SKIRMISHER, null));
+        player1.deckInHands.add(new Card(new ArrayList<>(), 2, cardgame.model.MusterClass.ELVEN_SKIRMISHER, null));
         player1.deckInHands.get(0).attributes.add(Attribute.MUSTER);
         player1.deckInHands.get(1).attributes.add(Attribute.MUSTER);
         new Request(player1, RequestType.PLAY, player1.deckInHands.get(0),3).validate().takeEffect();
