@@ -9,12 +9,12 @@ import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.GameStat
 
 class Navigation(private val context: Activity) {
 
-    fun startPlayerListActivity() {
-        startActivity(PlayerListActivity.getIntent(context))
+    fun startPlayerListActivity(requestCode: Int) {
+        startActivityForResult(PlayerListActivity.getIntent(context), requestCode)
     }
 
-    fun startGameActivity(initialGameState: GameState) {
-        startActivity(GameActivity.getIntent(context, initialGameState))
+    fun startGameActivity(initialGameState: GameState, requestCode: Int) {
+        startActivityForResult(GameActivity.getIntent(context, initialGameState), requestCode)
     }
 
     private fun startActivity(intent: Intent) {
