@@ -2,6 +2,7 @@ package com.pwr.zespolowe2016.cardgame.game.views.battle_view
 
 import com.pwr.zespolowe2016.cardgame.game.views.battle_view.LanesOrder.*
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
+import kotlinx.android.synthetic.main.player_battle_field_view.view.middleBattleLine
 
 abstract class PlayerBattleFieldViewState(protected val playerBattleFieldView: PlayerBattleFieldView) {
 
@@ -9,6 +10,14 @@ abstract class PlayerBattleFieldViewState(protected val playerBattleFieldView: P
     abstract fun setOnSwordsItemClickListener(listener: (Int, Card) -> Unit)
     abstract fun setCatapultsData(catapults: List<Card>)
     abstract fun setSwordsData(swords: List<Card>)
+
+    abstract fun setOnCatapultsRowClickListener(listener: () -> Unit)
+
+    fun setOnArchersRowClickListener(listener: () -> Unit) {
+        playerBattleFieldView.middleBattleLine.setOnClickListener { listener() }
+    }
+
+    abstract fun setOnSwordsRowClickListener(listener: () -> Unit)
 
     companion object {
         fun fromLanesOrder(

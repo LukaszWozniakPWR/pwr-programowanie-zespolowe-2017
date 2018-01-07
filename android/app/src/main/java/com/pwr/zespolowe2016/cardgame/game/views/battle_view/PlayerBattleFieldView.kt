@@ -9,6 +9,7 @@ import com.pwr.zespolowe2016.cardgame.game.views.battle_view.LanesOrder.CATAPULS
 import com.pwr.zespolowe2016.cardgame.other.bindView
 import com.pwr.zespolowe2016.cardgame.other.extensions.extractAttributes
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.RowInfo
 
 class PlayerBattleFieldView @JvmOverloads constructor(
         context: Context,
@@ -54,6 +55,27 @@ class PlayerBattleFieldView @JvmOverloads constructor(
 
     fun setSwordsData(swords: List<Card>) {
         state.setSwordsData(swords)
+    }
+
+    fun pickRowWithNextClick(nextClickListener: (Int) -> Unit) {
+        state.setOnSwordsRowClickListener {
+            nextClickListener(RowInfo.SWORDS.rowNumber)
+            emptyRowClickListeners()
+        }
+        state.setOnArchersRowClickListener {
+            nextClickListener(RowInfo.ARCHERS.rowNumber)
+            emptyRowClickListeners()
+        }
+        state.setOnCatapultsRowClickListener {
+            nextClickListener(RowInfo.CATAPULTS.rowNumber)
+            emptyRowClickListeners()
+        }
+    }
+
+    private fun emptyRowClickListeners() {
+        state.setOnSwordsRowClickListener { /* NO-OP */ }
+        state.setOnArchersRowClickListener { /* NO-OP */ }
+        state.setOnCatapultsRowClickListener { /* NO-OP */ }
     }
 
     init {

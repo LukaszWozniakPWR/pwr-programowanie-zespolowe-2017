@@ -35,7 +35,7 @@ enum class CardClass(
     @SerializedName("SIGYN") SIGYN(4, RowInfo.SWORDS, Fraction.NILFGAARD, listOf(), R.string.sigyn_card_name, R.string.sigyn_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("FREJA") FREJA(4, RowInfo.ARCHERS, Fraction.NILFGAARD, listOf(), R.string.freja_card_name, R.string.freja_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("BOAR_HORDE") BOAR_HORDE(3, RowInfo.SWORDS, Fraction.NILFGAARD, listOf(), R.string.boar_horde_card_name, R.string.boar_horde_card_description, R.drawable.ic_dissatisfied_512),
-    @SerializedName("BATTERED_CATAPULTE") BATTERED_CATAPULTE(3, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(), R.string.battered_catapulte_card_name, R.string.battered_catapulte_card_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("BATTERED_CATAPULTE") BATTERED_CATAPULTE(3, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(), R.string.battered_carapulte_card_name, R.string.battered_catapulte_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("HEL") HEL(3, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(), R.string.hel_card_name, R.string.hel_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("MIMIR") MIMIR(3, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(), R.string.mimir_card_name, R.string.mimir_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("AX_LAUNCHER") AX_LAUNCHER(2, RowInfo.SWORDS, Fraction.NILFGAARD, listOf(), R.string.ax_launcher_card_name, R.string.ax_launcher_card_description, R.drawable.ic_dissatisfied_512),

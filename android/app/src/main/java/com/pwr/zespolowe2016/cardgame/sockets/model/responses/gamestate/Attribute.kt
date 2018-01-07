@@ -1,7 +1,6 @@
 package com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate
 
 import android.support.annotation.StringRes
-import com.sun.org.omg.CORBA.AttributeDescription
 
 enum class Attribute(@StringRes val attributeName: Int, @StringRes val attributeDescription: Int) {
     COLD(0, 0), //TODO: add valid resources,

@@ -16,6 +16,34 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/pickRowContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <TextView
+            android:id="@+id/pickRowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_18"
+            android:textColor="@color/grayStoneDark"
+            android:text="@string/pick_your_row"/>
+        <Button
+            android:id="@+id/cancelPickingRowButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_picking_row"
+            style="@style/MenuButtonStyle"
+            android:textSize="@dimen/text_size_16"
+            android:padding="1dp"
+            android:layout_margin="1dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
