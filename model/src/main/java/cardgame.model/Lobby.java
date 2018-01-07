@@ -7,8 +7,8 @@ public class Lobby {
 
     public static void main(String[] args) {
 //        System.out.println("The Server is Running");
-        List<Card> deck1 = new ArrayList<Card>();
-        List<Card> deck2 = new ArrayList<Card>();
+        List<Card> deck1 = new ArrayList<>();
+        List<Card> deck2 = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             deck1.add(Card.getRandom());
             deck2.add(Card.getRandom());

@@ -1,11 +1,7 @@
 package cardgame.model;
 
 public enum BondClass {
-    PFI,
-    CRINFRID_REAVERS,
-    BLUE_STRIPES,
-    CATAPULT,
-    IMPERA,
-    NAUSICAA,
-    EMISSARY
+    YOUNG_GIANT,
+    HOG_HORDE,
+    AXE_LAUNCHER
 }
