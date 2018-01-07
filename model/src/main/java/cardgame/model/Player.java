@@ -1,6 +1,7 @@
 package main.java.cardgame.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 
@@ -10,7 +11,7 @@ public class Player {
     public Player opponent;
     public Card lastPlayedCard;
 
-    public ArrayList<Card> deckInHands = new ArrayList<>(), graveyard = new ArrayList<>();
+    public List<Card> deckInHands = new ArrayList<>(), graveyard = new ArrayList<>();
     public Row frontRow = new Row(), middleRow = new Row(), rearRow = new Row();
 
     public int getRoundScore() {
@@ -45,6 +46,10 @@ public class Player {
     public void clear() {
         passed = false;
         moveCardsToGraveyard();
+    }
+
+    public void pass() {
+        passed = true;
     }
 
     public void scourge() {
@@ -93,5 +98,9 @@ public class Player {
         }
         deckInHands.remove(c);
         c.specialActions(this, row);
+    }
+
+    public Player(List<Card> deckGiven) {
+        deckInHands = deckGiven;
     }
 }

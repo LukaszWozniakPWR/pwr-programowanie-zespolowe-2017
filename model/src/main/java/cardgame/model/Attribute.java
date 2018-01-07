@@ -26,12 +26,6 @@ public enum Attribute
             player.getRow(row).affect(Effect.COMMANDERS_HORN);
         }
     },
-    BASIC() {
-        @Override
-        public void specialAction(Player player, int row) {
-
-        }
-    },
     SCOURGE() {
         @Override
         public void specialAction(Player player, int row) {

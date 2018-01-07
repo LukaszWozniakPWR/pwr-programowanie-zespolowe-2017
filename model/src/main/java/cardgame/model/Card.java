@@ -1,16 +1,15 @@
 package main.java.cardgame.model;
 
-import java.util.ArrayList;
+import java.util.*;
 
-public class Card {
-    public ArrayList<Attribute> attributes;
+public enum Card {
+    ARCHER(new ArrayList<>(), Collections.singletonList(2), 5, null, null);
+
+    public List<Attribute> attributes;
+    public List<Integer> rowsAllowed;
     public int basicStrength;
-    public cardgame.model.MusterClass musterClass;
+    public MusterClass musterClass;
     private BondClass bondClass;
-
-    public boolean is(Attribute a) {
-        return attributes.contains(a);
-    }
 
     public int getStrength(Row row) {
         int strength = basicStrength;
@@ -45,8 +44,19 @@ public class Card {
             a.specialAction(player, row);
     }
 
-    public Card(ArrayList<Attribute> attributes, int basicStrength, cardgame.model.MusterClass musterClass, BondClass bondClass) {
+    public boolean is(Attribute a) {
+        return attributes.contains(a);
+    }
+
+    private static final Card[] VALUES = values();
+    private static Random RANDOM = new Random();
+    public static Card getRandom() {
+        return VALUES[RANDOM.nextInt(VALUES.length)];
+    }
+
+    Card(List<Attribute> attributes, List<Integer> rowsAllowed, int basicStrength, MusterClass musterClass, BondClass bondClass) {
         this.attributes = attributes;
+        this.rowsAllowed = rowsAllowed;
         this.basicStrength = basicStrength;
         this.musterClass = musterClass;
         this.bondClass = bondClass;

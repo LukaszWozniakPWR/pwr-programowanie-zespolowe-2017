@@ -1,4 +1,4 @@
-package cardgame.model;
+package main.java.cardgame.model;
 
 public enum MusterClass {
     DWARF_SKIRMISHER,
