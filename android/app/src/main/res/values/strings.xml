@@ -35,8 +35,9 @@
     <string name="player_points_count_format">Punkty: %1$s</string>
     <string name="player_lifes_count_format">Życia: %1$s</string>
 
+    <!--Game View-->
     <string name="resign">P</string>
-
-    <string name="testArcher">Łucznik</string>
-    <string name="testArcherDescription">Łucznik jest bardzo dobrym strzelcem</string>
+    <string name="pick_your_row">Wybierz jeden ze swoich rzędów</string>
+    <string name="pick_opponent_row">Wybierz jeden rzędów przeciwnika</string>
+    <string name="cancel_picking_row">Anuluj</string>
 </resources>

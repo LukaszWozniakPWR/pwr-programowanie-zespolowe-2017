@@ -5,14 +5,21 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.R.id.otherPlayerView
+import com.pwr.zespolowe2016.cardgame.R.id.yourPlayerView
 import com.pwr.zespolowe2016.cardgame.game.views.CardsInHandView
 import com.pwr.zespolowe2016.cardgame.game.views.PlayerView
 import com.pwr.zespolowe2016.cardgame.game.views.battle_view.PlayerBattleFieldView
 import com.pwr.zespolowe2016.cardgame.other.Navigation
+import com.pwr.zespolowe2016.cardgame.other.extensions.visible
 import com.pwr.zespolowe2016.cardgame.sockets.EmptyApiCallback
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.*
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.RowInfo.ANY_OF_YOURS
 
 class GameActivity : SocketApiActivity() {
 
@@ -21,6 +28,9 @@ class GameActivity : SocketApiActivity() {
     override val layoutId: Int = R.layout.activity_game
     override val navigation = Navigation(this)
 
+    private val pickRowContainer: LinearLayout by bindView(R.id.pickRowContainer)
+    private val pickRowText: TextView by bindView(R.id.pickRowText)
+    private val cancelPickingRowButton: Button by bindView(R.id.cancelPickingRowButton)
     private val yourPlayerView: PlayerView by bindView(R.id.yourPlayerView)
     private val otherPlayerView: PlayerView by bindView(R.id.otherPlayerView)
     private val yourBattleFieldView: PlayerBattleFieldView by bindView(R.id.yourBattleField)
@@ -32,11 +42,45 @@ class GameActivity : SocketApiActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         gameState = intent.getParcelableExtra(INITIAL_GAME_STATE_KEY)
+        cancelPickingRowButton.setOnClickListener { cancelPickingRow() }
         yourPlayerView.addResignButtonListener { socketApi?.pass() }
-        cardsInHandView.onCardClickListener = { i, card ->
-            socketApi?.putCard(i, card.cardClass.rowInfo.rowNumber)
-        }
+        cardsInHandView.onCardClickListener = { i, card -> onCardInHandClicked(i, card) }
         refreshInfo()
+    }
+
+    private fun onCardInHandClicked(cardIndex: Int, card: Card) {
+        when (card.cardClass.rowInfo) {
+            RowInfo.ANY_OF_OPPONENTS -> pickOpponentRowAndPutCard(cardIndex, card)
+            RowInfo.ANY_OF_YOURS -> pickYourRowAndPutCard(cardIndex, card)
+            else -> sendPutCardRequest(cardIndex, card.cardClass.rowInfo.rowNumber)
+        }
+    }
+
+    private fun pickOpponentRowAndPutCard(cardIndex: Int, card: Card) {
+        pickRowContainer.visible = true
+        pickRowText.setText(R.string.pick_opponent_row)
+        otherPlayerBattleFieldView.pickRowWithNextClick { rowNumber ->
+            sendPutCardRequest(cardIndex, rowNumber)
+            cancelPickingRow()
+        }
+    }
+
+    private fun pickYourRowAndPutCard(cardIndex: Int, card: Card) {
+        pickRowContainer.visible = true
+        pickRowText.setText(R.string.pick_your_row)
+        yourBattleFieldView.pickRowWithNextClick { rowNumber ->
+            sendPutCardRequest(cardIndex, rowNumber)
+            cancelPickingRow()
+        }
+    }
+
+    private fun sendPutCardRequest(cardIndex: Int, rowNumber: Int) {
+        socketApi?.putCard(cardIndex, rowNumber)
+    }
+
+    private fun cancelPickingRow() {
+        pickRowContainer.visible = false
+
     }
 
     private fun refreshInfo() {
