@@ -12,4 +12,5 @@ enum class ResponseType {
     @SerializedName("OpponentActionResponse") OPPONENT_ACTION_RESPONSE,
     @SerializedName("PutCardResponse") PUT_CARD_RESPONSE,
     @SerializedName("PassResponse") PASS_RESPONSE,
+    @SerializedName("GameEndedResponse") GAME_ENDED_RESPONSE,
 }

@@ -15,4 +15,8 @@ interface SocketAidlCallback {
     void opponentActionResponse(in GameState gameStateAfterOpponentMove);
     void putCardResponse(boolean success, in GameState gameStateAfterYourMove);
     void passResponse(boolean success, in GameState gameStateAfterYourPass);
+
+    void youWonResponse();
+    void youLostResponse();
+    void opponentDisconnected();
 }
