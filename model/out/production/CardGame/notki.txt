@@ -1,2 +1,0 @@
--- należy dodać weryfikację ruchu: czy gracz posiada określoną kartę
--- karty dowódców (jak to połączyć z powyższym?)
