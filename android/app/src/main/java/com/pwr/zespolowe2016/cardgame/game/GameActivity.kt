@@ -48,6 +48,8 @@ class GameActivity : SocketApiActivity() {
         refreshInfo()
     }
 
+    override fun onBackPressed() { /* NO-OP */ }
+
     private fun onCardInHandClicked(cardIndex: Int, card: Card) {
         when (card.cardClass.rowInfo) {
             RowInfo.ANY_OF_OPPONENTS -> pickOpponentRowAndPutCard(cardIndex, card)

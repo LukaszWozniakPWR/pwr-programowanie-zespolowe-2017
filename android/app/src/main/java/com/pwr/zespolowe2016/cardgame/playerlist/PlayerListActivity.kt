@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.widget.ViewAnimator
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.R.id.viewAnimator
 import com.pwr.zespolowe2016.cardgame.other.DialogCreator
 import com.pwr.zespolowe2016.cardgame.other.Navigation
 import com.pwr.zespolowe2016.cardgame.other.extensions.displayChild
@@ -47,6 +48,8 @@ class PlayerListActivity : SocketApiActivity() {
         super.onServiceConnected()
         socketApi?.getPlayerList()
     }
+
+    override fun onBackPressed() { /* NO-OP */ }
 
     override val apiCallback = object : EmptyApiCallback() {
 
