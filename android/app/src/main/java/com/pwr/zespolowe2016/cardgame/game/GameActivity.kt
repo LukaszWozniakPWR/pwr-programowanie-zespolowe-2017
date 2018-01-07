@@ -144,8 +144,6 @@ class GameActivity : SocketApiActivity() {
     }
 
     inner class GameActivityApiCallback(private val context: Context) : EmptyApiCallback() {
-        //TODO onConnectionLost
-
         override fun youWonResponse() {
             AlertDialog.Builder(this@GameActivity)
                     .setTitle("Gratulacje")
@@ -192,6 +190,10 @@ class GameActivity : SocketApiActivity() {
                         setCanceledOnTouchOutside(false)
                         show()
                     }
+        }
+
+        override fun onConnectionLost() {
+            navigation.finishWithResultOk()
         }
 
         override fun putCardResponse(success: Boolean, gameStateAfterYourMove: GameState) {
