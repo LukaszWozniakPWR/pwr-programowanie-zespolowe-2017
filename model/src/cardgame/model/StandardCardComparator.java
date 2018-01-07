@@ -1,4 +1,4 @@
-package main.java.cardgame.model;
+package cardgame.model;
 
 import java.util.Comparator;
 

@@ -1,4 +1,4 @@
-package main.java.cardgame.model;
+package cardgame.model;
 
 import java.util.Random;
 
@@ -9,7 +9,7 @@ public class Game {
         }
     }
 
-    private Player player1, player2, currentPlayer;
+    public Player player1, player2, currentPlayer;
 
     public void chooseStartingPlayer() {
         currentPlayer = (new Random().nextDouble() > 0.5) ? player1 : player2;
@@ -128,7 +128,10 @@ public class Game {
     public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-        player1.opponent = player2;
-        player2.opponent = player1;
+        this.player1.opponent = player2;
+        this.player2.opponent = player1;
+        // Assuming that garbage with circular references is collected
+        this.player1.game = this;
+        this.player2.game = this;
     }
 }

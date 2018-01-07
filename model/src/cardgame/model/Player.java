@@ -1,4 +1,4 @@
-package main.java.cardgame.model;
+package cardgame.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ public class Player {
     public Boolean passed = false;
     public Player opponent;
     public Card lastPlayedCard;
+    public Game game;
 
     public List<Card> deckInHands = new ArrayList<>(), graveyard = new ArrayList<>();
     public Row frontRow = new Row(), middleRow = new Row(), rearRow = new Row();
@@ -80,18 +81,7 @@ public class Player {
         getRow(row).scourge(graveyard, frontRow.getScourgePeak()).sort();
     }
 
-    // TODO POTRZEBNY PROTOKÓŁ KOMUNIKACJI odbieranie żądania i zamiana JSON -> Request
-    public Request getRequest() {
-        return null;
-    }
-
-    // TODO POTRZEBNY PROTOKÓŁ KOMUNIKACJI odbiera żądanie przywrócenia karty
-    public void revive() {}
-
-    // TODO POTRZEBNY PROTOKÓŁ KOMUNIKACJI odbiera żądanie wzięcia nowej karty w rękę
-    public void getNewCard() {}
-
-    public void play(Card c, int row) {
+    public void play(Card c, int row) throws Game.InvalidMove {
         lastPlayedCard = c;
         if (row > 0) {
             getRow(row).add(c).sort();

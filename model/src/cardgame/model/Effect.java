@@ -1,4 +1,4 @@
-package main.java.cardgame.model;
+package cardgame.model;
 
 public enum Effect {
     COMMANDERS_HORN,

@@ -1,4 +1,4 @@
-package main.java.cardgame.model;
+package cardgame.model;
 
 import java.util.*;
 
@@ -39,9 +39,9 @@ public enum Card {
         return strength;
     }
 
-    public void specialActions(Player player, int row) {
+    public void specialActions(Player player, int row) throws Game.InvalidMove {
         for (Attribute a : attributes)
-            a.specialAction(player, row);
+            a.specialAction(player.game, row);
     }
 
     public boolean is(Attribute a) {
