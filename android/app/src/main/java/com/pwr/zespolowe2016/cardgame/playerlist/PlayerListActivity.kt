@@ -1,5 +1,6 @@
 package com.pwr.zespolowe2016.cardgame.playerlist
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -86,6 +87,13 @@ class PlayerListActivity : SocketApiActivity() {
 
         override fun gameStartedResponse(initialGameState: GameState) {
             navigation.startGameActivity(initialGameState)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            navigation.finishWithResultOk()
         }
     }
 

@@ -1,7 +1,11 @@
 package com.pwr.zespolowe2016.cardgame.menu
 
 import android.animation.Animator
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import com.pwr.zespolowe2016.cardgame.R
@@ -52,6 +56,20 @@ class MenuActivity : SocketApiActivity() {
             socketApi.setNickname(nicknameEditText.string)
             nicknameEditText.hideKeyboard()
             viewAnimator.displayChild(PROGRESS_INDEX)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            AlertDialog.Builder(this)
+                    .setTitle("Błąd")
+                    .setMessage("Niestety utraciłeś połączenie!")
+                    .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        dialog.dismiss()
+                    })
+                    .create()
+                    .show()
         }
     }
 

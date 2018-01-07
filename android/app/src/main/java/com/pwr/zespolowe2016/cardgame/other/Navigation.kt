@@ -24,4 +24,9 @@ class Navigation(private val context: Activity) {
     private fun startActivityForResult(intent: Intent, requestCode: Int) {
         context.startActivityForResult(intent, requestCode)
     }
+
+    fun finishWithResultOk() {
+        context.setResult(Activity.RESULT_OK)
+        context.finish()
+    }
 }
