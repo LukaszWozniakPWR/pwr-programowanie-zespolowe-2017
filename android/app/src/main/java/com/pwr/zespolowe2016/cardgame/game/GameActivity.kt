@@ -1,6 +1,8 @@
 package com.pwr.zespolowe2016.cardgame.game
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import com.pwr.zespolowe2016.cardgame.R
@@ -44,19 +46,20 @@ class GameActivity : SocketApiActivity() {
             loadInfo(it.yourState, it.opponentState)
             loadCards(it.yourState, it.opponentState)
         }
-
     }
 
     private fun loadTurn(turn: Turn) {
-        yourPlayerView.showTurnAndResignButton()
-        //TODO real turn
-//        if (turn == Turn.YOUR) {
-//            yourPlayerView.showTurnAndResignButton()
-//            otherPlayerView.hideTurn()
-//        } else {
-//            otherPlayerView.showTurnAndHideResignButton()
-//            yourPlayerView.hideTurn()
-//        }
+        if (turn == Turn.YOUR) {
+            yourPlayerView.showTurnAndResignButton()
+            otherPlayerView.hideTurn()
+            cardsInHandView.onCardClickListener = { i, card ->
+                socketApi?.putCard(i, card.cardClass.rowInfo.rowNumber)
+            }
+        } else {
+            otherPlayerView.showTurnAndHideResignButton()
+            yourPlayerView.hideTurn()
+            cardsInHandView.onCardClickListener = { i, card -> }
+        }
     }
 
     private fun loadNames(you: String, opponent: String) {
@@ -103,9 +106,23 @@ class GameActivity : SocketApiActivity() {
         //TODO onConnectionLost
 
         override fun putCardResponse(success: Boolean, gameStateAfterYourMove: GameState) {
+            gameState = gameStateAfterYourMove
             if (success) {
-                gameState = gameStateAfterYourMove
                 refreshInfo()
+            } else {
+                AlertDialog.Builder(this@GameActivity)
+                        .setTitle("Błąd")
+                        .setMessage("Niestety karta sie nie dodała, błąd systemu!")
+                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                            refreshInfo()
+                            dialog.dismiss()
+                        })
+                        .setCancelable(false)
+                        .create()
+                        .apply {
+                            setCanceledOnTouchOutside(false)
+                            show()
+                        }
             }
         }
 
