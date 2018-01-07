@@ -1,6 +1,7 @@
 package cardgame.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalInt;
 
 
@@ -52,7 +53,7 @@ public class Row {
         elements.sort(scc);
     }
 
-    public Row scourge(ArrayList<Card> graveyard, int value) {
+    public Row scourge(List<Card> graveyard, int value) {
         ArrayList<Card> toRemove = new ArrayList<>();
         for (Card c : elements)
             if (c.getStrength(this) == value && !c.is(Attribute.HERO)) {
