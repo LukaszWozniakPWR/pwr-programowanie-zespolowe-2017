@@ -1,8 +1,9 @@
 package com.pwr.zespolowe2016.cardgame.sockets
 
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.Response
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.ResponseType.*
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gameended.GameEndReason
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gameended.GameEndedResponse
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.GameState
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestateresponse.GameStateResponse
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.orThrow
@@ -63,6 +64,7 @@ class ResponseHandler(
             OPPONENT_ACTION_RESPONSE -> opponentActionResponse(response.opponentActionResponse.orThrow())
             PUT_CARD_RESPONSE -> putCardResponse(response.putCardResponse.orThrow())
             PASS_RESPONSE -> passResponse(response.passResponse.orThrow())
+            GAME_ENDED_RESPONSE -> gameEndedResponse(response.gameEndedResponse.orThrow())
         }
     }
 
@@ -100,5 +102,15 @@ class ResponseHandler(
 
     private fun passResponse(data: GameStateResponse) {
         callbacks.forEach { callback -> callback.passResponse(data.success, data.gameState) }
+    }
+
+    private fun gameEndedResponse(data: GameEndedResponse) {
+        callbacks.forEach { callback ->
+            when (data.gameEndReason) {
+                GameEndReason.OPPONENT_DISCONNECTED -> callback.opponentDisconnected()
+                GameEndReason.YOU_WON -> callback.youWonResponse()
+                GameEndReason.YOU_LOST -> callback.youLostResponse()
+            }
+        }
     }
 }
