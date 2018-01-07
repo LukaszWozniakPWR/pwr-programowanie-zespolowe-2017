@@ -2,15 +2,12 @@ package com.pwr.zespolowe2016.cardgame.game
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.R.id.otherPlayerView
-import com.pwr.zespolowe2016.cardgame.R.id.yourPlayerView
 import com.pwr.zespolowe2016.cardgame.game.views.CardsInHandView
 import com.pwr.zespolowe2016.cardgame.game.views.PlayerView
 import com.pwr.zespolowe2016.cardgame.game.views.battle_view.PlayerBattleFieldView
@@ -19,7 +16,6 @@ import com.pwr.zespolowe2016.cardgame.other.extensions.visible
 import com.pwr.zespolowe2016.cardgame.sockets.EmptyApiCallback
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.*
-import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.RowInfo.ANY_OF_YOURS
 
 class GameActivity : SocketApiActivity() {
 
@@ -120,13 +116,13 @@ class GameActivity : SocketApiActivity() {
     private fun loadInfo(yourState: YourState) {
         yourPlayerView.cardsCount = yourState.numberOfCardsInHand
         yourPlayerView.pointsCount = yourState.points
-        //TODO lifes
+        yourPlayerView.roundsWon = yourState.roundsWon
     }
 
     private fun loadInfo(opponentState: OpponentState) {
         otherPlayerView.cardsCount = opponentState.numberOfCardsInHand
         otherPlayerView.pointsCount = opponentState.points
-        //TODO lifes
+        otherPlayerView.roundsWon = opponentState.roundsWon
     }
 
     private fun loadCards(yourState: YourState, opponentState: OpponentState) {

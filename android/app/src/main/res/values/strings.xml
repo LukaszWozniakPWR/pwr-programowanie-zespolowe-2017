@@ -33,7 +33,7 @@
     <!--Player In Game View-->
     <string name="player_cards_count_format">Karty: %1$s</string>
     <string name="player_points_count_format">Punkty: %1$s</string>
-    <string name="player_lifes_count_format">Życia: %1$s</string>
+    <string name="player_rounds_won_count_format">Wygrane: %1$s</string>
 
     <!--Game View-->
     <string name="resign">P</string>

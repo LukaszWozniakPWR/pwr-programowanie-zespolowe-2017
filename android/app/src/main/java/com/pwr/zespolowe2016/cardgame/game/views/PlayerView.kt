@@ -7,11 +7,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
-import com.pwr.zespolowe2016.cardgame.other.DialogCreator
-import com.pwr.zespolowe2016.cardgame.other.Lazy
 import com.pwr.zespolowe2016.cardgame.other.bindString
 import com.pwr.zespolowe2016.cardgame.other.bindView
-import com.pwr.zespolowe2016.cardgame.other.requiredString
 
 class PlayerView @JvmOverloads constructor(
         context: Context,
@@ -34,9 +31,9 @@ class PlayerView @JvmOverloads constructor(
             pointsCountView.text = pointsCountStringFormat.format(value.toString())
             field = value
         }
-    var lifesCount: Int = 0
+    var roundsWon: Int = 0
         set(value) {
-            lifesCountView.text = lifesCountStringFormat.format(value.toString())
+            lifesCountView.text = roundsWonStringFormat.format(value.toString())
             field = value
         }
 
@@ -68,7 +65,7 @@ class PlayerView @JvmOverloads constructor(
 
     private val cardsCountStringFormat: String by bindString(R.string.player_cards_count_format)
     private val pointsCountStringFormat: String by bindString(R.string.player_points_count_format)
-    private val lifesCountStringFormat: String by bindString(R.string.player_lifes_count_format)
+    private val roundsWonStringFormat: String by bindString(R.string.player_rounds_won_count_format)
 
     init {
         inflate(context, R.layout.player_in_game_view, this)
@@ -78,6 +75,6 @@ class PlayerView @JvmOverloads constructor(
     private fun initializeViewValues() {
         cardsCount = 0
         pointsCount = 0
-        lifesCount = 0
+        roundsWon = 0
     }
 }

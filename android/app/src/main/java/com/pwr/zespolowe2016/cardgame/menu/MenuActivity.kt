@@ -29,13 +29,13 @@ class MenuActivity : SocketApiActivity() {
     private val viewAnimator: ViewAnimator by bindView(R.id.viewAnimator)
     private val startButton: Button by bindView(R.id.startButton)
 
-    private val fakeButton3: Button by bindView(R.id.fakeButotn3)
     private val nicknameEditText: EditText by bindView(R.id.nicknameEditText)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startButton.setOnClickListener { startButtonClicked() }
         //fakeButton3.setOnClickListener { navigation.startGameActivity("fakeEnemyNickname") }
+        if (savedInstanceState != null) return
         mainContainer.post {
             MenuAnimation.Builder()
                     .build(mainContainer, appLogoImageView, viewAnimator, object : OnEndAnimatorListener() {

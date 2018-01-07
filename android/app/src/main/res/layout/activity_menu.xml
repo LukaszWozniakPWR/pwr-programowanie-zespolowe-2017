@@ -1,65 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/menu_screen_background_transition"
-    android:gravity="center_horizontal"
-    android:padding="@dimen/menu_activity_padding"
-    tools:context="com.pwr.zespolowe2016.cardgame.menu.MenuActivity">
-
-    <android.support.design.widget.AppBarLayout
+    android:fillViewport="true">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:id="@+id/mainContainer"
+        android:orientation="vertical"
+        android:background="@drawable/menu_screen_background_transition"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/menu_activity_padding"
+        tools:context="com.pwr.zespolowe2016.cardgame.menu.MenuActivity">
 
-        <include layout="@layout/toolbar"/>
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
-    </android.support.design.widget.AppBarLayout>
+            <include layout="@layout/toolbar"/>
 
-    <ImageView
-        android:id="@+id/appLogo"
-        android:layout_marginTop="48dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:maxHeight="200dp"
-        android:maxWidth="200dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/logo" />
+        </android.support.design.widget.AppBarLayout>
 
-    <ViewAnimator
-        android:id="@+id/viewAnimator"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_marginTop="48dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxHeight="200dp"
+            android:maxWidth="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
 
-            <EditText
-                android:id="@+id/nicknameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/nickname_hint"/>
+        <ViewAnimator
+            android:id="@+id/viewAnimator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/startButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/start_button"
-                android:theme="@style/MenuButtonStyle" />
-            <Button
-                android:id="@+id/fakeButotn3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OPEN FAKE GAME"
-                android:theme="@style/MenuButtonStyle" />
-        </LinearLayout>
-        <include layout="@layout/progressbar"/>
-    </ViewAnimator>
-</LinearLayout>
+                <EditText
+                    android:id="@+id/nicknameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nickname_hint"/>
+
+                <Button
+                    android:id="@+id/startButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_button"
+                    android:theme="@style/MenuButtonStyle" />
+            </LinearLayout>
+            <include layout="@layout/progressbar"/>
+        </ViewAnimator>
+    </LinearLayout>
+</ScrollView>

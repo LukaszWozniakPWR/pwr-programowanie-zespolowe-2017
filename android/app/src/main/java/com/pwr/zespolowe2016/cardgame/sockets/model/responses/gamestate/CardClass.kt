@@ -4,6 +4,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import com.google.gson.annotations.SerializedName
 import com.pwr.zespolowe2016.cardgame.R
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Fraction.NILFGAARD
 
 enum class CardClass(
         val basePoints: Int,
@@ -45,4 +46,5 @@ enum class CardClass(
     @SerializedName("WOLF_HORDE") WOLF_HORDE(1, RowInfo.ARCHERS, Fraction.NILFGAARD, listOf(), R.string.wolf_horde_card_name, R.string.wolf_horde_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("SUPPORT_FROM_GODS") SUPPORT_FROM_GODS(0, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(), R.string.support_from_gods_card_name, R.string.support_from_gods_card_description, R.drawable.ic_dissatisfied_512),
 
+    @SerializedName("ARCHER") ARCHER(5, RowInfo.ARCHERS, NILFGAARD, listOf(), R.string.nickname_hint, R.string.nickname_incorrect, R.drawable.ic_dissatisfied_512)
 }

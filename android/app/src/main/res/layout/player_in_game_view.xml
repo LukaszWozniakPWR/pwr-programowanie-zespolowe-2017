@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/PlayerViewValueStyle"
-                android:text="@string/player_lifes_count_format"/>
+                android:text="@string/player_rounds_won_count_format"/>
         </LinearLayout>
 
         <Button
