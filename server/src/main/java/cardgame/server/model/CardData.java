@@ -1,18 +1,18 @@
 package cardgame.server.model;
 
-import cardgame.model.Cards;
+import cardgame.model.Card;
 import cardgame.model.Row;
 
 public class CardData {
     public String name;
     public int strength;
 
-    public  CardData(Cards card, Row row) {
-        name = card.toString();
+    public  CardData(Card card, Row row) {
+        name = card.toString().toUpperCase();
         if (row != null) {
-            strength = card.getCard().getStrength(row);
+            strength = card.getStrength(row);
         } else {
-            strength = card.getCard().basicStrength;
+            strength = card.basicStrength;
         }
     }
 }
