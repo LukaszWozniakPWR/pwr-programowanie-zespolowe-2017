@@ -1,5 +1,6 @@
 package com.pwr.zespolowe2016.cardgame.playerlist
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -85,11 +86,19 @@ class PlayerListActivity : SocketApiActivity() {
         }
 
         override fun gameStartedResponse(initialGameState: GameState) {
-            navigation.startGameActivity(initialGameState)
+            navigation.startGameActivity(initialGameState, GAME_ACTIVITY_REQUEST_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == GAME_ACTIVITY_REQUEST_CODE) {
+            navigation.finishWithResultOk()
         }
     }
 
     companion object {
+        private const val GAME_ACTIVITY_REQUEST_CODE = 2133
         private const val PROGRESS_INDEX = 0
         private const val CONTENT_INDEX = 1
         private const val EMPTY_LIST_INDEX = 2
