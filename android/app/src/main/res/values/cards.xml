@@ -1,5 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Nilfgaard -->
     <string name="baldur_card_name">Baldur</string>
     <string name="baldur_card_description">Baldur jest znany z dobrej walki ciężkim mieczem.</string>
+
+    <string name="snake_storm_card_name">Deszcz Węży</string>
+    <string name="snake_storm_card_description">Taki wąż potrafi zabić jednym ukąszeniem.</string>
+
+    <string name="loki_card_name">Loki</string>
+    <string name="loki_card_description">Loki zjednoczył wiele plemion w jeden kraj.</string>
+
+    <string name="hajmdal_card_name">Hajmdal</string>
+    <string name="hajmdal_card_description">Hajmdal strzela z łuku zrobionego z wierzby.</string>
+    
+    <string name="magni_card_name">Magni</string>
+    <string name="magni_card_description">Magni podczas bitwy pomaga z dystansu.</string>
+    
+    <string name="archers_thrudheim_card_name">Łucznicy z Thrudheim</string>
+    <string name="archers_thrudheim_card_description">Z Thrudheim pochodzą najlepsi łucznicy.</string>
+    
+    <string name="aegir_card_name">Aegir</string>
+    <string name="aegir_card_description">Aegir potrafi bezszelestnie chodzić.</string>
+    
+    <string name="hodur_card_name">Hodur</string>
+    <string name="hodur_card_description">Hodur nie przegrał nigdy żadnego pojedynku.</string>
+    
+    <string name="frigg_card_name">Frigg</string>
+    <string name="frigg_card_description">Frigg podobno potrafi latać na miotle.</string>
+    
+    <string name="fulla_card_name">Fulla</string>
+    <string name="fulla_card_description">Fulla jest bardzo znaną czarodziejką.</string>
+    
+    <string name="widar_card_name">Widar</string>
+    <string name="widar_card_description">Widar w starym języku oznacza “milczący”.</string>
+
+    <string name="forseti_card_name">Forseti</string>
+    <string name="forseti_card_description">Forseti mieszka w pałacu ze złotymi kolumnami.</string>
+
+    <string name="arrow_storm_card_name">Deszcz strzał</string>
+    <string name="arrow_storm_card_description">Strzały spadające z nieba mogą roztrzygnąć wynik potyczki.</string>
+
+    <string name="young_giant_card_name">Młody Olbrzym</string>
+    <string name="young_giant_card_description">Nawet młody olbrzym jest większy od dorosłego człowieka.</string>
+
+    <string name="rock_storm_card_name">Deszcz kamieni</string>
+    <string name="rock_storm_card_description">Kamienie mogą rozwalić czyjąś czaszkę.</string>
+
+    <string name="hermod_card_name">Hermod</string>
+    <string name="hermod_card_description">Powiadają, że Hermod został posłany na świat przez Bogów.</string>
+
+    <string name="kvaser_card_name">Kvaser</string>
+    <string name="kvaser_card_description">Kvaser zna odpowiedź na każde pytanie.</string>
+
+    <string name="sigyn_card_name">Sigyn</string>
+    <string name="sigyn_card_description">Sigyn jest synem olbrzyma i kobiety.</string>
+
+    <string name="freja_card_name">Freja</string>
+    <string name="freja_card_description">Freja w czasie bitwy jeździ na swoim dziku.</string>
+
+    <string name="boar_horde_card_name">Horda dzików</string>
+    <string name="boar_horde_card_description">Przed głodnymi dzikami za daleko nie uciekniesz.</string>
+
+    <string name="battered_carapulte_card_name">Podniszczona katapulta</string>
+    <string name="battered_catapulte_card_description">Katapulta w nienajlepszym stanie nadal spełnia swoje zadanie.</string>
+
+    <string name="hel_card_name">Hel</string>
+    <string name="hel_card_description">Hel jest jednym z największych wojowników.</string>
+
+    <string name="mimir_card_name">Mimir</string>
+    <string name="mimir_card_description">Mimir pomimo swojego wieku bardzo dobrze walczy.</string>
+
+    <string name="ax_launcher_card_name">Wyrzutnia toporów</string>
+    <string name="ax_launcher_card_description">Nikt nie chciałby dostać takim toporem w głowę.</string>
+
+    <string name="sol_card_name">Sol</string>
+    <string name="sol_card_description">Legenda mówi, że Sol urodził się na słońcu.</string>
+
+    <string name="mani_card_name">Mani</string>
+    <string name="mani_card_description">Mani bardzo szybko biega.</string>
+
+    <string name="gullweig_card_name">Gullweig</string>
+    <string name="gullweig_card_description">Gullweig podobno potrafi używać magii.</string>
+
+    <string name="wolf_horde_card_name">Horda wilków</string>
+    <string name="wolf_horde_card_description">Wilki przestraszą nawet najbardziej odważnych wojowników.</string>
+
+    <string name="support_from_gods_card_name">Wsparcie od Bogów</string>
+    <string name="support_from_gods_card_description">Modlitwa do Bogów czyni cuda.</string>
+
+    <!-- North -->
+
 </resources>
