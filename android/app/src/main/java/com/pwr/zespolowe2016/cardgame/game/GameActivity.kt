@@ -80,7 +80,6 @@ class GameActivity : SocketApiActivity() {
 
     private fun cancelPickingRow() {
         pickRowContainer.visible = false
-
     }
 
     private fun refreshInfo() {
@@ -149,6 +148,54 @@ class GameActivity : SocketApiActivity() {
     inner class GameActivityApiCallback(private val context: Context) : EmptyApiCallback() {
         //TODO onConnectionLost
 
+        override fun youWonResponse() {
+            AlertDialog.Builder(this@GameActivity)
+                    .setTitle("Gratulacje")
+                    .setMessage("Wygrałeś rozgrywkę.")
+                    .setPositiveButton("OK") { dialog, which ->
+                        this@GameActivity.finish()
+                        dialog.dismiss()
+                    }
+                    .setCancelable(false)
+                    .create()
+                    .apply {
+                        setCanceledOnTouchOutside(false)
+                        show()
+                    }
+        }
+
+        override fun youLostResponse() {
+            AlertDialog.Builder(this@GameActivity)
+                    .setTitle("Przegrałeś")
+                    .setMessage("Może następnym razem się uda, powodzenia!")
+                    .setPositiveButton("OK") { dialog, which ->
+                        this@GameActivity.finish()
+                        dialog.dismiss()
+                    }
+                    .setCancelable(false)
+                    .create()
+                    .apply {
+                        setCanceledOnTouchOutside(false)
+                        show()
+                    }
+        }
+
+        override fun opponentDisconnected() {
+            AlertDialog.Builder(this@GameActivity)
+                    .setTitle("Przeciwnik się rozłączył")
+                    .setMessage("Niestety przeciwnik utracił połączenie, wróć do listy graczy.")
+                    .setPositiveButton("OK") { dialog, which ->
+                        this@GameActivity.finish()
+                        dialog.dismiss()
+                    }
+                    .setCancelable(false)
+                    .create()
+                    .apply {
+                        setCanceledOnTouchOutside(false)
+                        show()
+                    }
+        }
+
         override fun putCardResponse(success: Boolean, gameStateAfterYourMove: GameState) {
             gameState = gameStateAfterYourMove
             if (success) {
@@ -157,10 +204,11 @@ class GameActivity : SocketApiActivity() {
                 AlertDialog.Builder(this@GameActivity)
                         .setTitle("Błąd")
                         .setMessage("Niestety karta sie nie dodała, błąd systemu!")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("OK", { dialog, which ->
                             refreshInfo()
                             dialog.dismiss()
-                        })
+                        }
+                        )
                         .setCancelable(false)
                         .create()
                         .apply {
