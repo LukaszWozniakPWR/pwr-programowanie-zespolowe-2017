@@ -270,8 +270,11 @@ public class GameServer {
     }
 
     private void newGame(User user1, User user2) {
-        user1.setPlayer(new Player(BASIC_DECK));
-        user2.setPlayer(new Player(BASIC_DECK));
+        user1.setPlayer(new Player(new ArrayList<>()));
+        user2.setPlayer(new Player(new ArrayList<>()));
+        applyDeck(BASIC_DECK, user1.getPlayer());
+        applyDeck(BASIC_DECK, user2.getPlayer());
+
         user1.updateState();
         user2.updateState();
 
@@ -287,5 +290,15 @@ public class GameServer {
 
         sendResponse(user1, response1);
         sendResponse(user2, response2);
+    }
+
+    // this should be in model
+    // eg. when creating Player object
+    private void applyDeck(List<Card> cards, Player player) {
+        int random = new Random().nextInt();
+        cards.stream()
+                .sorted(Comparator.comparingInt(o -> System.identityHashCode(o) ^ random))
+                .limit(10)
+                .collect(Collectors.toCollection(() -> player.deckInHands));
     }
 }
