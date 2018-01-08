@@ -38,6 +38,11 @@ class PlayerListActivity : SocketApiActivity() {
         pullToRefresh.setOnRefreshListener { socketApi?.getPlayerList() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        socketApi?.getPlayerList()
+    }
+
     private fun invitePlayer(player: Player) {
         dialogCreator.showInvitePlayerDialog(
                 player.name,
