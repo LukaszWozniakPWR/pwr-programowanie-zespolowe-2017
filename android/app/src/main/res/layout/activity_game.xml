@@ -87,9 +87,15 @@
             android:padding="@dimen/padding_4"/>
     </LinearLayout>
 
-    <com.pwr.zespolowe2016.cardgame.game.views.CardsInHandView
-        android:id="@+id/cardsInHandView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <com.pwr.zespolowe2016.cardgame.game.views.CardsInHandView
+            android:id="@+id/cardsInHandView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <include layout="@layout/miniature_card_list_item"
+            android:visibility="invisible"/>
+    </FrameLayout>
 
 </LinearLayout>
