@@ -197,8 +197,8 @@ class GameActivity : SocketApiActivity() {
         }
 
         override fun putCardResponse(success: Boolean, gameStateAfterYourMove: GameState) {
-            gameState = gameStateAfterYourMove
             if (success) {
+                gameState = gameStateAfterYourMove
                 refreshInfo()
             } else {
                 AlertDialog.Builder(this@GameActivity)

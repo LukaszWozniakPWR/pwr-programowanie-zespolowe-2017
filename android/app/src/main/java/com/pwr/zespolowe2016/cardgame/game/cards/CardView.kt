@@ -37,7 +37,7 @@ class CardView : LinearLayout {
         photoView.setImageResource(cardClass.cardImage)
         pointsView.text = cardClass.basePoints.toString()
         nameView.text = context.getString(cardClass.cardName)
-        typeView.text = "NO TYPE"
+        typeView.text = card.cardClass.rowInfo.realName
         descriptionView.text = context.getString(cardClass.cardDescription)
     }
 }

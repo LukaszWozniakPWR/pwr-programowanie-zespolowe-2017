@@ -21,8 +21,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:padding="24dp"
         android:gravity="center"
+        android:paddingTop="24dp"
         android:maxLength="3"
         android:maxLines="1"
         tools:text="50"/>
