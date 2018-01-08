@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <style>
+            body {
+                background: #fff;
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+                height: 100vh;
+                width: 100vw;
+            }
+
+            #main {
+                display: block;
+                margin: 0 auto;
+            }
+
+            #msgbox {
+                position: fixed;
+                bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="main">
+        <div id="app"></div>
+        <div id="msgbox"></div>
+    </div>
+    </body>
+</html>
+
