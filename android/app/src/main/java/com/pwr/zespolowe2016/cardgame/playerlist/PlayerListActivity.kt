@@ -100,9 +100,8 @@ class PlayerListActivity : SocketApiActivity() {
 
     companion object {
         private const val GAME_ACTIVITY_REQUEST_CODE = 2133
-        private const val PROGRESS_INDEX = 0
-        private const val CONTENT_INDEX = 1
-        private const val EMPTY_LIST_INDEX = 2
+        private const val CONTENT_INDEX = 0
+        private const val EMPTY_LIST_INDEX = 1
         fun getIntent(context: Context) = Intent(context, PlayerListActivity::class.java)
     }
 }

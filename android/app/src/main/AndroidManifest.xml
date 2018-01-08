@@ -15,6 +15,7 @@
 
         <activity
             android:name=".menu.MenuActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +25,14 @@
         </activity>
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".playerlist.PlayerListActivity"
             android:label="@string/player_list_appbar_title"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
 
-        <activity android:name=".game.GameActivity"/>
+        <activity android:name=".game.GameActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".sockets.SocketService"/>
     </application>
