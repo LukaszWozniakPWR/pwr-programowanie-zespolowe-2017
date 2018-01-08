@@ -129,9 +129,32 @@ public class GameServer {
                 case PUT_CARD:
                     PutCard args = (PutCard) command;
                     game.putCard(p, p.deckInHands.get(args.cardNumber), args.row);
+                    if (p.deckInHands.size() == 0) p.passed = true;
+                    // temporary solution
+                    if (!game.getOpponent(user).getPlayer().passed) {
+                        game.currentPlayer = game.currentPlayer.opponent;
+                    }
                     break;
                 case PASS:
                     game.pass(p);
+                    // temporary solution
+                    if (!user.getGame().getOpponent(user).getPlayer().passed) {
+                        game.currentPlayer = game.currentPlayer.opponent;
+                    } else {
+                        int playerScore = user.getPlayer().getRoundScore();
+                        int opponentScore = user.getGame().getOpponent(user).getPlayer().getRoundScore();
+
+                        if (playerScore >= opponentScore) {
+                            user.getPlayer().gameScore++;
+                        }
+
+                        if (playerScore <= opponentScore) {
+                            user.getGame().getOpponent(user).getPlayer().gameScore++;
+                        }
+
+                        user.getPlayer().clear();
+                        user.getGame().getOpponent(user).getPlayer().clear();
+                    }
                     break;
             }
 
