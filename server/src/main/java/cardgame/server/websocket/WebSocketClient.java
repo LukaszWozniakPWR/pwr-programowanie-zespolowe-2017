@@ -13,5 +13,6 @@ public class WebSocketClient extends Client {
     @Override
     public void send(String message) {
         connection.send(message);
+        System.out.println(message);
     }
 }

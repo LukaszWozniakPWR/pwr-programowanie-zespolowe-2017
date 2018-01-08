@@ -19,6 +19,7 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
 
     public WebSocketServer(InetSocketAddress address, GameServer gameServer) {
         super(address);
+        this.setReuseAddr(true);
         this.gameServer = gameServer;
         clients = new HashMap<>();
     }

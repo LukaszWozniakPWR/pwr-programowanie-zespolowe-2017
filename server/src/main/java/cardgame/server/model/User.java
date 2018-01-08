@@ -1,8 +1,7 @@
 package cardgame.server.model;
 
+import cardgame.model.Player;
 import cardgame.server.Client;
-import cardgame.server.model.game.Game;
-import cardgame.server.model.game.Player;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,23 +1,19 @@
 package cardgame.server;
 
+import cardgame.model.*;
 import cardgame.server.communication.*;
 import cardgame.server.communication.command.*;
-import cardgame.server.communication.response.GameRequest;
-import cardgame.server.communication.response.PlayerList;
-import cardgame.server.communication.response.RequestGameResponse;
-import cardgame.server.communication.response.SetNicknameResponse;
-import cardgame.server.model.game.Game;
-import cardgame.server.model.User;
-import cardgame.server.model.game.Player;
+import cardgame.server.communication.response.*;
+import cardgame.server.model.*;
+import cardgame.server.model.Game;
 import com.google.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Modifier;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class GameServer {
     private static Logger log = LogManager.getLogger();
@@ -27,6 +23,12 @@ public class GameServer {
     private Gson gson;
     private final Set<Game> games;
     private static final Pattern NICKNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_-]{4,24}$");
+    public static final List<Cards> BASIC_DECK = Arrays.asList(
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
+            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER
+    );
 
     public GameServer() {
         clients = new HashSet<>();
@@ -34,6 +36,8 @@ public class GameServer {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Command.class, new CommandDeserializer());
         gsonBuilder.registerTypeAdapter(Response.class, new ResponseSerializer());
+        gsonBuilder.registerTypeAdapter(Card.class, new CardSerializer());
+        gsonBuilder.registerTypeAdapter(Row.class, new RowSerializer());
         gsonBuilder.excludeFieldsWithModifiers(Modifier.PRIVATE);
         gson = gsonBuilder.create();
     }
@@ -90,8 +94,69 @@ public class GameServer {
             case Pong.NAME:
                 break;
 
+            case PutCard.NAME:
+                handleAction(client, command.args, Action.PUT_CARD);
+                break;
+
+            case Pass.NAME:
+                handleAction(client, command.args, Action.PASS);
+                break;
+
             default:
                 break;
+        }
+    }
+
+    private void handleAction(Client client, BaseCommand command, Action action) {
+        GameState state = new GameState();
+
+        // try-catch driven validation
+        try {
+            User user = client.getUser();
+            Player p = user.getPlayer();
+            Game game = user.getGame();
+
+            switch (action) {
+                case PUT_CARD:
+                    PutCard args = (PutCard) command;
+                    new Request(p, RequestType.PLAY, p.deckInHands.get(args.cardNumber), args.row).validate().takeEffect();
+                    // temporary solution
+                    if (!game.getOpponent(user).getPlayer().passed) {
+                        game.switchPlayers();
+                    }
+                    break;
+                case PASS:
+                    new Request(p, RequestType.PASS).validate().takeEffect();
+                    // temporary solution
+                    if (!user.getGame().getOpponent(user).getPlayer().passed) {
+                        game.switchPlayers();
+                    } else {
+                        int playerScore = user.getPlayer().getRoundScore();
+                        int opponentScore = user.getGame().getOpponent(user).getPlayer().getRoundScore();
+
+                        if (playerScore >= opponentScore) {
+                            user.getPlayer().gameScore++;
+                        }
+
+                        if (playerScore <= opponentScore) {
+                            user.getGame().getOpponent(user).getPlayer().gameScore++;
+                        }
+
+                        user.getPlayer().clear();
+                        user.getGame().getOpponent(user).getPlayer().clear();
+                    }
+                    break;
+            }
+
+            state.forUser(user);
+            GameStateResponse opponentState = new OpponentActionResponse();
+            opponentState.forUser(user.getGame().getOpponent(user));
+
+            sendResponse(client, new ActionResponse(action, true, state));
+            sendResponse(user.getGame().getOpponent(user), opponentState);
+
+        } catch (NullPointerException | IndexOutOfBoundsException ex) {
+            sendResponse(client, new ActionResponse(action, false, state));
         }
     }
 
@@ -209,12 +274,33 @@ public class GameServer {
     private void newGame(User user1, User user2) {
         user1.state = User.PlayerState.PLAYING;
         user2.state = User.PlayerState.PLAYING;
-//        Game game = null;
-//        user1.setGame(game);
-//        user2.setGame(game);
-//        user1.setPlayer(game.getPlayer1());
-//        user2.setPlayer(game.getPlayer2());
-//
-//        games.add(game);
+        user1.setPlayer(new Player());
+        user2.setPlayer(new Player());
+
+        Game game = new Game(user1, user2);
+        games.add(game);
+        game.chooseStartingPlayer();
+        applyDeck(BASIC_DECK, user1.getPlayer());
+        applyDeck(BASIC_DECK, user2.getPlayer());
+
+        GameStartedResponse response1 = new GameStartedResponse();
+        response1.forUser(user1);
+
+        GameStartedResponse response2 = new GameStartedResponse();
+        response2.forUser(user2);
+
+        sendResponse(user1, response1);
+        sendResponse(user2, response2);
+    }
+
+    // this should be in model
+    // eg. when creating Player object
+    private void applyDeck(List<Cards> cards, Player player) {
+        int random = new Random().nextInt();
+        cards.stream()
+                .sorted(Comparator.comparingInt(o -> System.identityHashCode(o) ^ random))
+                .limit(10)
+                .map(Cards::getCard)
+                .collect(Collectors.toCollection(() -> player.deckInHands));
     }
 }

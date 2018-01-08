@@ -30,6 +30,12 @@ public class CommandDeserializer implements JsonDeserializer<Command> {
             case Pong.NAME:
                 command.args = null;
                 break;
+            case PutCard.NAME:
+                command.args = context.deserialize(object.get("args"), PutCard.class);
+                break;
+            case Pass.NAME:
+                command.args = null;
+                break;
             default:
                 break;
         }

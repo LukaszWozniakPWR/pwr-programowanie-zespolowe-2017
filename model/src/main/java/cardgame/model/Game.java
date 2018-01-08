@@ -5,7 +5,7 @@ import java.util.Random;
 public class Game {
     private Player player1, player2, currentPlayer;
 
-    private void chooseStartingPlayer() {
+    public void chooseStartingPlayer() {
         currentPlayer = (new Random().nextDouble() > 0.5) ? player1 : player2;
     }
 
@@ -24,7 +24,7 @@ public class Game {
         player2.clear();
     }
 
-    private void switchPlayers() {
+    public void switchPlayers() {
         currentPlayer = currentPlayer.opponent;
     }
 
