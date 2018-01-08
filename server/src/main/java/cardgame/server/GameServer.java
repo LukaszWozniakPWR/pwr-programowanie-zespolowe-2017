@@ -131,16 +131,16 @@ public class GameServer {
                     game.putCard(p, p.deckInHands.get(args.cardNumber), args.row);
                     if (p.deckInHands.size() == 0) p.passed = true;
                     // temporary solution
-                    if (!game.getOpponent(user).getPlayer().passed) {
+                    if (opponent.getPlayer().passed) {
                         game.currentPlayer = game.currentPlayer.opponent;
                     }
                     break;
                 case PASS:
                     game.pass(p);
                     // temporary solution
-                    if (!user.getGame().getOpponent(user).getPlayer().passed) {
+                    if (user.getGame().getOpponent(user).getPlayer().passed) {
                         game.currentPlayer = game.currentPlayer.opponent;
-                    } else {
+
                         int playerScore = user.getPlayer().getRoundScore();
                         int opponentScore = user.getGame().getOpponent(user).getPlayer().getRoundScore();
 
@@ -297,13 +297,15 @@ public class GameServer {
         user2.setPlayer(new Player(new ArrayList<>()));
         applyDeck(BASIC_DECK, user1.getPlayer());
         applyDeck(BASIC_DECK, user2.getPlayer());
-
-        user1.updateState();
-        user2.updateState();
-
         Game game = new Game(user1, user2);
         games.add(game);
         game.chooseStartingPlayer();
+
+        user1.setGame(game);
+        user2.setGame(game);
+
+        user1.updateState();
+        user2.updateState();
 
         GameStartedResponse response1 = new GameStartedResponse();
         response1.forUser(user1);
