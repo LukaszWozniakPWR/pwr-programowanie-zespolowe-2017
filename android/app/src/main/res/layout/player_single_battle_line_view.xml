@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/brown_red_rounded_border"
         android:padding="@dimen/padding_12"
         app:layoutManager="LinearLayoutManager"/>
 
@@ -19,13 +18,11 @@
         android:id="@+id/totalPoints"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_12"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/grayStoneDark"
-        android:layout_marginTop="@dimen/padding_4"
-        android:padding="@dimen/padding_16"
+        android:textColor="#ffffff"
         android:gravity="center"
-        android:background="@drawable/brown_red_rounded_border"
+        android:paddingTop="24dp"
         android:maxLength="3"
         android:maxLines="1"
         tools:text="50"/>

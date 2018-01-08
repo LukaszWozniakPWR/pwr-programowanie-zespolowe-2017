@@ -71,14 +71,7 @@ class PlayerListActivity : SocketApiActivity() {
         }
 
         override fun onRequestGameResponse(playerAccepted: Boolean, nickname: String) {
-            if (playerAccepted) {
-                dialogCreator.showGameAcceptedDialogDialog(
-                        nickname,
-                        {
-                            viewAnimator.displayedChild = PROGRESS_INDEX
-
-                        })
-            } else {
+            if (!playerAccepted) {
                 dialogCreator.showGameRefusedDialog(nickname)
             }
         }

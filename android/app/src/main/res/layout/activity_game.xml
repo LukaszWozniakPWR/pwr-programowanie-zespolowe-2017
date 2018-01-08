@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/wood_voard">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -57,12 +58,6 @@
             android:layout_weight="1"
             tools:ignore="NestedWeights"
             app:lanesOrder="catapultsFirst"/>
-
-        <View
-            android:layout_width="8dp"
-            android:layout_margin="@dimen/padding_4"
-            android:layout_height="match_parent"
-            android:background="@color/greenGoblinDark"/>
 
         <com.pwr.zespolowe2016.cardgame.game.views.battle_view.PlayerBattleFieldView
             android:id="@+id/otherPlayerBattleField"
