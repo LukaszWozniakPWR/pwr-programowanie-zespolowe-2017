@@ -26,7 +26,7 @@ public enum Card {
     Broken_Catapult(1, new ArrayList<>(), Collections.singletonList(3), 3, null, null),
     Hel(1, new ArrayList<>(), Collections.singletonList(3), 3, null, null),
     Mimir(1, new ArrayList<>(), Collections.singletonList(3), 3, null, null),
-    Axe_Launcher(3, Collections.singletonList(Attribute.BOND), Collections.singletonList(3), 3, null, BondClass.AXE_LAUNCHER),
+    Axe_Launcher(2, Collections.singletonList(Attribute.BOND), Collections.singletonList(1), 2, null, BondClass.AXE_LAUNCHER),
     Sol(1, new ArrayList<>(), Collections.singletonList(2), 2, null, null),
     Mani(1, new ArrayList<>(), Collections.singletonList(2), 2, null, null),
     Gullweig(1, new ArrayList<>(), Collections.singletonList(1), 2, null, null),
