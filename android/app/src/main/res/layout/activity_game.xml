@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/wood_voard">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <include layout="@layout/toolbar"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/pickRowContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <TextView
+            android:id="@+id/pickRowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_18"
+            android:textColor="@color/grayStoneDark"
+            android:text="@string/pick_your_row"/>
+        <Button
+            android:id="@+id/cancelPickingRowButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_picking_row"
+            style="@style/MenuButtonStyle"
+            android:textSize="@dimen/text_size_16"
+            android:padding="1dp"
+            android:layout_margin="1dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <com.pwr.zespolowe2016.cardgame.game.views.battle_view.PlayerBattleFieldView
+            android:id="@+id/yourBattleField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="NestedWeights"
+            app:lanesOrder="catapultsFirst"/>
+
+        <com.pwr.zespolowe2016.cardgame.game.views.battle_view.PlayerBattleFieldView
+            android:id="@+id/otherPlayerBattleField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:lanesOrder="swordsFirst"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.pwr.zespolowe2016.cardgame.game.views.PlayerView
+            android:id="@+id/yourPlayerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/padding_4"/>
+
+        <com.pwr.zespolowe2016.cardgame.game.views.PlayerView
+            android:id="@+id/otherPlayerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/padding_4"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.pwr.zespolowe2016.cardgame.game.views.CardsInHandView
+            android:id="@+id/cardsInHandView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <include layout="@layout/miniature_card_list_item"
+            android:visibility="invisible"/>
+    </FrameLayout>
+
+</LinearLayout>

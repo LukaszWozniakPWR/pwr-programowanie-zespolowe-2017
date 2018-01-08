@@ -217,3 +217,5 @@ freeline.py
 freeline/
 freeline_project_description.json
 /.idea/vcs.xml
+/.idea/
+/.idea/misc.xml

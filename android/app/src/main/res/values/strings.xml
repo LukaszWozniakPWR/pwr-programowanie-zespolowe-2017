@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">Card game</string>
+    <string name="start_button">Start</string>
+    <string name="user_name">Podaj nazwę użytkownika</string>
+    <string name="nickname_hint">Nazwa użytkownika</string>
+    <string name="nickname_incorrect">Nazwa zła</string>
+
+    <!--Errors-->
+    <string name="connection_lost">Utracono połączenie</string>
+
+    <!--Dialogs-->
+    <string name="dialog_no">Nie</string>
+    <string name="dialog_yes">Tak</string>
+    <string name="dialog_ok">OK</string>
+    <string name="connection_lost_title">Połączenie zerwane</string>
+    <string name="connection_lost_message">Coś poszło nie tak, spróbuj za chwilę.</string>
+    <string name="cards_dialog_close">Zamknij</string>
+
+    <!--Player List-->
+    <string name="player_list_appbar_title">Lista graczy</string>
+    <string name="player_status_free">Wolny</string>
+    <string name="player_status_playing">W grze</string>
+    <string name="player_list_empty_message">Lista graczy jest pusta.</string>
+    <string name="invite_player_title">Zaproś gracza</string>
+    <string name="invite_player_message">Czy chcesz zaprosić gracza %1$s?</string>
+    <string name="player_refused_title">Odrzucono zaproszenie</string>
+    <string name="player_accepted_title">Przyjęto zaproszenie</string>
+    <string name="player_refused_message">Gracz %1$s odrzucił Twoje zaproszenie :(</string>
+    <string name="player_accepted_message">Gracz %1$s przyjął Twoje zaproszenie :)</string>
+    <string name="player_requested_game_title">Zaproszenie do gry</string>
+    <string name="player_requested_game_message">Gracz %1$s zaprosił Cię do wspólnej rozgrywki, grasz?</string>
+
+    <!--Player In Game View-->
+    <string name="player_cards_count_format">Karty: %1$s</string>
+    <string name="player_points_count_format">Punkty: %1$s</string>
+    <string name="player_rounds_won_count_format">Wygrane: %1$s</string>
+
+    <!--Game View-->
+    <string name="resign">P</string>
+    <string name="pick_your_row">Wybierz jeden ze swoich rzędów</string>
+    <string name="pick_opponent_row">Wybierz jeden rzędów przeciwnika</string>
+    <string name="cancel_picking_row">Anuluj</string>
 </resources>

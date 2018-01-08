@@ -1,0 +1,26 @@
+<resources>
+    <dimen name="default_activity_padding">@dimen/padding_16</dimen>
+    <dimen name="default_between_list_items_padding">@dimen/padding_12</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_2">2dp</dimen>
+
+    <!-- TextSize -->
+    <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+
+    <!-- Menu -->
+    <dimen name="menu_activity_padding">24dp</dimen>
+
+    <!-- Rankings -->
+    <dimen name="rankings_photo_size">50dp</dimen>
+</resources>
+
