@@ -19,6 +19,7 @@
     "jquery": "^3.2.1",
     "mdbootstrap": "^4.4.3",
     "node-sass": "^4.7.2",
+    "popper.js": "^1.12.9",
     "postcss-loader": "^2.0.9",
     "resolve-url-loader": "^2.2.1",
     "sass-loader": "^6.0.6",
