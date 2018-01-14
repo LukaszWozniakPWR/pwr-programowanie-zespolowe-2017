@@ -74,8 +74,7 @@
         margin-left: 10px;
         height: 108px;
         border: 2px solid #222;
-        backkground: #eee;
-        background: url("../../../assets/logo.png") no-repeat;
+        background: #eee url("../../../assets/logo.png") no-repeat;
         background-size: 90%;
         background-position: center;
         border-radius: 4px;
