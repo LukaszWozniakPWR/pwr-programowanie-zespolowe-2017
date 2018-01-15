@@ -23,11 +23,12 @@ public class GameServer {
     private Gson gson;
     private final Set<Game> games;
     private static final Pattern NICKNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_-]{4,24}$");
-    public static final List<Cards> BASIC_DECK = Arrays.asList(
-            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
-            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
-            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER,
-            Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER, Cards.ARCHER
+    public static final List<Card> BASIC_DECK = Arrays.asList(
+            Card.Baldur, Card.Snake_Rain, Card.Loki, Card.Hajmdal, Card.Magni, Card.Thrudheim_Archers,
+            Card.Thrudheim_Archers, Card.Aegir, Card.Hodur, Card.Frigg, Card.Fulla, Card.Widar, Card.Forseti,
+            Card.Arrow_Rain, Card.Young_Giant, Card.Young_Giant, Card.Stone_Rain, Card.Hermod, Card.Kvaser,
+            Card.Sigyn, Card.Freja, Card.Hog_Horde, Card.Broken_Catapult, Card.Hel, Card.Mimir, Card.Axe_Launcher,
+            Card.Sol, Card.Mani, Card.Gullweig, Card.Wolf_Horde, Card.Divine_Help
     );
 
     public GameServer() {
@@ -55,6 +56,13 @@ public class GameServer {
 
     public void onClose(Client client) {
         log.info(String.format("Client %d disconnected", client.getId()));
+        Game game = client.getUser().getGame();
+        if (game != null) {
+            sendResponse(game.getOpponent(client.getUser()), new GameEndedResponse(GameEndReason.OPPONENT_DISCONNECTED));
+            game.getOpponent(client.getUser()).setGame(null);
+            game.getOpponent(client.getUser()).updateState();
+        }
+
         synchronized (clients) {
             clients.remove(client);
         }
@@ -115,22 +123,24 @@ public class GameServer {
             User user = client.getUser();
             Player p = user.getPlayer();
             Game game = user.getGame();
+            User opponent = user.getGame().getOpponent(user);
 
             switch (action) {
                 case PUT_CARD:
                     PutCard args = (PutCard) command;
-                    new Request(p, RequestType.PLAY, p.deckInHands.get(args.cardNumber), args.row).validate().takeEffect();
+                    game.putCard(p, p.deckInHands.get(args.cardNumber), args.row);
+                    if (p.deckInHands.size() == 0) p.passed = true;
                     // temporary solution
-                    if (!game.getOpponent(user).getPlayer().passed) {
-                        game.switchPlayers();
+                    if (opponent.getPlayer().passed) {
+                        game.currentPlayer = game.currentPlayer.opponent;
                     }
                     break;
                 case PASS:
-                    new Request(p, RequestType.PASS).validate().takeEffect();
+                    game.pass(p);
                     // temporary solution
-                    if (!user.getGame().getOpponent(user).getPlayer().passed) {
-                        game.switchPlayers();
-                    } else {
+                    if (user.getGame().getOpponent(user).getPlayer().passed) {
+                        game.currentPlayer = game.currentPlayer.opponent;
+
                         int playerScore = user.getPlayer().getRoundScore();
                         int opponentScore = user.getGame().getOpponent(user).getPlayer().getRoundScore();
 
@@ -150,12 +160,23 @@ public class GameServer {
 
             state.forUser(user);
             GameStateResponse opponentState = new OpponentActionResponse();
-            opponentState.forUser(user.getGame().getOpponent(user));
+            opponentState.forUser(opponent);
 
             sendResponse(client, new ActionResponse(action, true, state));
-            sendResponse(user.getGame().getOpponent(user), opponentState);
+            sendResponse(opponent, opponentState);
 
-        } catch (NullPointerException | IndexOutOfBoundsException ex) {
+            if (game.gameIsOver()) {
+                GameEndReason opponentReason = p.gameScore > opponent.getPlayer().gameScore ? GameEndReason.LOST : GameEndReason.WON;
+                GameEndReason reason = p.gameScore < opponent.getPlayer().gameScore ? GameEndReason.LOST : GameEndReason.WON;
+                sendResponse(client, new GameEndedResponse(reason));
+                sendResponse(opponent, new GameEndedResponse(opponentReason));
+                user.setGame(null);
+                opponent.setGame(null);
+                user.updateState();
+                opponent.updateState();
+            }
+
+        } catch (NullPointerException | IndexOutOfBoundsException | cardgame.model.Game.InvalidMove ex) {
             sendResponse(client, new ActionResponse(action, false, state));
         }
     }
@@ -272,16 +293,19 @@ public class GameServer {
     }
 
     private void newGame(User user1, User user2) {
-        user1.state = User.PlayerState.PLAYING;
-        user2.state = User.PlayerState.PLAYING;
-        user1.setPlayer(new Player());
-        user2.setPlayer(new Player());
-
+        user1.setPlayer(new Player(new ArrayList<>()));
+        user2.setPlayer(new Player(new ArrayList<>()));
+        applyDeck(BASIC_DECK, user1.getPlayer());
+        applyDeck(BASIC_DECK, user2.getPlayer());
         Game game = new Game(user1, user2);
         games.add(game);
         game.chooseStartingPlayer();
-        applyDeck(BASIC_DECK, user1.getPlayer());
-        applyDeck(BASIC_DECK, user2.getPlayer());
+
+        user1.setGame(game);
+        user2.setGame(game);
+
+        user1.updateState();
+        user2.updateState();
 
         GameStartedResponse response1 = new GameStartedResponse();
         response1.forUser(user1);
@@ -295,12 +319,11 @@ public class GameServer {
 
     // this should be in model
     // eg. when creating Player object
-    private void applyDeck(List<Cards> cards, Player player) {
+    private void applyDeck(List<Card> cards, Player player) {
         int random = new Random().nextInt();
         cards.stream()
                 .sorted(Comparator.comparingInt(o -> System.identityHashCode(o) ^ random))
                 .limit(10)
-                .map(Cards::getCard)
                 .collect(Collectors.toCollection(() -> player.deckInHands));
     }
 }

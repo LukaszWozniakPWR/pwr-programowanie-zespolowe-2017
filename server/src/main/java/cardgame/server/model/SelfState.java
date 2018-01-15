@@ -1,7 +1,6 @@
 package cardgame.server.model;
 
 import cardgame.model.Card;
-import cardgame.model.Cards;
 import cardgame.model.Player;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public class SelfState extends OpponentState {
 
     public SelfState(Player player) {
         super(player);
-        this.hand = player.deckInHands.stream().map(card -> new CardData(Cards.fromCard(card), null)).collect(Collectors.toList());
-        this.graveyard = player.graveyard.stream().map(card -> new CardData(Cards.fromCard(card), null)).collect(Collectors.toList());
+        this.hand = player.deckInHands.stream().map(card -> new CardData(card, null)).collect(Collectors.toList());
+        this.graveyard = player.graveyard.stream().map(card -> new CardData(card, null)).collect(Collectors.toList());
     }
 }

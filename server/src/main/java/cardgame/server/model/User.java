@@ -11,7 +11,7 @@ public class User {
     public PlayerState state = PlayerState.FREE;
     private Client client;
     private final Set<User> gameRequsets;
-    private Game game;
+    private Game game = null;
     private Player player;
 
     public User(String name) {
@@ -45,6 +45,14 @@ public class User {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void updateState() {
+        if (game == null) {
+            state = PlayerState.FREE;
+        } else {
+            state = PlayerState.PLAYING;
+        }
     }
 
     public enum PlayerState {
