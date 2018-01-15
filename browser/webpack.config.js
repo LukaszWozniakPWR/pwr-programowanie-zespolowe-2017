@@ -27,7 +27,7 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             "DEBUG": true,
-            "Config.HOSTNAME": JSON.stringify("127.0.0.1"),
+            "Config.HOSTNAME": JSON.stringify("zespolowe.ddns.net"),
             "Config.PORT": 8448
         })
     ],
