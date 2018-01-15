@@ -116,6 +116,7 @@
             this.client.addResponseListener("OpponentActionResponse", new ResponseListener((response) => {
                 this.updateStateWithInfo(response);
             }));
+            document.body.classList.add("game");
         }
 
         get gamestate() {
@@ -210,17 +211,26 @@
     .gamerow, .hand {
     }
 
-    .board > div + div {
-        border-top: 2px solid #aaa;
+    .gamerow .rowcards {
+        background: url("../../assets/plank.png") no-repeat;
     }
 
     .rowpoints {
-        display: inline;
-        width: 20px;
+        display: inline-block;
+        width: 80px;
+        background: url("../../assets/pointsbg.png") no-repeat;
+        background-position: center;
+        height: 116px;
+        float: left;
+        padding: 40px 0px;
+        text-align: center;
+        font-size: 20px;
+        color:  #fff;
+        font-weight: 900;
     }
 
     .rowcards {
-        width: 1250px;
+        width: 1210px;
         display: inline-block;
     }
 
@@ -231,13 +241,11 @@
         justify-content: center;
     }
 
-    .board {
-        border: 2px solid #aaa;
-    }
 
     .player-info {
         border-radius: 4px;
         padding: 4px 6px;
+        background: rgba(255,255,255,0.4);
     }
 
     .player-info.active {

@@ -66,4 +66,9 @@
         width: 100%;
         height: 100%;
     }
+
+    body.game {
+        background: url("../assets/pexels-photo-139312.jpeg");
+        background-size: cover;
+    }
 </style>
