@@ -54,7 +54,7 @@ public class Game {
     public void getNewCard(Player p) throws InvalidMove {
         if (p == currentPlayer) {
             p.deckInHands.add(Card.getRandom());
-            switchPlayers();
+//            switchPlayers();
         } else {
             throw new InvalidMove("Wrong player");
         }
@@ -80,7 +80,12 @@ public class Game {
         if (p == currentPlayer) {
             if (p.deckInHands.contains((c))) {
                 if (c.rowsAllowed.contains(row)) {
-                    p.play(c, row);
+                    if (c.attributes.contains(Attribute.SPY)) {
+                        p.opponent.getRow(row).add(c);
+                        c.specialActions(p, row);
+                    }
+                    else
+                        p.play(c, row);
                     switchPlayers();
                 } else {
                     throw new InvalidMove("Card not allowed in this row");

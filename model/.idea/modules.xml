@@ -3,6 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CardGame.iml" filepath="$PROJECT_DIR$/CardGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model.iml" filepath="$PROJECT_DIR$/.idea/modules/model.iml" group="model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model_main.iml" filepath="$PROJECT_DIR$/.idea/modules/model_main.iml" group="model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model_test.iml" filepath="$PROJECT_DIR$/.idea/modules/model_test.iml" group="model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1521260142/pwr-programowanie-zespolowe-2017.iml" filepath="$PROJECT_DIR$/.idea/modules/-1521260142/pwr-programowanie-zespolowe-2017.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1521260142/pwr-programowanie-zespolowe-2017_main.iml" filepath="$PROJECT_DIR$/.idea/modules/-1521260142/pwr-programowanie-zespolowe-2017_main.iml" group="pwr-programowanie-zespolowe-2017" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1521260142/pwr-programowanie-zespolowe-2017_test.iml" filepath="$PROJECT_DIR$/.idea/modules/-1521260142/pwr-programowanie-zespolowe-2017_test.iml" group="pwr-programowanie-zespolowe-2017" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1634147936/server.iml" filepath="$PROJECT_DIR$/.idea/modules/1634147936/server.iml" group="server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1634147936/server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/1634147936/server_main.iml" group="server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1634147936/server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/1634147936/server_test.iml" group="server" />
     </modules>
   </component>
 </project>
