@@ -11,4 +11,6 @@ enum class Attribute(@StringRes val attributeName: Int, @StringRes val attribute
     HERO(0, 0), //TODO: add valid resources,
     MEDIC(0, 0), //TODO: add valid resources,
     SPY(0, 0), //TODO: add valid resources,
+    BOND(0,0), //TODO: add valid resources,
+    SUPPLY(0,0) //TODO: add valid resources,
 }
