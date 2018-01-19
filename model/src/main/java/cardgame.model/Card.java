@@ -55,10 +55,13 @@ public enum Card {
             else
                 weatherAffectedStrength = strength = 0;
 
-        if (attributes.contains(Attribute.BOND))
+        if (attributes.contains(Attribute.BOND)) {
             for (Card c : row.elements)
-                if (c != this && c.bondClass != null && c.bondClass == this.bondClass)
+                if (c.bondClass == this.bondClass) // Card is enum, we can't simply use c != this
                     strength += weatherAffectedStrength;
+	    strength -= weatherAffectedStrength; // reverting this being counted
+
+	}
 
         if (row.hasHorn())
             strength *= 2;
