@@ -33,7 +33,7 @@ class MiniatureCardView @JvmOverloads constructor(
         //TODO photoView
         val cardClass = card.cardClass
         photoView.setImageResource(cardClass.cardImage)
-        pointsView.text = cardClass.basePoints.toString()
+        pointsView.text = card.actualStrength.toString()
         nameView.text = context.getString(cardClass.cardName)
     }
 }
