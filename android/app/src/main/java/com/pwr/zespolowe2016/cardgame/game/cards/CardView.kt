@@ -40,7 +40,7 @@ class CardView : LinearLayout {
         //TODO photoView
         val cardClass = card.cardClass
         photoView.setImageResource(cardClass.cardImage)
-        pointsView.text = cardClass.basePoints.toString()
+        pointsView.text = card.actualStrength.toString()
         nameView.text = context.getString(cardClass.cardName)
         typeView.text = card.cardClass.rowInfo.realName
         descriptionView.text = context.getString(cardClass.cardDescription)

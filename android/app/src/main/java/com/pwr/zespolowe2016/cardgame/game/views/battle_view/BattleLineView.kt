@@ -38,7 +38,7 @@ class BattleLineView @JvmOverloads constructor(
     var cardList: List<Card> = emptyList()
         set(value) {
             cardsAdapter.setData(value)
-            totalPoints = value.sumBy { card -> card.cardClass.basePoints }
+            totalPoints = value.sumBy { card -> card.actualStrength }
             field = value
         }
 
