@@ -2,6 +2,7 @@ package com.pwr.zespolowe2016.cardgame.game.cards
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -17,8 +18,11 @@ class CardView : LinearLayout {
     private val nameView: TextView by bindView(R.id.card_view_name)
     private val typeView: TextView by bindView(R.id.card_view_type)
     private val descriptionView: TextView by bindView(R.id.card_view_description)
+    private val attributesRecyclerView: RecyclerView by bindView(R.id.attributesRecyclerView)
 
     private val layoutId: Int =  R.layout.card_view
+
+    private val attributesAdapter = AttributesAdapter()
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -29,6 +33,7 @@ class CardView : LinearLayout {
     private fun initialize() {
         inflate(context, layoutId, this)
         orientation = VERTICAL
+        attributesRecyclerView.adapter = attributesAdapter
     }
 
     fun displayCard(card: Card) {
@@ -39,5 +44,6 @@ class CardView : LinearLayout {
         nameView.text = context.getString(cardClass.cardName)
         typeView.text = card.cardClass.rowInfo.realName
         descriptionView.text = context.getString(cardClass.cardDescription)
+        attributesAdapter.setData(card.cardClass.attributes)
     }
 }
