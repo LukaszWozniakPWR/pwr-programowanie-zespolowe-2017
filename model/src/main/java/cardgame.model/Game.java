@@ -31,7 +31,8 @@ public class Game {
     }
 
     private void switchPlayers() {
-        currentPlayer = currentPlayer.opponent;
+        if (!currentPlayer.opponent.passed)
+            currentPlayer = currentPlayer.opponent;
     }
 
     public void pass(Player p) throws InvalidMove {
