@@ -12,7 +12,7 @@ public class Player {
     public Card lastPlayedCard;
     public Game game;
 
-    public List<Card> deckInHands = new ArrayList<>(), graveyard = new ArrayList<>();
+    public List<Card> /*available = new ArrayList<>(),*/ deckInHands = new ArrayList<>(), graveyard = new ArrayList<>();
     public Row frontRow = new Row(), middleRow = new Row(), rearRow = new Row();
 
     public int getRoundScore() {
