@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48a784c6-7d6c-496f-83cd-5f33638c8882" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cardgame.model/Game.java" afterPath="$PROJECT_DIR$/src/main/java/cardgame.model/Game.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" afterPath="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/../.gradle/" />
@@ -90,7 +90,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Player.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-988">
@@ -105,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Card.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Card.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Card.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="106" column="24" lean-forward="true" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
+            <state relative-caret-position="324">
+              <caret line="62" column="97" lean-forward="false" selection-start-line="62" selection-start-column="97" selection-end-line="62" selection-end-column="97" />
               <folding>
                 <element signature="e#7701#7702#0" expanded="true" />
                 <element signature="e#7765#7766#0" expanded="true" />
@@ -854,8 +854,8 @@
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Lobby.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/BondClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" />
       </list>
     </option>
   </component>
@@ -1281,17 +1281,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="106" column="24" lean-forward="true" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
-          <folding>
-            <element signature="e#7701#7702#0" expanded="true" />
-            <element signature="e#7765#7766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Lobby.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1328,6 +1317,17 @@
             <element signature="e#1315#1316#0" expanded="true" />
             <element signature="e#2552#2553#0" expanded="true" />
             <element signature="e#2591#2592#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Card.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="62" column="97" lean-forward="false" selection-start-line="62" selection-start-column="97" selection-end-line="62" selection-end-column="97" />
+          <folding>
+            <element signature="e#7701#7702#0" expanded="true" />
+            <element signature="e#7765#7766#0" expanded="true" />
           </folding>
         </state>
       </provider>
