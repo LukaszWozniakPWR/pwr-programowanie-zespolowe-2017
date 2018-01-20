@@ -67,10 +67,9 @@ public enum Card {
     Wolf_Horde(2, 2, Collections.singletonList(Attribute.MEDIC), Collections.singletonList(2), 1, null, null),
     Divine_Help(2, 1, Collections.singletonList(Attribute.SUPPLY), Collections.singletonList(3), 0, null, null);
 
-
     public int deck;
     public int maxInDeck;
-    public List<Attribute> attributes;
+    private List<Attribute> attributes;
     public List<Integer> rowsAllowed;
     public int basicStrength;
     public MusterClass musterClass;
@@ -93,9 +92,8 @@ public enum Card {
             for (Card c : row.elements)
                 if (c.bondClass == this.bondClass) // Card is enum, we can't simply use c != this
                     strength += weatherAffectedStrength;
-	    strength -= weatherAffectedStrength; // reverting this being counted
-
-	}
+	        strength -= weatherAffectedStrength; // reverting this being counted
+	    }
 
         if (row.hasHorn())
             strength *= 2;
@@ -109,24 +107,11 @@ public enum Card {
 
     public void specialActions(Player player, int row) throws Game.InvalidMove {
         for (Attribute a : attributes)
-            a.specialAction(player.game, row);
+            a.specialAction(player, row);
     }
 
     public boolean is(Attribute a) {
         return attributes.contains(a);
-    }
-
-    private static List<Card> VALUES = new ArrayList<>();
-    static {
-        for (Card c : values()) {
-            for (int i = 0; i < c.maxInDeck; ++i) {
-                VALUES.add(c);
-            }
-        }
-    }
-    private static Random RANDOM = new Random();
-    public static Card getRandom() {
-        return VALUES.get(RANDOM.nextInt(VALUES.size()));
     }
 
     Card(int deck, int maxInDeck, List<Attribute> attributes, List<Integer> rowsAllowed, int basicStrength, MusterClass musterClass, BondClass bondClass) {

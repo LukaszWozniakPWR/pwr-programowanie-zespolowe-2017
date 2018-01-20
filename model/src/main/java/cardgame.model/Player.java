@@ -1,7 +1,9 @@
 package cardgame.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 
@@ -10,9 +12,10 @@ public class Player {
     public Boolean passed = false;
     public Player opponent;
     public Card lastPlayedCard;
-    public Game game;
+    private Random random = new Random();
 
-    public List<Card> /*available = new ArrayList<>(),*/ deckInHands = new ArrayList<>(), graveyard = new ArrayList<>();
+    private List<Card> available = new ArrayList<>(), graveyard = new ArrayList<>();
+    public List<Card> deckInHands = new ArrayList<>();
     public Row frontRow = new Row(), middleRow = new Row(), rearRow = new Row();
 
     public int getRoundScore() {
@@ -55,10 +58,31 @@ public class Player {
 
     public void scourge() {
         int scourgePeak = Stream.of(frontRow, middleRow, rearRow).mapToInt(Row::getScourgePeak).max().getAsInt();
-//        System.out.println(""+scourgePeak);
         if (scourgePeak >= 0)
             for (int i = 1; i <= 3; i++)
-                getRow(i).scourge(graveyard, scourgePeak).sort();
+                getRow(i).scourge(graveyard, scourgePeak);
+    }
+
+    public void scorch(int row) {
+        getRow(row).scourge(graveyard, frontRow.getScourgePeak());
+    }
+
+    public void pullRandomCard() {
+        if (available.isEmpty())
+            return;
+        Card c = available.get(random.nextInt(available.size()));
+        available.remove(c);
+        deckInHands.add(c);
+        Collections.sort(deckInHands);
+    }
+
+    public void reviveRandomCard() {
+        if (graveyard.isEmpty())
+            return;
+        Card c = graveyard.get(random.nextInt(graveyard.size()));
+        graveyard.remove(c);
+        deckInHands.add(c);
+        Collections.sort(deckInHands);
     }
 
     // see Attribute::MUSTER before changing
@@ -66,8 +90,6 @@ public class Player {
         ArrayList<Card> toPlay = new ArrayList<>();
         for (Card cc : deckInHands)
             if (cc.musterClass == c.musterClass) {
-//                getRow(row).add(cc).sort();
-//                deckInHands.remove(cc);
                 toPlay.add(cc);
             }
         for (Card cc : toPlay) {
@@ -75,10 +97,6 @@ public class Player {
             deckInHands.remove(cc);
         }
         getRow(row).sort();
-    }
-
-    public void scorch(int row) {
-        getRow(row).scourge(graveyard, frontRow.getScourgePeak()).sort();
     }
 
     public void play(Card c, int row) throws Game.InvalidMove {
@@ -90,7 +108,12 @@ public class Player {
         c.specialActions(this, row);
     }
 
-    public Player(List<Card> deckGiven) {
-        deckInHands = deckGiven;
+    public Player(int deck) {
+        for (Card c : Card.values())
+            if (c.deck == deck || c.deck == 0)
+                for (int i = 0; i < c.maxInDeck; ++i)
+                    available.add(c);
+        for (int i = 0; i < 10; ++i)
+            pullRandomCard();
     }
 }

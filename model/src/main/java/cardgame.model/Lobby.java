@@ -1,23 +1,20 @@
 package cardgame.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Lobby {
 
     public static void main(String[] args) {
 //        System.out.println("The Server is Running");
-        List<Card> deck1 = new ArrayList<>();
-        List<Card> deck2 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            deck1.add(Card.getRandom());
-            deck2.add(Card.getRandom());
-        }
-        Player player1 = new Player(deck1);
-        Player player2 = new Player(deck2);
-        Game g = new Game(player1, player2);
-        g.chooseStartingPlayer();
-        g.clearTable();
+//        List<Card> deck1 = new ArrayList<>();
+//        List<Card> deck2 = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            deck1.add(Card.getRandom());
+//            deck2.add(Card.getRandom());
+//        }
+//        Player player1 = new Player(deck1);
+//        Player player2 = new Player(deck2);
+//        Game g = new Game(player1, player2);
+//        g.chooseStartingPlayer();
+//        g.clearTable();
 
 ////        new Request(player1, RequestType.PASS, null, 0).validate().takeEffect();
 //        player1.deckInHands.add(new Card(new ArrayList<>(), 10, null, null));
