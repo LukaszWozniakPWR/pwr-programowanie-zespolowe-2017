@@ -7,4 +7,5 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/padding_4"
     android:padding="@dimen/padding_12"
+    android:splitMotionEvents="false"
     app:layoutManager="LinearLayoutManager" />
