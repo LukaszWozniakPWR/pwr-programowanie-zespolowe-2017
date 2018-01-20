@@ -82,7 +82,9 @@ public class Game {
             if (p.deckInHands.contains((c))) {
                 if (c.rowsAllowed.contains(row)) {
                     if (c.attributes.contains(Attribute.SPY)) {
-                        p.opponent.getRow(row).add(c);
+                        p.lastPlayedCard = c;
+                        p.opponent.getRow(row).add(c).sort();
+                        p.deckInHands.remove(c);
                         c.specialActions(p, row);
                     }
                     else
