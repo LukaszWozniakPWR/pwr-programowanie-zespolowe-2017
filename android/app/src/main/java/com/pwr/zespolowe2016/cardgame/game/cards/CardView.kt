@@ -44,7 +44,7 @@ class CardView : LinearLayout {
         pointsView.visible = card.actualStrength > 0
         nameView.text = context.getString(cardClass.cardName)
         descriptionView.text = context.getString(cardClass.cardDescription)
-        attributesAdapter.setData(card.cardClass.attributes)
+        if (card.actualStrength > 0) attributesAdapter.setData(card.cardClass.attributes)
         attributesRecyclerView.visible = card.actualStrength > 0
     }
 }
