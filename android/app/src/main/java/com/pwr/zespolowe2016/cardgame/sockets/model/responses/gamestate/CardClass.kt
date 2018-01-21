@@ -77,7 +77,7 @@ enum class CardClass(
     /* NONE */
     //TODO Pożogaa
     @SerializedName("COMMANDERS_HORN") COMMANDERS_HORN(-1, RowInfo.ANY_OF_YOURS, Fraction.NONE, listOf(Attribute.COMMANDERS_HORN), R.string.commanders_horn_attribute_name, R.string.commanders_horn_attribute_description, R.drawable.rog_bojowy),
-    @SerializedName("SCOURGE") SCOURGE(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.SCOURGE), R.string.scourge_attribute_name, R.string.scourge_attribute_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("SCOURGE") SCOURGE(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.SCOURGE), R.string.scourge_attribute_name, R.string.scourge_attribute_description, R.drawable.pozoga),
     @SerializedName("COLD") COLD(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.COLD), R.string.cold_attribute_name, R.string.cold_attribute_description, R.drawable.mroz),
     @SerializedName("RAIN") RAIN(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.RAIN), R.string.rain_attribute_name, R.string.rain_attribute_description, R.drawable.deszcz),
     @SerializedName("FOG") FOG(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.FOG), R.string.fog_attribute_name, R.string.fog_attribute_description, R.drawable.mgla),
