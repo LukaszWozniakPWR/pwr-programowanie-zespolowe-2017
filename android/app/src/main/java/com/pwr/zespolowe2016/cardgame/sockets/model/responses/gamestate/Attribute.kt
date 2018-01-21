@@ -14,4 +14,5 @@ enum class Attribute(@StringRes val attributeName: Int, @StringRes val attribute
     SPY(R.string.spy_attribute_name, R.string.spy_attribute_description),
     SUPPLY(R.string.supply_attribute_name, R.string.supply_attribute_description),
     BOND(R.string.bond_attribute_name, R.string.bond_attribute_description),
+    SCOURGE(R.string.scourge_attribute_name, R.string.scourge_attribute_description),
 }
