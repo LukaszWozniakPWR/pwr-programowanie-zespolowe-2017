@@ -16,11 +16,11 @@ enum class CardClass(
 ) {
     /* NILFGAARD */
     @SerializedName("BALDUR") BALDUR(10, RowInfo.SWORDS, Fraction.NILFGAARD, listOf(Attribute.MEDIC, Attribute.HERO), R.string.baldur_card_name, R.string.baldur_card_description, R.drawable.baldur),
-    @SerializedName("SNAKE_RAIN") SNAKE_STORM(10, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(), R.string.snake_storm_card_name, R.string.snake_storm_card_description, R.drawable.deszczwunzy),
+    @SerializedName("SNAKE_RAIN") SNAKE_RAIN(10, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(), R.string.snake_storm_card_name, R.string.snake_storm_card_description, R.drawable.deszczwunzy),
     @SerializedName("LOKI") LOKI(10, RowInfo.SWORDS, Fraction.NILFGAARD, listOf(Attribute.HERO), R.string.loki_card_name, R.string.loki_card_description, R.drawable.loki),
     @SerializedName("HAJMDAL") HAJMDAL(10, RowInfo.ARCHERS, Fraction.NILFGAARD, listOf(Attribute.HERO), R.string.hajmdal_card_name, R.string.hajmdal_card_description, R.drawable.hajmdal),
     @SerializedName("MAGNI") MAGNI(10, RowInfo.CATAPULTS, Fraction.NILFGAARD, listOf(Attribute.HERO), R.string.magni_card_name, R.string.magni_card_description, R.drawable.magni),
-    @SerializedName("THRUDHEIM_ARCHERS") ARCHERS_THRUDHEIM(10, RowInfo.ARCHERS, Fraction.NILFGAARD, listOf(), R.string.archers_thrudheim_card_name, R.string.archers_thrudheim_card_description, R.drawable.lucznicyztrudheim),
+    @SerializedName("THRUDHEIM_ARCHERS") THRUDHEIM_ARCHERS(10, RowInfo.ARCHERS, Fraction.NILFGAARD, listOf(), R.string.archers_thrudheim_card_name, R.string.archers_thrudheim_card_description, R.drawable.lucznicyztrudheim),
     @SerializedName("AEGIR") AEGIR(9, RowInfo.SWORDS, Fraction.NILFGAARD, listOf(Attribute.SPY), R.string.aegir_card_name, R.string.aegir_card_description, R.drawable.aegir),
     @SerializedName("HODUR") HODUR(7, RowInfo.SWORDS, Fraction.NILFGAARD, listOf(Attribute.SPY), R.string.hodur_card_name, R.string.hodur_card_description, R.drawable.hodur),
     @SerializedName("FRIGG") FRIGG(6, RowInfo.ARCHERS, Fraction.NILFGAARD, listOf(), R.string.frigg_card_name, R.string.frigg_card_description, R.drawable.frigg),
@@ -59,7 +59,7 @@ enum class CardClass(
     @SerializedName("CAROUSEL") CAROUSEL(6, RowInfo.CATAPULTS, Fraction.NORTH, listOf(), R.string.carousel_card_name, R.string.carousel_description, R.drawable.hulajgrod),
     @SerializedName("JONSI") JONSI(5, RowInfo.CATAPULTS, Fraction.NORTH, listOf(Attribute.MEDIC), R.string.jonsi_card_name, R.string.jonsi_card_description, R.drawable.jonsi),
     //TODO Make pics for cards below
-    @SerializedName("IBAR_DRUIDS") IBAR_DRUIDS(6, RowInfo.ARCHERS, Fraction.NORTH, listOf(Attribute.BOND), R.string.ibar_druids_card_name, R.string.ibar_druids_card_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("IBAR_DRUIDS") IBAR_DRUIDS(5, RowInfo.ARCHERS, Fraction.NORTH, listOf(Attribute.BOND), R.string.ibar_druids_card_name, R.string.ibar_druids_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("BRIGIT") BRIGIT(5, RowInfo.ARCHERS, Fraction.NORTH, listOf(), R.string.brigit_card_name, R.string.brigit_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("TARANIS") TARANIS(5, RowInfo.SWORDS, Fraction.NORTH, listOf(), R.string.taranis_card_name, R.string.taranis_card_description, R.drawable.ic_dissatisfied_512),
     @SerializedName("ESUS") ESUS(5, RowInfo.SWORDS, Fraction.NORTH, listOf(), R.string.esus_card_name, R.string.esus_card_description, R.drawable.ic_dissatisfied_512),
