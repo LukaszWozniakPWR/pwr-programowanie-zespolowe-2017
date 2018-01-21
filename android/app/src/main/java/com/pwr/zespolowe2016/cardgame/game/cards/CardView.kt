@@ -16,7 +16,6 @@ class CardView : LinearLayout {
     private val photoView: ImageView by bindView(R.id.card_view_photo)
     private val pointsView: TextView by bindView(R.id.card_view_points)
     private val nameView: TextView by bindView(R.id.card_view_name)
-    private val typeView: TextView by bindView(R.id.card_view_type)
     private val descriptionView: TextView by bindView(R.id.card_view_description)
     private val attributesRecyclerView: RecyclerView by bindView(R.id.attributesRecyclerView)
 
@@ -42,7 +41,6 @@ class CardView : LinearLayout {
         photoView.setImageResource(cardClass.cardImage)
         pointsView.text = card.actualStrength.toString()
         nameView.text = context.getString(cardClass.cardName)
-        typeView.text = card.cardClass.rowInfo.realName
         descriptionView.text = context.getString(cardClass.cardDescription)
         attributesAdapter.setData(card.cardClass.attributes)
     }
