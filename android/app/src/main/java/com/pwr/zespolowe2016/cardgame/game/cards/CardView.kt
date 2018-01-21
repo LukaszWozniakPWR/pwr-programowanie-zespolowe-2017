@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.bindView
+import com.pwr.zespolowe2016.cardgame.other.extensions.visible
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class CardView : LinearLayout {
@@ -40,8 +41,10 @@ class CardView : LinearLayout {
         val cardClass = card.cardClass
         photoView.setImageResource(cardClass.cardImage)
         pointsView.text = card.actualStrength.toString()
+        pointsView.visible = card.actualStrength > 0
         nameView.text = context.getString(cardClass.cardName)
         descriptionView.text = context.getString(cardClass.cardDescription)
         attributesAdapter.setData(card.cardClass.attributes)
+        attributesRecyclerView.visible = card.actualStrength > 0
     }
 }

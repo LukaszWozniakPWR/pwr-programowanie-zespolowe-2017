@@ -9,6 +9,7 @@ import com.pwr.zespolowe2016.cardgame.game.views.battle_view.LanesOrder.CATAPULS
 import com.pwr.zespolowe2016.cardgame.other.bindView
 import com.pwr.zespolowe2016.cardgame.other.extensions.extractAttributes
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
+import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Effect
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.RowInfo
 
 class PlayerBattleFieldView @JvmOverloads constructor(
@@ -45,37 +46,38 @@ class PlayerBattleFieldView @JvmOverloads constructor(
             field = value
         }
 
-    fun setCatapultsData(catapults: List<Card>) {
-        state.setCatapultsData(catapults)
+    fun setCatapultsData(catapults: List<Card>, effects: List<Effect>) {
+        state.setCatapultsData(catapults, effects)
     }
 
-    fun setArchersData(archers: List<Card>) {
+    fun setArchersData(archers: List<Card>, effects: List<Effect>) {
         middleBattleLineView.cardList = archers
+        middleBattleLineView.effectsList = effects
     }
 
-    fun setSwordsData(swords: List<Card>) {
-        state.setSwordsData(swords)
+    fun setSwordsData(swords: List<Card>, effects: List<Effect>) {
+        state.setSwordsData(swords, effects)
     }
 
     fun pickRowWithNextClick(nextClickListener: (Int) -> Unit) {
-        state.setOnSwordsRowClickListener {
+        state.setSwordsRowSelectable {
             nextClickListener(RowInfo.SWORDS.rowNumber)
             emptyRowClickListeners()
         }
-        state.setOnArchersRowClickListener {
+        state.setArchersRowSelectable {
             nextClickListener(RowInfo.ARCHERS.rowNumber)
             emptyRowClickListeners()
         }
-        state.setOnCatapultsRowClickListener {
+        state.setCatapultsRowSelectable {
             nextClickListener(RowInfo.CATAPULTS.rowNumber)
             emptyRowClickListeners()
         }
     }
 
     private fun emptyRowClickListeners() {
-        state.setOnSwordsRowClickListener { /* NO-OP */ }
-        state.setOnArchersRowClickListener { /* NO-OP */ }
-        state.setOnCatapultsRowClickListener { /* NO-OP */ }
+        leftBattleLineView.setNotSelectable()
+        middleBattleLineView.setNotSelectable()
+        rightBattleLineView.setNotSelectable()
     }
 
     init {

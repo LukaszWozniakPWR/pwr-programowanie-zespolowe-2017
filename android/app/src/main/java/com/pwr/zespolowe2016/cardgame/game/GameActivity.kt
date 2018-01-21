@@ -16,6 +16,7 @@ import com.pwr.zespolowe2016.cardgame.other.extensions.visible
 import com.pwr.zespolowe2016.cardgame.sockets.EmptyApiCallback
 import com.pwr.zespolowe2016.cardgame.sockets.SocketApiActivity
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.*
+import kotlinx.android.synthetic.main.activity_game.view.cardsInHandView
 
 class GameActivity : SocketApiActivity() {
 
@@ -94,7 +95,7 @@ class GameActivity : SocketApiActivity() {
             yourPlayerView.showTurnAndResignButton()
             otherPlayerView.hideTurn()
             cardsInHandView.onCardClickListener = { i, card ->
-                socketApi?.putCard(i, card.cardClass.rowInfo.rowNumber)
+                onCardInHandClicked(i, card)
             }
         } else {
             otherPlayerView.showTurnAndHideResignButton()
@@ -132,15 +133,15 @@ class GameActivity : SocketApiActivity() {
 
     private fun loadCards(cardsInHand: List<Card>, swordsRow: Row, archersRow: Row, catapultsRow: Row) {
         cardsInHandView.cardList = cardsInHand
-        yourBattleFieldView.setSwordsData(swordsRow.battleCards)
-        yourBattleFieldView.setArchersData(archersRow.battleCards)
-        yourBattleFieldView.setCatapultsData(catapultsRow.battleCards)
+        yourBattleFieldView.setSwordsData(swordsRow.battleCards, swordsRow.activeEffects)
+        yourBattleFieldView.setArchersData(archersRow.battleCards, archersRow.activeEffects)
+        yourBattleFieldView.setCatapultsData(catapultsRow.battleCards, catapultsRow.activeEffects)
     }
 
     private fun loadCards(swordsRow: Row, archersRow: Row, catapultsRow: Row) {
-        otherPlayerBattleFieldView.setSwordsData(swordsRow.battleCards)
-        otherPlayerBattleFieldView.setArchersData(archersRow.battleCards)
-        otherPlayerBattleFieldView.setCatapultsData(catapultsRow.battleCards)
+        otherPlayerBattleFieldView.setSwordsData(swordsRow.battleCards, swordsRow.activeEffects)
+        otherPlayerBattleFieldView.setArchersData(archersRow.battleCards, archersRow.activeEffects)
+        otherPlayerBattleFieldView.setCatapultsData(catapultsRow.battleCards, catapultsRow.activeEffects)
     }
 
     inner class GameActivityApiCallback(private val context: Context) : EmptyApiCallback() {
