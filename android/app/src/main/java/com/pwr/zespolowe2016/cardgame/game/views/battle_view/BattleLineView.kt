@@ -59,6 +59,7 @@ class BattleLineView @JvmOverloads constructor(
                 recyclerView.setBackgroundResource(R.color.brownRed)
             } else {
                 recyclerView.alpha = 1.0f
+                recyclerView.setBackgroundResource(0)
             }
         }
 
