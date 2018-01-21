@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48a784c6-7d6c-496f-83cd-5f33638c8882" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cardgame.model/Attribute.java" afterPath="$PROJECT_DIR$/src/main/java/cardgame.model/Attribute.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cardgame.model/Player.java" afterPath="$PROJECT_DIR$/src/main/java/cardgame.model/Player.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" afterPath="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/../.gradle/" />
@@ -74,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Game.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -110,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Card.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Card.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Card.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="74" column="10" lean-forward="false" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
+            <state relative-caret-position="126">
+              <caret line="55" column="67" lean-forward="false" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -862,12 +861,12 @@
         <option value="$PROJECT_DIR$/src/cardgame/model/Card.java" />
         <option value="$PROJECT_DIR$/src/cardgame/model/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/BondClass.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/StandardCardComparator.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Lobby.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Attribute.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cardgame.model/Card.java" />
       </list>
     </option>
   </component>
@@ -1281,14 +1280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="74" column="10" lean-forward="false" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Attribute.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-375">
@@ -1339,6 +1330,14 @@
             <element signature="e#2136#2137#0" expanded="true" />
             <element signature="e#2172#2173#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cardgame.model/Card.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="55" column="67" lean-forward="false" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
+          <folding />
         </state>
       </provider>
     </entry>
