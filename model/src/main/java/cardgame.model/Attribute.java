@@ -62,7 +62,7 @@ public enum Attribute
     GOOD_WEATHER() {
         @Override
         public void specialAction(Player player, int row) {
-            for (int i = 0; i <=3; ++i) {
+            for (int i = 1; i <=3; ++i) {
                 player.getRow(i).disaffect(Effect.BAD_WEATHER);
                 player.opponent.getRow(i).disaffect(Effect.BAD_WEATHER);
             }
