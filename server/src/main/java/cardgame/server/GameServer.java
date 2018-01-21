@@ -129,18 +129,11 @@ public class GameServer {
                 case PUT_CARD:
                     PutCard args = (PutCard) command;
                     game.putCard(p, p.deckInHands.get(args.cardNumber), args.row);
-                    if (p.deckInHands.size() == 0) p.passed = true;
-                    // temporary solution
-                    if (opponent.getPlayer().passed) {
-                        game.currentPlayer = game.currentPlayer.opponent;
-                    }
+                    if (p.deckInHands.size() == 0) p.pass();
                     break;
                 case PASS:
                     game.pass(p);
-                    // temporary solution
                     if (user.getGame().getOpponent(user).getPlayer().passed) {
-                        game.currentPlayer = game.currentPlayer.opponent;
-
                         int playerScore = user.getPlayer().getRoundScore();
                         int opponentScore = user.getGame().getOpponent(user).getPlayer().getRoundScore();
 
@@ -152,8 +145,7 @@ public class GameServer {
                             user.getGame().getOpponent(user).getPlayer().gameScore++;
                         }
 
-                        user.getPlayer().clear();
-                        user.getGame().getOpponent(user).getPlayer().clear();
+                        game.clearTable();
                     }
                     break;
             }
