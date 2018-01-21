@@ -77,10 +77,10 @@ enum class CardClass(
 
     /* NONE */
     //TODO zmienić punkty i rzędy dla poniższych kar
-    @SerializedName("COMMANDERS_HORN") COMMANDERS_HORN(10, RowInfo.SWORDS, Fraction.NONE, listOf(Attribute.COMMANDERS_HORN), R.string.commanders_horn_attribute_name, R.string.commanders_horn_attribute_description, R.drawable.ic_dissatisfied_512),
-    @SerializedName("SCOURGE") SCOURGE(10, RowInfo.CATAPULTS, Fraction.NONE, listOf(Attribute.SCOURGE), R.string.scourge_attribute_name, R.string.scourge_attribute_description, R.drawable.ic_dissatisfied_512),
-    @SerializedName("COLD") COLD(10, RowInfo.SWORDS, Fraction.NONE, listOf(Attribute.COLD), R.string.cold_attribute_name, R.string.cold_attribute_description, R.drawable.ic_dissatisfied_512),
-    @SerializedName("RAIN") RAIN(10, RowInfo.ARCHERS, Fraction.NONE, listOf(Attribute.RAIN), R.string.rain_attribute_name, R.string.rain_attribute_description, R.drawable.ic_dissatisfied_512),
-    @SerializedName("FOG") FOG(10, RowInfo.SWORDS, Fraction.NONE, listOf(Attribute.FOG), R.string.fog_attribute_name, R.string.fog_attribute_description, R.drawable.ic_dissatisfied_512),
-    @SerializedName("GOOD_WEATHER") GOOD_WEATHER(10, RowInfo.ARCHERS, Fraction.NONE, listOf(Attribute.GOOD_WEATHER), R.string.good_weather_attribute_name, R.string.good_weather_attribute_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("COMMANDERS_HORN") COMMANDERS_HORN(-1, RowInfo.ANY_OF_YOURS, Fraction.NONE, listOf(Attribute.COMMANDERS_HORN), R.string.commanders_horn_attribute_name, R.string.commanders_horn_attribute_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("SCOURGE") SCOURGE(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.SCOURGE), R.string.scourge_attribute_name, R.string.scourge_attribute_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("COLD") COLD(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.COLD), R.string.cold_attribute_name, R.string.cold_attribute_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("RAIN") RAIN(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.RAIN), R.string.rain_attribute_name, R.string.rain_attribute_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("FOG") FOG(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.FOG), R.string.fog_attribute_name, R.string.fog_attribute_description, R.drawable.ic_dissatisfied_512),
+    @SerializedName("GOOD_WEATHER") GOOD_WEATHER(-1, RowInfo.EMPTY, Fraction.NONE, listOf(Attribute.GOOD_WEATHER), R.string.good_weather_attribute_name, R.string.good_weather_attribute_description, R.drawable.ic_dissatisfied_512),
 }
