@@ -95,7 +95,9 @@
     (<any>window).jQuery = $
     import "bootstrap";
     import Card from "./game/Card.vue";
+    import Cards from "../cards";
     import Animation from "../animation";
+    import RowInfo from "../model/RowInfo";
 
     @Component({
         components: {
@@ -113,9 +115,45 @@
         mounted() {
             console.log(this.gamestate);
             this.showTurnInfo();
+
             this.client.addResponseListener("OpponentActionResponse", new ResponseListener((response) => {
                 this.updateStateWithInfo(response);
             }));
+
+            this.client.addResponseListener("GameEndedResponse", new ResponseListener((response) => {
+                let msg = "Koniec gry";
+
+                switch (response.reason) {
+                    case "OPPONENT_DISCONNECTED":
+                        msg = "Przeciwnik się rozłączył";
+                        break;
+                    case "WON":
+                        msg = "Wygrałeś!";
+                        break;
+                    case "LOST":
+                        msg = "Przegrałeś!";
+                        break;
+                }
+
+                this.lock = true;
+                let el = document.getElementById("game-message");
+                el.innerHTML = msg;
+                el.style.display = "block";
+                setTimeout(() => {
+                    el.classList.remove("show");
+                    setTimeout(() => {
+                        el.style.display = "none";
+                        this.lock = false;
+                        el.innerHTML = "";
+                        this.app.state = "list";
+                        this.app.gamestate = {};
+                        document.body.classList.remove("game");
+                    }, 250);
+                }, 4000);
+
+                el.classList.add("show");
+            }));
+
             document.body.classList.add("game");
         }
 
@@ -128,7 +166,25 @@
         handClick(index: number) {
             if (!this.lock && this.gamestate.turn === "YOUR") {
                 if (this.selected == index) this.selected = -1;
-                else this.selected = index;
+                else {
+                    let cardType = this.gamestate.selfState.hand[index].name;
+                    let card = Cards[cardType];
+
+                    if (card.row == RowInfo.ANY_OF_YOURS) {
+                        this.selected = index;
+                    } else {
+                        this.lock = true;
+                        this.client.putCard(index, card.row).then((response) => {
+                            this.updateStateWithInfo(response['game']);
+                            this.lock = false;
+                            this.selected = -1;
+                        }).catch(() => {
+                            this.app.showError("Błąd");
+                            this.lock = false;
+                            this.selected = -1;
+                        });
+                    }
+                }
             }
         }
 
@@ -169,8 +225,8 @@
                     el.style.display = "none";
                     this.lock = false;
                     el.innerHTML = "";
-                }, 350);
-            }, 3000);
+                }, 250);
+            }, 2000);
 
             el.classList.add("show");
         }
@@ -263,7 +319,7 @@
         z-index: 9999;
         background: rgba(0,0,0,.8);
         opacity: 0;
-        transition: opacity ease .3s;
+        transition: opacity ease .2s;
         top: 0;
         display: none;
         font-weight: 800;
