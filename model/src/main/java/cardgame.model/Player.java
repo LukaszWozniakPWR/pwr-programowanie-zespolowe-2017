@@ -12,7 +12,7 @@ public class Player {
     public Boolean passed = false;
     public Player opponent;
     public Card lastPlayedCard;
-    private Random random = new Random(System.currentTimeMillis());
+    private Random random = new Random();
 
     private List<Card> available = new ArrayList<>(), graveyard = new ArrayList<>();
     public List<Card> deckInHands = new ArrayList<>();
