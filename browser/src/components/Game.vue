@@ -10,7 +10,7 @@
                 <div class="hand">
                     <Card v-for="i in this.gamestate.opponentState.handLength" :key="i" type="PLACEHOLDER"/>
                 </div>
-                <div class="gamerow" @click="rowClick(3, true)">
+                <div class="gamerow" @click="rowClick(3, true)" :class="this.gamestate.opponentState.rearRow.effects">
                     <div class="rowpoints">{{ this.gamestate.opponentState.rearRow.points }}</div>
                     <div class="rowcards">
                         <div>
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="gamerow" @click="rowClick(2, true)">
+                <div class="gamerow" @click="rowClick(2, true)" :class="this.gamestate.opponentState.middleRow.effects">
                     <div class="rowpoints">{{ this.gamestate.opponentState.middleRow.points }}</div>
                     <div class="rowcards">
                         <div>
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="gamerow" @click="rowClick(1, true)">
+                <div class="gamerow" @click="rowClick(1, true)" :class="this.gamestate.opponentState.frontRow.effects">
                     <div class="rowpoints">{{ this.gamestate.opponentState.frontRow.points }}</div>
                     <div class="rowcards">
                         <div>
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="board">
-                <div class="gamerow" @click="rowClick(1)">
+                <div class="gamerow" @click="rowClick(1)" :class="this.gamestate.selfState.frontRow.effects">
                     <div class="rowpoints">{{ this.gamestate.selfState.frontRow.points }}</div>
                     <div class="rowcards">
                         <div>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="gamerow" @click="rowClick(2)">
+                <div class="gamerow" @click="rowClick(2)" :class="this.gamestate.selfState.middleRow.effects">
                     <div class="rowpoints">{{ this.gamestate.selfState.middleRow.points }}</div>
                     <div class="rowcards">
                         <div>
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="gamerow" @click="rowClick(3)">
+                <div class="gamerow" @click="rowClick(3)" :class="this.gamestate.selfState.rearRow.effects">
                     <div class="rowpoints">{{ this.gamestate.selfState.rearRow.points }}</div>
                     <div class="rowcards">
                         <div>
@@ -333,5 +333,12 @@
 
     #game-message.show {
         opacity: 1;
+    }
+
+    .gamerow.BAD_WEATHER > * {
+        filter: grayscale(0.5);
+    }
+    .gamerow.COMMANDER_HORN {
+        filter: drop-shadow(0 0 5px #ffcc00);
     }
 </style>

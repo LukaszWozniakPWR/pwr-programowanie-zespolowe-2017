@@ -8,7 +8,7 @@ export default {
     BALDUR: {
         name: R.baldur_card_name,
         description: R.baldur_card_description,
-        img: assets["../assets/cards/baldur.png"],
+        img: assets["../assets/cards/Baldur.png"],
         basicStrength: 10,
         row: RowInfo.SWORDS,
         fraction: Fraction.NILFGAARD,
@@ -48,7 +48,7 @@ export default {
     MAGNI: {
         name: R.magni_card_name,
         description: R.magni_card_description,
-        img: assets["../assets/cards/magni.png"],
+        img: assets["../assets/cards/Magni.png"],
         basicStrength: 10,
         row: RowInfo.CATAPULTS,
         fraction: Fraction.NILFGAARD,
@@ -288,7 +288,7 @@ export default {
     DIVINE_HELP: {
         name: R.support_from_gods_card_name,
         description: R.support_from_gods_card_description,
-        img: assets["../assets/cards/wsparcie_od_bogow.png"],
+        img: assets["../assets/cards/wsparcie odbogow.png"],
         basicStrength: 0,
         row: RowInfo.CATAPULTS,
         fraction: Fraction.NILFGAARD,
@@ -308,7 +308,7 @@ export default {
     DAGDA: {
         name: R.dagda_card_name,
         description: R.dagda_card_description,
-        img: assets["../assets/cards/dagda.png"],
+        img: assets["../assets/cards/Dagda.png"],
         basicStrength: 10,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -398,7 +398,7 @@ export default {
     IBAR_DRUIDS: {
         name: R.ibar_druids_card_name,
         description: R.ibar_druids_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/druidzizibar.png"],
         basicStrength: 6,
         row: RowInfo.ARCHERS,
         fraction: Fraction.NORTH,
@@ -408,7 +408,7 @@ export default {
     BRIGIT: {
         name: R.brigit_card_name,
         description: R.brigit_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/brigit.png"],
         basicStrength: 5,
         row: RowInfo.ARCHERS,
         fraction: Fraction.NORTH,
@@ -418,7 +418,7 @@ export default {
     TARANIS: {
         name: R.taranis_card_name,
         description: R.taranis_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/taranis.png"],
         basicStrength: 5,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -428,7 +428,7 @@ export default {
     ESUS: {
         name: R.esus_card_name,
         description: R.esus_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/esus.png"],
         basicStrength: 5,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -438,7 +438,7 @@ export default {
     GALAHAD: {
         name: R.galahad_card_name,
         description: R.galahad_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/galahad.png"],
         basicStrength: 5,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -448,7 +448,7 @@ export default {
     AIBELL: {
         name: R.aibell_card_name,
         description: R.aibell_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/aibell.png"],
         basicStrength: 5,
         row: RowInfo.ARCHERS,
         fraction: Fraction.NORTH,
@@ -458,7 +458,7 @@ export default {
     UTHER: {
         name: R.uther_card_name,
         description: R.uther_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/uther.png"],
         basicStrength: 4,
         row: RowInfo.ARCHERS,
         fraction: Fraction.NORTH,
@@ -468,7 +468,7 @@ export default {
     TALITIA: {
         name: R.talitia_card_name,
         description: R.talitia_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/talitia.png"],
         basicStrength: 4,
         row: RowInfo.ARCHERS,
         fraction: Fraction.NORTH,
@@ -478,7 +478,7 @@ export default {
     ARTHWYS: {
         name: R.arthwys_card_name,
         description: R.arthwys_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/arthwys.png"],
         basicStrength: 4,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -488,7 +488,7 @@ export default {
     GRAY_LINES: {
         name: R.gray_lines_card_name,
         description: R.gray_lines_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/szareszeregi.png"],
         basicStrength: 4,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -498,7 +498,7 @@ export default {
     GWYNEDD: {
         name: R.gwynedd_card_name,
         description: R.gwynedd_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/gwynedd.png"],
         basicStrength: 2,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -508,7 +508,7 @@ export default {
     OSTENDA_INFANTRY: {
         name: R.ostenda_infantry_card_name,
         description: R.ostenda_infantry_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/piechurzyzostendy.png"],
         basicStrength: 1,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -518,7 +518,7 @@ export default {
     ARMED_PEASANTS: {
         name: R.armed_peasants_card_name,
         description: R.armed_peasants_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/uzbrojeniwiesniacy.png"],
         basicStrength: 1,
         row: RowInfo.SWORDS,
         fraction: Fraction.NORTH,
@@ -528,7 +528,7 @@ export default {
     POWYS: {
         name: R.powys_launcher_card_name,
         description: R.powys_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/powys.png"],
         basicStrength: 1,
         row: RowInfo.CATAPULTS,
         fraction: Fraction.NORTH,
@@ -538,7 +538,7 @@ export default {
     OWAIN: {
         name: R.owain_card_name,
         description: R.owain_card_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/Owain.png"],
         basicStrength: 1,
         row: RowInfo.CATAPULTS,
         fraction: Fraction.NORTH,
@@ -548,7 +548,7 @@ export default {
     COMMANDERS_HORN: {
         name: R.commanders_horn_attribute_name,
         description: R.commanders_horn_attribute_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/róg bojowy.png"],
         basicStrength: 0,
         row: RowInfo.ANY_OF_YOURS,
         fraction: Fraction.NONE,
@@ -558,7 +558,7 @@ export default {
     SCOURGE: {
         name: R.scourge_attribute_name,
         description: R.scourge_attribute_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/pozoga.png"],
         basicStrength: 0,
         row: RowInfo.EMPTY,
         fraction: Fraction.NONE,
@@ -568,7 +568,7 @@ export default {
     COLD: {
         name: R.cold_attribute_name,
         description: R.cold_attribute_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/mroz.png"],
         basicStrength: 0,
         row: RowInfo.EMPTY,
         fraction: Fraction.NONE,
@@ -578,7 +578,7 @@ export default {
     RAIN: {
         name: R.rain_attribute_name,
         description: R.rain_attribute_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/deszcz.png"],
         basicStrength: 0,
         row: RowInfo.EMPTY,
         fraction: Fraction.NONE,
@@ -588,7 +588,7 @@ export default {
     FOG: {
         name: R.fog_attribute_name,
         description: R.fog_attribute_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/mgla.png"],
         basicStrength: 0,
         row: RowInfo.EMPTY,
         fraction: Fraction.NONE,
@@ -598,7 +598,7 @@ export default {
     GOOD_WEATHER: {
         name: R.good_weather_attribute_name,
         description: R.good_weather_attribute_description,
-        img: assets["../assets/cards/ic_dissatisfied_512.png"],
+        img: assets["../assets/cards/dobra pogoda.png"],
         basicStrength: 0,
         row: RowInfo.EMPTY,
         fraction: Fraction.NONE,
