@@ -1,7 +1,5 @@
 package cardgame.model;
 
-import java.util.Random;
-
 public class Game {
     public class InvalidMove extends Exception {
         public InvalidMove(String message) {
@@ -12,7 +10,7 @@ public class Game {
     public Player player1, player2, currentPlayer;
 
     public void chooseStartingPlayer() {
-        currentPlayer = (new Random().nextDouble() > 0.5) ? player1 : player2;
+        currentPlayer = (Math.random() > 0.5) ? player1 : player2;
     }
 
     private Player determineRoundWinner() {
