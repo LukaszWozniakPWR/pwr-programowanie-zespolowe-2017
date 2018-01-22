@@ -129,18 +129,11 @@ public class GameServer {
                 case PUT_CARD:
                     PutCard args = (PutCard) command;
                     game.putCard(p, p.deckInHands.get(args.cardNumber), args.row);
-                    if (p.deckInHands.size() == 0) p.passed = true;
-                    // temporary solution
-                    if (opponent.getPlayer().passed) {
-                        game.currentPlayer = game.currentPlayer.opponent;
-                    }
+                    if (p.deckInHands.size() == 0) p.pass();
                     break;
                 case PASS:
                     game.pass(p);
-                    // temporary solution
                     if (user.getGame().getOpponent(user).getPlayer().passed) {
-                        game.currentPlayer = game.currentPlayer.opponent;
-
                         int playerScore = user.getPlayer().getRoundScore();
                         int opponentScore = user.getGame().getOpponent(user).getPlayer().getRoundScore();
 
@@ -152,8 +145,7 @@ public class GameServer {
                             user.getGame().getOpponent(user).getPlayer().gameScore++;
                         }
 
-                        user.getPlayer().clear();
-                        user.getGame().getOpponent(user).getPlayer().clear();
+                        game.clearTable();
                     }
                     break;
             }
@@ -293,10 +285,11 @@ public class GameServer {
     }
 
     private void newGame(User user1, User user2) {
-        user1.setPlayer(new Player(new ArrayList<>()));
-        user2.setPlayer(new Player(new ArrayList<>()));
-        applyDeck(BASIC_DECK, user1.getPlayer());
-        applyDeck(BASIC_DECK, user2.getPlayer());
+        Random r = new Random();
+
+        user1.setPlayer(new Player(r.nextInt(2) + 1));
+        user2.setPlayer(new Player(r.nextInt(2) + 1));
+
         Game game = new Game(user1, user2);
         games.add(game);
         game.chooseStartingPlayer();
@@ -315,15 +308,5 @@ public class GameServer {
 
         sendResponse(user1, response1);
         sendResponse(user2, response2);
-    }
-
-    // this should be in model
-    // eg. when creating Player object
-    private void applyDeck(List<Card> cards, Player player) {
-        int random = new Random().nextInt();
-        cards.stream()
-                .sorted(Comparator.comparingInt(o -> System.identityHashCode(o) ^ random))
-                .limit(10)
-                .collect(Collectors.toCollection(() -> player.deckInHands));
     }
 }
