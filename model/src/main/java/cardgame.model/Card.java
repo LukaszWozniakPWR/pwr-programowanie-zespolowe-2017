@@ -76,6 +76,9 @@ public enum Card {
     private BondClass bondClass;
 
     public int getStrength(Row row) {
+        if (this.deck == 0)
+            return 0;
+
         int strength = basicStrength;
 
         if (attributes.contains(Attribute.HERO))
@@ -99,8 +102,10 @@ public enum Card {
             strength *= 2;
 
         for (Card c : row.elements)
-            if (c != this && c.is(Attribute.SUPPLY))
+            if (c.is(Attribute.SUPPLY))
                 ++strength;
+        if (this.is(Attribute.SUPPLY))
+            --strength;
 
         return strength;
     }
