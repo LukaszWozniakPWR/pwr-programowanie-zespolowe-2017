@@ -71,4 +71,8 @@
         background: url("../assets/pexels-photo-139312.jpeg");
         background-size: cover;
     }
+
+    body {
+        overflow: hidden !important;
+    }
 </style>

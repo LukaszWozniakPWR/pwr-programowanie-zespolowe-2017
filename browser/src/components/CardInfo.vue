@@ -9,13 +9,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="game-card-big">
+                    <div class="game-card-big" :class="{hasimg: img}" :style="{'background-image': img}">
                         <div class="card-data">
                             <div class="card-big-strength">{{ basicStrength }}</div>
                             <div class="card-big-name">{{ cardName }}</div>
                         </div>
                     </div>
                     <div class="card-big-description">{{ description }}</div>
+                    <div class="card-big-attr" v-if="attrs.length > 0">
+                        <h4>Atrybuty:</h4>
+                        <div v-for="attr in attrs"><b>{{ AttributeData[attr].name }}</b>: {{ AttributeData[attr].description }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,6 +30,8 @@
     import {Vue, Component, Prop} from "vue-property-decorator";
     import * as $ from "jquery";
     import "bootstrap";
+    import Attribute from "../model/Attribute";
+    import AttributeData from "../AttributeData";
 
     @Component
     export default class CardInfo extends Vue {
@@ -33,6 +39,9 @@
         cardName: string;
         description: string;
         basicStrength: number;
+        img: string;
+        attrs: Attribute[];
+        AttributeData = AttributeData;
 
 
         mounted() {
@@ -48,7 +57,7 @@
         display: inline-block;
         width: 400px;
         margin-left: 10px;
-        height: 540px;
+        height: 460px;
         border: 2px solid #222;
         backkground: #eee;
         background: url("../../assets/logo.png") no-repeat;
@@ -85,5 +94,11 @@
         padding: 3px 10px;
         background: rgba(0,0,0,0.7);
         font-size: 24px;
+    }
+
+    .game-card-big.hasimg {
+        background-size: contain;
+        background-position: top center;
+        background-color: #000;
     }
 </style>

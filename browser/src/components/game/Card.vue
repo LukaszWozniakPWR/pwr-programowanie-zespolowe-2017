@@ -1,5 +1,5 @@
 <template>
-    <div class="game-card" @click="click()" @contextmenu="contextmenu($event)">
+    <div class="game-card" :class="{hasimg: hasImage}" @click="click()" @contextmenu="contextmenu($event)" :style="{'background-image': img}">
         <div class="card-data" v-if="type !== 'PLACEHOLDER'">
             <div class="card-strength" v-bind:class="{
                 buff: strength > basicStrength,
@@ -33,12 +33,24 @@
             return (Cards[this.type]) ? Cards[this.type].name : this.type;
         }
 
+        get hasImage() {
+            return (Cards[this.type] && Cards[this.type].img);
+        }
+
+        get img() {
+            return (Cards[this.type] && Cards[this.type].img) ? `url(${Cards[this.type].img}` : "";
+        }
+
         get description() {
             return (Cards[this.type]) ? Cards[this.type].description : "";
         }
 
         get basicStrength() {
             return (Cards[this.type]) ? Cards[this.type].basicStrength : this.strength;
+        }
+
+        get attrs() {
+            return (Cards[this.type]) ? Cards[this.type].attributes : [];
         }
 
         mounted() {
@@ -60,6 +72,8 @@
                     description: this.description,
                     basicStrength: this.basicStrength,
                     id: "card-info",
+                    img: this.img,
+                    attrs: this.attrs,
                 }
             });
         }
@@ -108,9 +122,12 @@
         height: 24px;
         width: 100%;
         color: #fff;
-        padding: 3px 10px;
+        padding: 1px 3px;
+        vertical-align: middle;
+        line-height: 12px;
+        font-weight: 800;
         background: rgba(0,0,0,0.7);
-        font-size: 14px;
+        font-size: 10px;
     }
 
     .card-strength.buff {
@@ -122,5 +139,11 @@
 
     .player-side .hand .game-card {
         cursor: pointer;
+    }
+
+    .game-card.hasimg {
+        background-size: contain;
+        background-position: top center;
+        background-color: #000;
     }
 </style>
