@@ -33,6 +33,13 @@ class CardsDialog(context: Context) : AlertDialog(context) {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (positionToScroll < cardsAdapter.itemCount) {
+            cardsList.scrollToPosition(positionToScroll)
+        }
+    }
+
     fun scrollToPosition(position: Int) {
         positionToScroll = position
     }

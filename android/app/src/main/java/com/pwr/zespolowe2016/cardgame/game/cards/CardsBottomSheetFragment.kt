@@ -22,6 +22,7 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
     private var positionToScroll = 0
 
     private var isInitialized = false
+    var isShowing = false
 
     var onCardClickListener: (Int, Card) -> Unit = { i, card -> /* NO-OP */ }
         set(value) {
@@ -80,9 +81,16 @@ class CardsBottomSheetFragment() : BottomSheetDialogFragment(), DialogInterface.
     }
 
     override fun onShow(dialog: DialogInterface?) {
+        if (isShowing) return
+        isShowing = true
         if (positionToScroll < cardsAdapter.itemCount) {
             recyclerView.scrollToPosition(positionToScroll)
         }
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+        isShowing = false
     }
 }

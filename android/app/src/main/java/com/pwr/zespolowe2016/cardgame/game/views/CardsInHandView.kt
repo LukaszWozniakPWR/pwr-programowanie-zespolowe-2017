@@ -50,6 +50,7 @@ class CardsInHandView @JvmOverloads constructor(
     private fun onCardClicked(card: Card) {
         cardsBottomSheetFragment.scrollToPosition(cardList.indexOf(card))
         cardsBottomSheetFragment.loadCards(context, cardList)
+        if (cardsBottomSheetFragment.isShowing) return
         cardsBottomSheetFragment.show(supportFragmentManager, cardsBottomSheetFragment.tag)
     }
 }

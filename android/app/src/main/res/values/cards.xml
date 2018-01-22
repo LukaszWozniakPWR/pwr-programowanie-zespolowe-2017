@@ -90,4 +90,81 @@
 
     <!-- North -->
 
+
+    <string name="morrigan_card_name">Morrigan</string>
+    <string name="morrigan_card_description">Mędrzec, który podobno potrafi rozmawiać z Bogiem.</string>
+
+    <string name="dagda_card_name">Dagda</string>
+    <string name="dagda_card_description">Najdzielniejszy rycerz w kraju.</string>
+
+    <string name="belenus_card_name">Belenus</string>
+    <string name="belenus_card_description">Belenus walczy zakrzywionym mieczem.</string>
+
+    <string name="lug_card_name">Lug</string>
+    <string name="lug_card_description">Lug walczy ramię w ramię ze swoim wilkiem.</string>
+
+    <string name="catapult_card_name">Katapulta</string>
+    <string name="catapult_card_description">Katapulta pozwala atakować z daleka.</string>
+
+    <string name="lukan_card_name">Lukan</string>
+    <string name="lukan_card_description">Lukan strzela z długiego łuku.</string>
+
+    <string name="ballista_card_name">Balista</string>
+    <string name="ballista_card_description">Balista trafia do celu nawet z 800 metrów.</string>
+
+    <string name="icestorm_card_name">Gradobicie</string>
+    <string name="icestorm_description">Kule gradu mogą zabić wrogą armię.</string>
+
+    <string name="carousel_card_name">Hulajgród</string>
+    <string name="carousel_description">Hulajgród jest nowoczesną machiną oblężniczą.</string>
+
+    <string name="jonsi_card_name">Jonsi</string>
+    <string name="jonsi_card_description">Jonsi to druid, który potrafi wyleczyć każdą chorobę.</string>
+
+    <string name="ibar_druids_card_name">Druidzi z Ibar</string>
+    <string name="ibar_druids_card_description">Druidzi nie rozstają się ze swoimi cisowymi laskami.</string>
+
+    <string name="brigit_card_name">Brigit</string>
+    <string name="brigit_card_description">Brigit jest największym wojownikiem-kobietą.</string>
+
+    <string name="taranis_card_name">Taranis</string>
+    <string name="taranis_card_description">Taranis pije tylko wino.</string>
+
+    <string name="esus_card_name">Esus</string>
+    <string name="esus_card_description">Esus przed walką odprawia nabożeństwo dla całej armii.</string>
+
+    <string name="galahad_card_name">Galahad</string>
+    <string name="galahad_card_description">Galahad już od małego chciał zostać wielkim rycerzem.</string>
+
+    <string name="aibell_card_name">Aibell</string>
+    <string name="aibell_card_description">Aibell została wychowana przez druidów.</string>
+
+    <string name="uther_card_name">Uther</string>
+    <string name="uther_card_description">Uther jest znanym w kraju wynalazcą.</string>
+
+    <string name="talitia_card_name">Talitia</string>
+    <string name="talitia_card_description">Talitia bardzo dobrze strzela z sosnowego łuku.</string>
+
+    <string name="arthwys_card_name">Arthwys</string>
+    <string name="arthwys_card_description">Arthwys napisał już wiele książek na temat sztuki wojennej.</string>
+
+    <string name="gray_lines_card_name">Szare szeregi</string>
+    <string name="gray_lines_card_description">Szare Szeregi to kilkuosobowe grupy skrytobójców.</string>
+
+    <string name="gwynedd_card_name">Gwynedd</string>
+    <string name="gwynedd_card_description">Gwynedd jest przywódcą krasnolódów z pobliskiej wsi.</string>
+
+    <string name="ostenda_infantry_card_name">Piechurzy z Ostendy</string>
+    <string name="ostenda_infantry_description">Akademia Wojskowa w Ostendzie kształci najlepszych żołnierzy.</string>
+
+    <string name="armed_peasants_card_name">Uzbrojeni wieśniacy</string>
+    <string name="armed_peasants_card_description">Zostali zwerbowani prosto z pola. Walczą przyrządami rolniczymi.</string>
+
+    <string name="powys_launcher_card_name">Powys</string>
+    <string name="powys_card_description">Powys jest w armii mistrzem oblężeń.</string>
+
+    <string name="owain_card_name">Owain</string>
+    <string name="owain_card_description">Owain potrafi się bezgłośnie przedostać na tyły wroga.</string>
+
+
 </resources>

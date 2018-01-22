@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hero_attribute_name">Bohater</string>
+    <string name="hero_attribute_description">Odporność na działanie kart specjalnych i efektów pogodowych.</string>
+
+    <string name="medic_attribute_name">Medyk</string>
+    <string name="medic_attribute_description">Wybierz jedną kartę ze stosu swoich kart odrzuconych.</string>
+
+    <string name="spy_attribute_name">Szpieg</string>
+    <string name="spy_attribute_description">Umieść kartę na polu wroga (dodaje sił do szeregu) i weź dwie losowe karty ze swojej talii.</string>
+
+    <string name="bond_attribute_name">Więź</string>
+    <string name="bond_attribute_description">Umieść kartę obok podobnie nazwanej karty, żeby podwoić ich siły.</string>
+
+    <string name="supply_attribute_name">Wsparcie</string>
+    <string name="supply_attribute_description">Dodaje+1 do wszystkich jednostek poza sobą.</string>
+
+    <string name="cold_attribute_name">Trzaskający mróz</string>
+    <string name="cold_attribute_description">Efekt pogodowy. Wszystkie jednostki walczące w zwarciu, otrzymują wartość 1, dla obu graczy.</string>
+
+    <string name="rain_attribute_name">Deszcz</string>
+    <string name="rain_attribute_description">Efekt pogodowy. Wszystkie jednostki oblężnicze otrzymują wartość 1 dla obu graczy.</string>
+
+    <string name="fog_attribute_name">Mgła</string>
+    <string name="fog_attribute_description">Efekt pogodowy. Wszystkie jednostki walczące na dystans otrzymują wartość 1 dla obu graczy.</string>
+
+    <string name="good_weather_attribute_name">Czyste niebo</string>
+    <string name="good_weather_attribute_description">Usuwa wszystkie efekty pogodowe.</string>
+
+    <string name="commanders_horn_attribute_name">Róg dowódcy</string>
+    <string name="commanders_horn_attribute_description">Wysokie morale. Podwaja siłę jednostek w danym rzędzie.</string>
+
+    <string name="scourge_attribute_name">Plaga</string>
+    <string name="scourge_attribute_description">Niszczy najsilniejsze jednostki na planszy</string>
+
+</resources>

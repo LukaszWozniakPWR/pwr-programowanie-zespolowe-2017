@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.pwr.zespolowe2016.cardgame.R
 import com.pwr.zespolowe2016.cardgame.other.bindView
+import com.pwr.zespolowe2016.cardgame.other.extensions.visible
 import com.pwr.zespolowe2016.cardgame.sockets.model.responses.gamestate.Card
 
 class MiniatureCardView @JvmOverloads constructor(
@@ -33,7 +34,8 @@ class MiniatureCardView @JvmOverloads constructor(
         //TODO photoView
         val cardClass = card.cardClass
         photoView.setImageResource(cardClass.cardImage)
-        pointsView.text = cardClass.basePoints.toString()
+        pointsView.text = card.actualStrength.toString()
+        pointsView.visible = card.actualStrength > 0
         nameView.text = context.getString(cardClass.cardName)
     }
 }
